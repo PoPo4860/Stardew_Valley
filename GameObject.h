@@ -22,7 +22,7 @@ class GameObject : public GameEntity
 protected:	// 상속된 클래스에 노출시킨다.
 //public:		// 모든 외부 클래스에 노출시킨다.
 	POINTFLOAT pos;
-	RECT shape;
+	RECT rect;
 	float moveSpeed;
 	int bodySize;
 	Image* img;

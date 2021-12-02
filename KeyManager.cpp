@@ -6,11 +6,6 @@ void KeyManager::Init()
 	{
 		keyUp[i] = true;
 		keyDown[i] = false;
-
-		//keyUp.set(i, true);
-		//keyDown.set(i, false);
-
-		//keyUp.operator<<
 	}
 }
 

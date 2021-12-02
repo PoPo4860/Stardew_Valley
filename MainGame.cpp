@@ -1,9 +1,8 @@
 #include "MainGame.h"
 #include "Image.h"
 #include "ImageManager.h"
-#include "BattleScene.h"
 #include "TilemapToolScene.h"
-
+#include "MineScene.h"
 HRESULT MainGame::Init()
 {
 	KeyManager::GetSingleton()->Init();
@@ -11,9 +10,10 @@ HRESULT MainGame::Init()
 	TimerManager::GetSingleton()->Init();
 	SceneManager::GetSingleton()->Init();
 
-	SceneManager::GetSingleton()->AddScene("BattleScene", new BattleScene());
+	//SceneManager::GetSingleton()->AddScene("BattleScene", new BattleScene());
 	SceneManager::GetSingleton()->AddScene("TilemapToolScene", new TilemapToolScene());
-	SceneManager::GetSingleton()->ChangeScene("TilemapToolScene");
+	SceneManager::GetSingleton()->AddScene("MineScene", new MineScene());
+	SceneManager::GetSingleton()->ChangeScene("MineScene");
 
 	srand((unsigned int) time(nullptr));
 
