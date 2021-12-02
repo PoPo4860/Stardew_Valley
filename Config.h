@@ -13,8 +13,8 @@ using namespace std;
 
 #define WIN_START_POS_X	400
 #define WIN_START_POS_Y	100
-#define WIN_SIZE_X	256			// 16 * 16
-#define WIN_SIZE_Y	224			// 16 * 14
+#define WIN_SIZE_X	420			// 16 * 16
+#define WIN_SIZE_Y	240			// 16 * 14
 #define TILEMAPTOOL_SIZE_X	620
 #define TILEMAPTOOL_SIZE_Y	330
 #define PIXELMAP_SIZE_X	800
@@ -36,6 +36,14 @@ typedef struct ArgumentFuncPtr
 #include "ImageManager.h"
 #include "KeyManager.h"
 #include "SceneManager.h"
+#include "GameDataManager.h"
+#include "ObjectPosManager.h"
+
+#define TIME TimerManager::GetSingleton()->GetDeltaTime() 
+#define GLOBAL_POS ObjectPosManager::GetSingleton()->GetGlobalPos()
+#define GLOBAL_POS_X GameDataManager::GetSingleton()->GetGlobalPosX()
+#define GLOBAL_POS_Y GameDataManager::GetSingleton()->GetGlobalPosY()
+
 
 extern HWND g_hWnd;
 extern HINSTANCE g_hInstance;

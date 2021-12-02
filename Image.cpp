@@ -145,8 +145,8 @@ void Image::Render(HDC hdc, int destX, int destY, float scale)
 		BitBlt(hdc,				// 복사 목적지 DC
 			destX - (imageInfo->width / 2),				// 복사될 비트맵의 시작 위치 x
 			destY - (imageInfo->height / 2),			// 복사될 비트맵의 시작 위치 y
-			imageInfo->width* scale,	// 원본 복사할 가로 크기
-			imageInfo->height * scale,	// 원본 복사할 세로 크기
+			(int)imageInfo->width  * scale,	// 원본 복사할 가로 크기
+			(int)imageInfo->height * scale,	// 원본 복사할 세로 크기
 			imageInfo->hMemDc,	// 원본 DC
 			0,					// 원본 비트맵 복사 시작 위치 x
 			0,					// 원본 비트맵 복사 시작 위치 y
@@ -168,8 +168,8 @@ void Image::Render(HDC hdc, int destX, int destY, int frameX, int frameY, int wi
 			hdc,
 			destX - (imageInfo->frameWidth / 2),
 			destY - (imageInfo->frameHeight / 2),
-			imageInfo->frameWidth * scale,
-			imageInfo->frameHeight * scale,	// 전체 프레임 수
+			(int)imageInfo->frameWidth * scale,
+			(int)imageInfo->frameHeight * scale,	// 전체 프레임 수
 
 			imageInfo->hMemDc,
 			imageInfo->frameWidth * frameX,
@@ -184,8 +184,8 @@ void Image::Render(HDC hdc, int destX, int destY, int frameX, int frameY, int wi
 		BitBlt(hdc,				// 복사 목적지 DC
 			destX - (imageInfo->frameWidth / 2),		// 복사될 비트맵의 시작 위치 x
 			destY - (imageInfo->frameHeight / 2),		// 복사될 비트맵의 시작 위치 y
-			imageInfo->frameWidth * scale,	// 원본 복사할 가로 크기
-			imageInfo->frameHeight * scale,	// 원본 복사할 세로 크기
+			(int)imageInfo->frameWidth * scale,	// 원본 복사할 가로 크기
+			(int)imageInfo->frameHeight * scale,	// 원본 복사할 세로 크기
 			imageInfo->hMemDc,	// 원본 DC
 			imageInfo->frameWidth * frameX,				// 원본 비트맵 복사 시작 위치 x
 			imageInfo->frameHeight * frameY,			// 원본 비트맵 복사 시작 위치 y
