@@ -34,6 +34,9 @@
     <Filter Include="MainGame\Object\Player">
       <UniqueIdentifier>{d1243277-f08d-40f7-a09a-ca634d8041e2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MainGame\Manager">
+      <UniqueIdentifier>{01f0974d-3503-483f-9b14-f9bbdbf483cd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -76,7 +79,10 @@
       <Filter>MainGame\Object\Player</Filter>
     </ClCompile>
     <ClCompile Include="MapManager.cpp">
-      <Filter>헤더 파일</Filter>
+      <Filter>MainGame\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="SmallStone.cpp">
+      <Filter>MainGame\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -125,17 +131,20 @@
     <ClInclude Include="MineScene.h">
       <Filter>MainGame\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="GameDataManager.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>MainGame\Object\Player</Filter>
     </ClInclude>
     <ClInclude Include="ObjectPosManager.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>MainGame\Manager</Filter>
     </ClInclude>
     <ClInclude Include="MapManager.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>MainGame\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameDataManager.h">
+      <Filter>MainGame\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="SmallStone.h">
+      <Filter>MainGame\Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

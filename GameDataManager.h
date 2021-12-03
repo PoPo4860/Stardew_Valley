@@ -1,5 +1,4 @@
 #pragma once
-#include "Config.h"
 #include "Singleton.h"
 
 class GameDataManager : public Singleton<GameDataManager> {

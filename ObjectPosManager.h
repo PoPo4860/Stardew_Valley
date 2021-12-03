@@ -1,17 +1,22 @@
 #pragma once
-#include "Config.h"
 #include "Singleton.h"
 class ObjectPosManager : public Singleton<ObjectPosManager>
 {
 private:
 	POINTFLOAT globalPos;
 	int mapSizeX, mapSizeY;
-	const int TILE_SIZE = 16;
+	int tileSize;
 public:
+	ObjectPosManager():
+		globalPos{},
+		tileSize{16},
+		mapSizeX{ NULL }, mapSizeY{ NULL }
+	{}
+
 	inline void SetMapSize(int x, int y) 
 	{ 
-		mapSizeX = x * TILE_SIZE; 
-		mapSizeY = y * TILE_SIZE;
+		mapSizeX = x * tileSize;
+		mapSizeY = y * tileSize;
 	}
 	inline void SetGlobalPos(POINTFLOAT playerPos)
 	{

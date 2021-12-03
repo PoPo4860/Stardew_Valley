@@ -25,17 +25,28 @@ protected:	// 상속된 클래스에 노출시킨다.
 	RECT rect;
 	float moveSpeed;
 	int bodySize;
+	int hp;
 	Image* img;
 
 public:
-	void Move();
+	GameObject() :
+		pos{},
+		rect{},
+		moveSpeed{ NULL },
+		bodySize{ NULL },
+		hp{ NULL }, 
+		img{ nullptr }
+	{}
+	virtual ~GameObject() = default;
+	virtual void InteractionPick() {};
+	virtual void InteractionSword(int damage) {};
+	virtual void InteractionRightClick() {};
 
-	// this가 nullptr이다. 코드상으로 함수를 객체가 호출했지만 객체가 없다. 에러
+	
 	inline void SetPos(POINTFLOAT pos) { this->pos = pos; }
 	inline POINTFLOAT GetPos() { return this->pos; }
 	inline void SetMoveSpeed(float speed) { this->moveSpeed = speed; }
 	inline int GetBodySize() { return this->bodySize; }
 
-	virtual ~GameObject() = default;
 };
 

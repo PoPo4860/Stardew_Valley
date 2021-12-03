@@ -14,5 +14,6 @@ public:
 	virtual void Update();
 	virtual void Render(HDC hdc);
 	virtual void Release();
+	void Move(float posX, float posY);
 	virtual ~Player() = default;
 };

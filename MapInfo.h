@@ -28,6 +28,7 @@ struct TILE_INFO
 	int frameX, frameY;
 };
 
+
 struct MAP_INFO
 {
 	MAP_INFO() :

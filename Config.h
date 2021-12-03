@@ -31,19 +31,20 @@ typedef struct ArgumentFuncPtr
 	string sceneName;
 	string loadingSceneName;
 } ARGUMENT_PTR, *LPARGUMENT_PTR;
-
 #include "TimerManager.h"
 #include "ImageManager.h"
 #include "KeyManager.h"
 #include "SceneManager.h"
 #include "GameDataManager.h"
 #include "ObjectPosManager.h"
+#include "MapManager.h"
 
 #define TIME TimerManager::GetSingleton()->GetDeltaTime() 
 #define GLOBAL_POS ObjectPosManager::GetSingleton()->GetGlobalPos()
 #define GLOBAL_POS_X GameDataManager::GetSingleton()->GetGlobalPosX()
 #define GLOBAL_POS_Y GameDataManager::GetSingleton()->GetGlobalPosY()
-
+#define MAP_MANAGER MapManager::GetSingleton()
+#define MAP MapManager::GetSingleton()->GetMap()
 
 extern HWND g_hWnd;
 extern HINSTANCE g_hInstance;

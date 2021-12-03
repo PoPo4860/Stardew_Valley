@@ -1,83 +1,17 @@
-﻿  Image.cpp
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(20,18): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(24,25): warning C4804: '<=': 연산에 'bool' 형식을 사용하는 것은 안전하지 않습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(34,28): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(39,18): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(53,28): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\Image.cpp(149,27): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\Image.cpp(148,27): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\Image.cpp(172,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\Image.cpp(171,31): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\Image.cpp(188,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\Image.cpp(187,31): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  ImageManager.cpp
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(20,18): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(24,25): warning C4804: '<=': 연산에 'bool' 형식을 사용하는 것은 안전하지 않습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(34,28): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(39,18): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(53,28): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  KeyManager.cpp
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(20,18): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(24,25): warning C4804: '<=': 연산에 'bool' 형식을 사용하는 것은 안전하지 않습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(34,28): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(39,18): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(53,28): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  MainGame.cpp
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\MainGame.cpp(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(20,18): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(24,25): warning C4804: '<=': 연산에 'bool' 형식을 사용하는 것은 안전하지 않습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(34,28): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(39,18): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(53,28): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  MineScene.cpp
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(20,18): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(24,25): warning C4804: '<=': 연산에 'bool' 형식을 사용하는 것은 안전하지 않습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(34,28): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(39,18): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(53,28): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\MineScene.cpp(100,62): warning C4244: '인수': 'FLOAT'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\MineScene.cpp(99,63): warning C4244: '인수': 'FLOAT'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\MineScene.cpp(111,58): warning C4244: '인수': 'FLOAT'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\MineScene.cpp(110,59): warning C4244: '인수': 'FLOAT'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Player.cpp
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(20,18): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(24,25): warning C4804: '<=': 연산에 'bool' 형식을 사용하는 것은 안전하지 않습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(34,28): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(39,18): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(53,28): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\Player.cpp(33,47): warning C4244: '인수': 'FLOAT'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\Player.cpp(33,25): warning C4244: '인수': 'FLOAT'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  SceneManager.cpp
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(20,18): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(24,25): warning C4804: '<=': 연산에 'bool' 형식을 사용하는 것은 안전하지 않습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(34,28): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(39,18): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(53,28): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  TilemapToolScene.cpp
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(20,18): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(24,25): warning C4804: '<=': 연산에 'bool' 형식을 사용하는 것은 안전하지 않습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(34,28): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(39,18): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(53,28): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Timer.cpp
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(20,18): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(24,25): warning C4804: '<=': 연산에 'bool' 형식을 사용하는 것은 안전하지 않습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(34,28): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(39,18): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(53,28): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  TimerManager.cpp
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(20,18): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(24,25): warning C4804: '<=': 연산에 'bool' 형식을 사용하는 것은 안전하지 않습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(34,28): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(39,18): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(53,28): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\TimerManager.cpp(18,59): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  main.cpp
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\main.cpp(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(20,18): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(24,25): warning C4804: '<=': 연산에 'bool' 형식을 사용하는 것은 안전하지 않습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(34,28): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(39,18): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(53,28): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  코드를 생성하고 있습니다...
+﻿  Player.cpp
+C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(25,18): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(29,25): warning C4804: '<=': 연산에 'bool' 형식을 사용하는 것은 안전하지 않습니다.
+C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(39,28): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(44,18): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\ObjectPosManager.h(58,28): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\Player.cpp(20,20): warning C4244: '=': 'FLOAT'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\Player.cpp(21,21): warning C4244: '=': 'FLOAT'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\Player.cpp(22,19): warning C4244: '=': 'FLOAT'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\Player.cpp(23,22): warning C4244: '=': 'FLOAT'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\Player.cpp(39,47): warning C4244: '인수': 'FLOAT'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\Player.cpp(39,25): warning C4244: '인수': 'FLOAT'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\Player.cpp(49,23): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\Player.cpp(50,24): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\Player.cpp(51,22): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\Player.cpp(52,25): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   210830_WinMain.vcxproj -> C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\x64\Debug\210830_WinMain.exe
