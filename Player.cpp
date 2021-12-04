@@ -1,7 +1,7 @@
-#include "ImageManager.h"
-#include "KeyManager.h"
-#include "TimerManager.h"
 #include "Player.h"
+#include "ImageManager.h"
+#include "TimerManager.h"
+#include "KeyManager.h"
 #include "Image.h"
 HRESULT Player::Init()
 {
@@ -10,7 +10,7 @@ HRESULT Player::Init()
 	img = ImageManager::GetSingleton()->FindImage("Image/Player.bmp");
 	pos.x = 100.0f;
 	pos.y = 150.0f;
-	moveSpeed = 150.0f;
+	moveSpeed = 100.0f;
 	bodySize = 10;
 	return S_OK;
 }
@@ -57,6 +57,13 @@ void Player::Move(float posX, float posY)
 			{
 				RECT rc;
 				if (IntersectRect(&rc, &rectTemp, &MAP->rect[y][x]))
+					return;
+			}
+			if (MAP->object[y][x] != nullptr)
+			{
+				RECT rc;
+				RECT temp = MAP->object[y][x]->GetRect();
+				if (IntersectRect(&rc, &rectTemp, &temp))
 					return;
 			}
 		}

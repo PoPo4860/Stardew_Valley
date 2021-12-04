@@ -1,6 +1,6 @@
 #include "MapManager.h"
 #include "Image.h"
-
+#include "SmallStone.h"
 void MapManager::PrintMapRayer1(HDC hdc)
 {
     for (int y = 0; y < mapInfo.mapSizeY; ++y) {
@@ -37,6 +37,59 @@ void MapManager::PrintMapRayer3(HDC hdc)
                 mapInfo.tileInfo[0][y][x].frameX,
                 mapInfo.tileInfo[0][y][x].frameY);
         }
+    }
+}
+
+void MapManager::CreateObject()
+{
+    int maxObject = 0;
+    int minObject = 0;
+    if (mapInfo.mapSizeY == 0)mapInfo.mapSizeY = 1;
+    if (mapInfo.mapSizeX == 0)mapInfo.mapSizeX = 1;
+    for (int y = 0; y < mapInfo.mapSizeY; ++y)
+    {
+        for (int x = 0; x < mapInfo.mapSizeX; ++x)
+        {
+            if (mapInfo.tileState[y][x] == Tile_State::Empty)
+            {
+                ++maxObject;
+            }
+        }
+    }
+    //맵을 순회하면서 오브젝트 설정이 가능한 최대갯수를 구함.
+
+    maxObject /= 4;
+    minObject = maxObject / 2;
+    int objectCost = minObject + (rand() % (maxObject - minObject));
+    // 현재 맵에 생성할 오브젝트의 비용을 설정함
+    for (int count = 0; count < objectCost;)
+    {
+        int posX = rand() % mapInfo.mapSizeX;
+        int posY = rand() % mapInfo.mapSizeY;
+
+        if (mapInfo.tileState[posY][posX] == Tile_State::Empty && mapInfo.object[posY][posX] == nullptr)
+        {
+            mapInfo.object[posY][posX] = new SmallStone(Stone_Object_Info::SmallStone_Lv1, posX, posY);
+            mapInfo.object[posY][posX]->Init();
+            ++count;
+        }
+    }
+}
+
+void MapManager::ObjectRender(HDC hdc)
+{
+    for (int y = 0; y < mapInfo.mapSizeY; ++y)
+    {
+        for (int x = 0; x < mapInfo.mapSizeX; ++x)
+        {
+            if (mapInfo.tileState[y][x] == Tile_State::Empty && mapInfo.object[y][x] != nullptr)
+                objectQueue.push(mapInfo.object[y][x]);
+        }
+    }
+    while (objectQueue.empty() == false)
+    {
+        objectQueue.top()->Render(hdc);
+        objectQueue.pop();
     }
 }
 
@@ -115,9 +168,7 @@ void MapManager::Load(int num)
         OPEN_EXISTING,          // 파일 만들거나 읽을 때 옵션
         FILE_ATTRIBUTE_NORMAL,  // 파일 속성(읽기 전용, 숨김 등등)
         NULL);
-    //LPCVOID;
 
-    // 읽기
     DWORD readByte;
     if (ReadFile(
         hFile,
@@ -127,6 +178,13 @@ void MapManager::Load(int num)
     {
         MessageBox(g_hWnd, "맵 데이터 로드에 실패했습니다.", "에러", MB_OK);
     }
+    // 맵 로드
+
+    SetDungeonImage();
+    // 해당 맵에 알맞는 이미지 설정
+
+    CreateObject();
+    // 해당 맵에 알맞는 오브젝트 생성
 
     CloseHandle(hFile);
 }

@@ -435,7 +435,19 @@ void TilemapToolScene::Save()
 
     // 쓰기
     DWORD byteSize = sizeof(MAP_INFO);
-
+    //mapInfo2.dungeonTiles = mapInfo.dungeonTiles;
+    //mapInfo2.mapSizeX = mapInfo.mapSizeX;
+    //mapInfo2.mapSizeY = mapInfo.mapSizeY;
+    //mapInfo2.dungeonTiles = mapInfo.dungeonTiles;
+    //for (int z = 0; z < 3; ++z) {
+    //    for (int y = 0; y < mapInfo.mapSizeY; ++y) {
+    //        for (int x = 0; x < mapInfo.mapSizeX; ++x) {
+    //            mapInfo2.rect[y][x] = mapInfo.rect[y][x];
+    //            mapInfo2.tileInfo[z][y][x] = mapInfo.tileInfo[z][y][x];
+    //            mapInfo2.tileState[y][x] = mapInfo.tileState[y][x];
+    //        }
+    //    }
+    //}
     DWORD writtenByte;
     if (WriteFile(hFile,                            // 파일 핸들
         &mapInfo,                                   // 메모리 시작주소

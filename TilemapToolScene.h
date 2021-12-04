@@ -75,6 +75,7 @@ private:
 	POINT mouse;			//	마우스 위치
 	MAP_INFO mapInfoTemp;		// 저장할 맵 템프
 	MAP_INFO mapInfo;
+	//MAP_INFO2 mapInfo2;
 	int mapPrintX, mapPrintY;	// 맵 출력 범위
 	int mapPosX, mapPosY;		// 현재 보는 맵 위치
 };

@@ -5,17 +5,16 @@
 #include "MineScene.h"
 HRESULT MainGame::Init()
 {
+	srand((unsigned int) time(nullptr));
 	KeyManager::GetSingleton()->Init();
 	ImageManager::GetSingleton()->Init();
 	TimerManager::GetSingleton()->Init();
 	SceneManager::GetSingleton()->Init();
 
-	//SceneManager::GetSingleton()->AddScene("BattleScene", new BattleScene());
 	SceneManager::GetSingleton()->AddScene("TilemapToolScene", new TilemapToolScene());
 	SceneManager::GetSingleton()->AddScene("MineScene", new MineScene());
 	SceneManager::GetSingleton()->ChangeScene("MineScene");
 
-	srand((unsigned int) time(nullptr));
 
 	// 타이머 셋팅
 	hTimer = (HANDLE)SetTimer(g_hWnd, 0, 10, NULL);

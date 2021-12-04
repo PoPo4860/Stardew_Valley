@@ -14,7 +14,6 @@
 */
 
 #include "GameEntity.h"
-
 class Image;
 class GameObject : public GameEntity
 {
@@ -38,15 +37,17 @@ public:
 		img{ nullptr }
 	{}
 	virtual ~GameObject() = default;
-	virtual void InteractionPick() {};
-	virtual void InteractionSword(int damage) {};
+	virtual bool InteractionPick(int damage) { return false; }
+	virtual bool InteractionSword(int damage) { return false; };
 	virtual void InteractionRightClick() {};
 
 	
 	inline void SetPos(POINTFLOAT pos) { this->pos = pos; }
 	inline POINTFLOAT GetPos() { return this->pos; }
+	inline float GetPosY() { return this->pos.y; }
 	inline void SetMoveSpeed(float speed) { this->moveSpeed = speed; }
 	inline int GetBodySize() { return this->bodySize; }
+	inline RECT GetRect() { return this->rect; }
 
 };
 
