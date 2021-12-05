@@ -24,7 +24,7 @@ using namespace std;
 #define SAFE_RELEASE(p)	{ if (p) { p->Release(); delete p; p = nullptr; } }
 #define SAFE_DELETE(p)	{ if (p) { delete p; p = nullptr; } }
 
-enum class MoveDir { Left, Right, Up, Down };
+//enum class MoveDir { Left, Right, Up, Down };
 
 typedef struct ArgumentFuncPtr
 {

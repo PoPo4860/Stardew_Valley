@@ -1,12 +1,15 @@
 ﻿  Player.cpp
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\Player.cpp(20,20): warning C4244: '=': 'FLOAT'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\Player.cpp(21,21): warning C4244: '=': 'FLOAT'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\Player.cpp(22,19): warning C4244: '=': 'FLOAT'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\Player.cpp(23,22): warning C4244: '=': 'FLOAT'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\Player.cpp(38,47): warning C4244: '인수': 'FLOAT'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\Player.cpp(38,25): warning C4244: '인수': 'FLOAT'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\Player.cpp(48,23): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\Player.cpp(49,24): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\Player.cpp(50,22): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\Player.cpp(51,25): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\Player.cpp(21,20): warning C4244: '=': 'FLOAT'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\Player.cpp(22,21): warning C4244: '=': 'FLOAT'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\Player.cpp(23,19): warning C4244: '=': 'FLOAT'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\Player.cpp(24,22): warning C4244: '=': 'FLOAT'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\Player.cpp(53,12): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\Player.cpp(66,21): warning C4244: '인수': 'FLOAT'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\Player.cpp(65,10): warning C4244: '인수': 'FLOAT'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\Player.cpp(73,21): warning C4244: '인수': 'FLOAT'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\Player.cpp(72,10): warning C4244: '인수': 'FLOAT'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\Player.cpp(99,23): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\Player.cpp(100,24): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\Player.cpp(101,22): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\Player.cpp(102,25): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   210830_WinMain.vcxproj -> C:\Users\dltng\Desktop\프로젝트\Stardew_Valley\x64\Debug\210830_WinMain.exe
