@@ -37,15 +37,15 @@
     <Filter Include="MainGame\Manager">
       <UniqueIdentifier>{01f0974d-3503-483f-9b14-f9bbdbf483cd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MainGame\Object\ObjectTool">
+      <UniqueIdentifier>{32433a81-f109-43ee-a7ed-4cb250e33974}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="GameEntity.cpp">
-      <Filter>2D Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
       <Filter>2D Framework</Filter>
     </ClCompile>
     <ClCompile Include="KeyManager.cpp">
@@ -84,6 +84,9 @@
     <ClCompile Include="SmallStone.cpp">
       <Filter>MainGame\Object</Filter>
     </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>MainGame\Object\ObjectTool</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Config.h">
@@ -93,9 +96,6 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="GameEntity.h">
-      <Filter>2D Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
       <Filter>2D Framework</Filter>
     </ClInclude>
     <ClInclude Include="KeyManager.h">
@@ -145,6 +145,9 @@
     </ClInclude>
     <ClInclude Include="SmallStone.h">
       <Filter>MainGame\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>MainGame\Object\ObjectTool</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

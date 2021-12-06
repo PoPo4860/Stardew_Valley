@@ -5,8 +5,6 @@
 
 HRESULT MineScene::Init()
 {
-    ImageManager::GetSingleton()->AddImage
-    ("Image/Dungeon/Dungeon_Stone_Object.bmp", 192, 64, 12 , 4, true, RGB(255, 0, 255));
     SetWindowSize(20, 10, WIN_SIZE_X * 3, WIN_SIZE_Y * 3);
     windowX = WIN_SIZE_X;
     windowY = WIN_SIZE_Y;
@@ -28,13 +26,11 @@ void MineScene::Update()
 
 void MineScene::Render(HDC hdc)
 {
-    MAP_MANAGER->PrintMapRayer1(hdc);
-    MAP_MANAGER->PrintMapRayer2(hdc);
-    MapManager::GetSingleton()->pushQueue(player);
-    MapManager::GetSingleton()->ObjectRender(hdc);
-    //player->Render(hdc);
-    
-    MAP_MANAGER->PrintMapRayer3(hdc);
+    MAP_MANAGER->DrawMapLayer(hdc, 1);
+    MAP_MANAGER->DrawMapLayer(hdc, 2);
+    MAP_MANAGER->pushQueue(player);
+    MAP_MANAGER->ObjectRender(hdc);
+    MAP_MANAGER->DrawMapLayer(hdc, 3);
 }
 
 void MineScene::Release()

@@ -1,5 +1,6 @@
 #include "SmallStone.h"
 #include "Config.h"
+#include "CommonFunction.h"
 #include "image.h"
 bool SmallStone::InteractionPick(int damage)
 {
@@ -10,14 +11,12 @@ bool SmallStone::InteractionPick(int damage)
 
 HRESULT SmallStone::Init()
 {
-	img = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Stone_Object.bmp");
-	pos.x = (pos.x * 16) + 8 - GLOBAL_POS.x;
-	pos.y = (pos.y * 16) + 8 - GLOBAL_POS.y;
+	img = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Stone_Object.bmp",192,64,12,4);
+	pos.x = (pos.x * 16) + 8;
+	pos.y = (pos.y * 16) + 8;
 	bodySize = 16;
-	rect.left = pos.x - (bodySize / 2);
-	rect.right = pos.x + (bodySize / 2);
-	rect.top = pos.y - (bodySize / 2);
-	rect.bottom = pos.y + (bodySize / 2);
+	SetRect(&rect,pos,bodySize);
+
 	if (objectInfo == Stone_Object_Info::SmallStone_Lv1)
 	{
 		frame = rand() % 3;

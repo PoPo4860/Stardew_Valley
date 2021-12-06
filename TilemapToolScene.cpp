@@ -8,44 +8,20 @@ HRESULT TilemapToolScene::Init()
     windowX = TILEMAPTOOL_SIZE_X;
     windowY = TILEMAPTOOL_SIZE_Y;
     {
-        ImageManager::GetSingleton()->AddImage
-        ("Image/Dungeon/Dungeon_Gray.bmp", 256, 288, 16, 18, true, RGB(255, 0, 255));
-        dungeonGray = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Gray.bmp");
-        ImageManager::GetSingleton()->AddImage
-        ("Image/Dungeon/Dungeon_Ice.bmp", 256, 288, 16, 18, true, RGB(255, 0, 255));
-        dungeonIce = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Ice.bmp");
-        ImageManager::GetSingleton()->AddImage
-        ("Image/Dungeon/Dungeon_Ice2.bmp", 256, 288, 16, 18, true, RGB(255, 0, 255));
-        dungeonIce2 = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Ice2.bmp");
-        ImageManager::GetSingleton()->AddImage
-        ("Image/Dungeon/Dungeon_Red.bmp", 256, 288, 16, 18, true, RGB(255, 0, 255));
-        dungeonRed = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Red.bmp");
-        ImageManager::GetSingleton()->AddImage
-        ("Image/Dungeon/Dungeon_Sand.bmp", 256, 288, 16, 18, true, RGB(255, 0, 255));
-        dungeonSand = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Sand.bmp");
-        ImageManager::GetSingleton()->AddImage
-        ("Image/Dungeon/Dungeon_Sand2.bmp", 256, 288, 16, 18, true, RGB(255, 0, 255));
-        dungeonSand2 = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Sand2.bmp");
-        ImageManager::GetSingleton()->AddImage
-        ("Image/Dungeon/Dungeon_Slime.bmp", 256, 288, 16, 18, true, RGB(255, 0, 255));
-        dungeonSlime = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Slime.bmp");
-        ImageManager::GetSingleton()->AddImage
-        ("Image/Dungeon/Dungeon_Soil.bmp", 256, 288, 16, 18, true, RGB(255, 0, 255));
-        dungeonSoil = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Soil.bmp");
-        ImageManager::GetSingleton()->AddImage
-        ("Image/Dungeon/Dungeon_Stone.bmp", 256, 288, 16, 18, true, RGB(255, 0, 255));
-        dungeonStone = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Stone.bmp");
-        ImageManager::GetSingleton()->AddImage
-        ("Image/Dungeon/TileMapTool_Layer.bmp", 64, 64, 4, 1);
-        layerNumImage = ImageManager::GetSingleton()->FindImage("Image/Dungeon/TileMapTool_Layer.bmp");
-        ImageManager::GetSingleton()->AddImage
-        ("Image/Dungeon/TileMapTool_LayerMode.bmp", 64, 64, 4, 1);
-        layerModeImage = ImageManager::GetSingleton()->FindImage("Image/Dungeon/TileMapTool_LayerMode.bmp");
-        ImageManager::GetSingleton()->AddImage
-        ("Image/Dungeon/TileMapTool_TileState.bmp", 80, 80, 5, 1);
-        tileStateImage = ImageManager::GetSingleton()->FindImage("Image/Dungeon/TileMapTool_TileState.bmp");
+        mineImage[0] = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Gray.bmp", 256, 288, 16, 18);
+        mineImage[1] = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Ice.bmp", 256, 288, 16, 18);
+        mineImage[2] = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Ice2.bmp", 256, 288, 16, 18);
+        mineImage[3] = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Red.bmp", 256, 288, 16, 18);
+        mineImage[4] = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Sand.bmp", 256, 288, 16, 18);
+        mineImage[5] = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Sand2.bmp", 256, 288, 16, 18);
+        mineImage[6] = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Slime.bmp", 256, 288, 16, 18);
+        mineImage[7] = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Soil.bmp", 256, 288, 16, 18);
+        mineImage[8] = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Stone.bmp", 256, 288, 16, 18);
+        layer.numImage = ImageManager::GetSingleton()->FindImage("Image/Dungeon/TileMapTool_Layer.bmp", 64, 64, 4, 1);
+        layer.modeImage = ImageManager::GetSingleton()->FindImage("Image/Dungeon/TileMapTool_LayerMode.bmp", 64, 64, 4, 1);
+        tileStateImage = ImageManager::GetSingleton()->FindImage("Image/Dungeon/TileMapTool_TileState.bmp", 80, 80, 5, 1);
     }
-    selectDungeon = dungeonSoil;
+    selectMineImage = mineImage[7];
     // 왼쪽 상단 메인 영역 초기화
     for (int y = 0; y < 256; ++y)  // y축
     {
@@ -92,13 +68,13 @@ void TilemapToolScene::Update()
     // 타일맵툴 명령키
     {
         if (KeyManager::GetSingleton()->IsOnceKeyDown('1'))             //==========================
-            layerNum = 0;                                               //
+            layer.num = 0;                                               //
         else if (KeyManager::GetSingleton()->IsOnceKeyDown('2'))        //
-            layerNum = 1;                                               //  레이어 선택
+            layer.num = 1;                                               //  레이어 선택
         else if (KeyManager::GetSingleton()->IsOnceKeyDown('3'))        //
-            layerNum = 2;                                               //
+            layer.num = 2;                                               //
         else if (KeyManager::GetSingleton()->IsOnceKeyDown('4'))        //
-            layerNum = 3;                                               //
+            layer.num = 3;                                               //
         if (KeyManager::GetSingleton()->IsOnceKeyDown('Z'))             //==========================
         {                                                               //
             if (tileState == Tile_State::Empty)                         //
@@ -116,89 +92,81 @@ void TilemapToolScene::Update()
         {                                                               //
             --mapPosY;                                                  //
             if (mapPosY < 0) mapPosY = 0;                               //
-            cout << "mapPosX : " << mapPosX << " mapPosY : " << mapPosY << "\n";
         }                                                               //
         else if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_DOWN))    //
         {                                                               //
             ++mapPosY;                                                  //
-            cout << "mapPosX : " << mapPosX << " mapPosY : " << mapPosY << "\n";
         }                                                               //
         else if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_RIGHT))   // 보여지는 맵크기 결정
         {                                                               //
             ++mapPosX;                                                  //
-            cout << "mapPosX : " << mapPosX << " mapPosY : " << mapPosY << "\n";
         }                                                               //
         else if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_LEFT))    //
         {                                                               //
             --mapPosX;                                                  //
             if (mapPosX < 0) mapPosX = 0;                               //
-            cout << "mapPosX : " << mapPosX << " mapPosY : " << mapPosY << "\n";
         }                                                               //==========================
         else if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_NUMPAD6)) //
         {                                                               //
             ++mapInfo.mapSizeX;                                         // 
-            cout << "mapSizeX : " << mapInfo.mapSizeX << " mapSizeY : " << mapInfo.mapSizeY << "\n";
         }                                                               //
         else if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_NUMPAD4)) // 
         {                                                               //
             --mapInfo.mapSizeX;                                         //
-            cout << "mapSizeX : " << mapInfo.mapSizeX << " mapSizeY : " << mapInfo.mapSizeY << "\n";
         }                                                               //
         else if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_NUMPAD8)) // 
         {                                                               //
             --mapInfo.mapSizeY;                                         // 실제 맵크기 결정
-            cout << "mapSizeX : " << mapInfo.mapSizeX << " mapSizeY : " << mapInfo.mapSizeY << "\n";
         }                                                               //
         else if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_NUMPAD5)) // 
         {                                                               //
             ++mapInfo.mapSizeY;                                         // 
-            cout << "mapSizeX : " << mapInfo.mapSizeX << " mapSizeY : " << mapInfo.mapSizeY << "\n";
         }                                                               //==========================
         else if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_NUMPAD3)) //
         {                                                               //
             if (mapInfo.dungeonTiles == Dungeon_Tiles::Dungeon_Gray)    //
             {                                                           //
-                selectDungeon = dungeonIce;                             //
+                selectMineImage = mineImage[1];                             //
                 mapInfo.dungeonTiles = Dungeon_Tiles::Dungeon_Ice;      //
             }                                                           //
             else if (mapInfo.dungeonTiles == Dungeon_Tiles::Dungeon_Ice)//
             {                                                           //
-                selectDungeon = dungeonIce2;                            //
+                selectMineImage = mineImage[2];                            //
                 mapInfo.dungeonTiles = Dungeon_Tiles::Dungeon_Ice2;     //  샘플영역 변경
             }                                                           //
             else if (mapInfo.dungeonTiles == Dungeon_Tiles::Dungeon_Ice2)
             {                                                           //
-                selectDungeon = dungeonRed;                             //
+                selectMineImage = mineImage[3];                             //
                 mapInfo.dungeonTiles = Dungeon_Tiles::Dungeon_Red;      //
             }                                                           //
             else if (mapInfo.dungeonTiles == Dungeon_Tiles::Dungeon_Red)//
             {                                                           //
-                selectDungeon = dungeonSand;                            //
+                selectMineImage = mineImage[4];                            //
                 mapInfo.dungeonTiles = Dungeon_Tiles::Dungeon_Sand;     //
             }                                                           //
             else if (mapInfo.dungeonTiles == Dungeon_Tiles::Dungeon_Sand)//
             {                                                           //
-                selectDungeon = dungeonSand2;                           //
+                selectMineImage = mineImage[5];                           //
                 mapInfo.dungeonTiles = Dungeon_Tiles::Dungeon_Sand2;    //
             }                                                           //
             else if (mapInfo.dungeonTiles == Dungeon_Tiles::Dungeon_Sand2)
             {                                                           //
-                selectDungeon = dungeonSlime;                           //
+                selectMineImage = mineImage[6];                           //
                 mapInfo.dungeonTiles = Dungeon_Tiles::Dungeon_Slime;    //
             }                                                           //
             else if (mapInfo.dungeonTiles == Dungeon_Tiles::Dungeon_Slime)
             {                                                           //
-                selectDungeon = dungeonSoil;                            //
+                selectMineImage = mineImage[7];                            //
                 mapInfo.dungeonTiles = Dungeon_Tiles::Dungeon_Soil;     //
             }                                                           //
             else if (mapInfo.dungeonTiles == Dungeon_Tiles::Dungeon_Soil)
             {                                                           //
-                selectDungeon = dungeonStone;                           //
+                selectMineImage = mineImage[8];                           //
                 mapInfo.dungeonTiles = Dungeon_Tiles::Dungeon_Stone;    //
             }                                                           //
             else if (mapInfo.dungeonTiles == Dungeon_Tiles::Dungeon_Stone)
             {                                                           //
-                selectDungeon = dungeonGray;                            //
+                selectMineImage = mineImage[0];                            //
                 mapInfo.dungeonTiles = Dungeon_Tiles::Dungeon_Gray;     //=========================
             }                                                           //
         }                                                               //
@@ -220,8 +188,8 @@ void TilemapToolScene::Update()
         }
         else if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_NUMPAD2))
         {
-            ++layerMode;
-            if (layerMode == 4) layerMode = 0;
+            ++layer.mode;
+            if (layer.mode == 4) layer.mode = 0;
         }
 
         mapPrintX = mapPosX + 20;
@@ -238,9 +206,9 @@ void TilemapToolScene::Update()
         for (int x = 0; x < 16; ++x)    // x축
         {
             SetRect(&(sampleTileInfo[y][x].rc),
-                TILEMAPTOOL_SIZE_X - selectDungeon->GetWidth() + x * TILE_SIZE,
+                TILEMAPTOOL_SIZE_X - selectMineImage->GetWidth() + x * TILE_SIZE,
                 y * TILE_SIZE,
-                TILEMAPTOOL_SIZE_X - selectDungeon->GetWidth() + x * TILE_SIZE + TILE_SIZE,
+                TILEMAPTOOL_SIZE_X - selectMineImage->GetWidth() + x * TILE_SIZE + TILE_SIZE,
                 y * TILE_SIZE + TILE_SIZE);
 
             sampleTileInfo[y][x].frameX = x;
@@ -249,10 +217,10 @@ void TilemapToolScene::Update()
     }
     // 샘플영역에서 샘플을 선택
     RECT sampleArea;
-    sampleArea.left = TILEMAPTOOL_SIZE_X - selectDungeon->GetWidth();
+    sampleArea.left = TILEMAPTOOL_SIZE_X - selectMineImage->GetWidth();
     sampleArea.right = TILEMAPTOOL_SIZE_X;
     sampleArea.top = 0;
-    sampleArea.bottom = selectDungeon->GetHeight();
+    sampleArea.bottom = selectMineImage->GetHeight();
 
     if (PtInRect(&(sampleArea), mouse))
     {
@@ -275,7 +243,7 @@ void TilemapToolScene::Update()
     }
 
     // 메인영역에서 선택된 샘플 정보로 수정
-    if (layerNum != 3)
+    if (layer.num != 3)
     {
         for (int y = mapPosY; y < mapPosY + 20; ++y) {
             for (int x = mapPosX; x < mapPosX + 20; ++x) {
@@ -290,8 +258,8 @@ void TilemapToolScene::Update()
                             for (int width = 0; width <= sampleTileWidth; ++width)
                             {
                                 if (mapPosX + height >= mapPrintX) break;
-                                mapInfo.tileInfo[layerNum][y + height][x + width].frameX = selectedSampleTile.frameX + width;
-                                mapInfo.tileInfo[layerNum][y + height][x + width].frameY = selectedSampleTile.frameY + height;
+                                mapInfo.tileInfo[layer.num][y + height][x + width].frameX = selectedSampleTile.frameX + width;
+                                mapInfo.tileInfo[layer.num][y + height][x + width].frameY = selectedSampleTile.frameY + height;
                             }
                         }
                     }
@@ -326,12 +294,12 @@ void TilemapToolScene::Update()
 void TilemapToolScene::Render(HDC hdc)
 {
     // 메인 영역
-    if (layerMode == 0) // 레이어 모드가 표준상태일때
+    if (layer.mode == 0) // 레이어 모드가 표준상태일때
     {
         for (int z = 2; z > -1; --z) {
             for (int y = mapPosY; y < mapPrintY; ++y) {
                 for (int x = mapPosX; x < mapPrintX; ++x) {
-                    selectDungeon->Render(hdc,
+                    selectMineImage->Render(hdc,
                         mapInfo.rect[y][x].left + (TILE_SIZE / 2) - (mapPosX * TILE_SIZE),
                         mapInfo.rect[y][x].top + (TILE_SIZE / 2) - (mapPosY * TILE_SIZE),
                         mapInfo.tileInfo[z][y][x].frameX,
@@ -344,16 +312,16 @@ void TilemapToolScene::Render(HDC hdc)
     {
         for (int y = mapPosY; y < mapPrintY; ++y) {
             for (int x = mapPosX; x < mapPrintX; ++x) {
-                selectDungeon->Render(hdc,
+                selectMineImage->Render(hdc,
                     mapInfo.rect[y][x].left + (TILE_SIZE / 2) - (mapPosX * TILE_SIZE),
                     mapInfo.rect[y][x].top + (TILE_SIZE / 2) - (mapPosY * TILE_SIZE),
-                    mapInfo.tileInfo[layerMode - 1][y][x].frameX,
-                    mapInfo.tileInfo[layerMode - 1][y][x].frameY);
+                    mapInfo.tileInfo[layer.mode - 1][y][x].frameX,
+                    mapInfo.tileInfo[layer.mode - 1][y][x].frameY);
             }
         }
     }
 
-    if (layerNum == 3)
+    if (layer.num == 3)
     {
         for (int y = mapPosY; y < mapPrintY; ++y) {
             for (int x = mapPosX; x < mapPrintX; ++x) {
@@ -380,11 +348,11 @@ void TilemapToolScene::Render(HDC hdc)
     }
 
     // 레이어 렌더
-    layerNumImage->Render(hdc, TILEMAPTOOL_SIZE_X - 265, TILEMAPTOOL_SIZE_Y - 150, layerNum, 0);
-    if (layerMode == 0)
-        layerModeImage->Render(hdc, TILEMAPTOOL_SIZE_X - 281, TILEMAPTOOL_SIZE_Y - 150, 3, 0);
+    layer.numImage->Render(hdc, TILEMAPTOOL_SIZE_X - 265, TILEMAPTOOL_SIZE_Y - 150, layer.num, 0);
+    if (layer.mode == 0)
+        layer.modeImage->Render(hdc, TILEMAPTOOL_SIZE_X - 281, TILEMAPTOOL_SIZE_Y - 150, 3, 0);
     else
-        layerModeImage->Render(hdc, TILEMAPTOOL_SIZE_X - 281, TILEMAPTOOL_SIZE_Y - 150, layerMode - 1, 0);
+        layer.modeImage->Render(hdc, TILEMAPTOOL_SIZE_X - 281, TILEMAPTOOL_SIZE_Y - 150, layer.mode - 1, 0);
     if (tileState == Tile_State::Empty)
         tileStateImage->Render(hdc, TILEMAPTOOL_SIZE_X - 265, TILEMAPTOOL_SIZE_Y - 222, 0, 0);
     else if (tileState == Tile_State::LadderDown)
@@ -398,7 +366,7 @@ void TilemapToolScene::Render(HDC hdc)
 
 
     // 선택된 타일
-    selectDungeon->Render(
+    selectMineImage->Render(
         hdc,
         TILEMAPTOOL_SIZE_X - 265,
         TILEMAPTOOL_SIZE_Y - 100,
@@ -408,15 +376,30 @@ void TilemapToolScene::Render(HDC hdc)
         0);
 
     // 우측상단 샘플 영역
-    selectDungeon->Render(
+    selectMineImage->Render(
         hdc,
-        TILEMAPTOOL_SIZE_X - selectDungeon->GetWidth() / 2,
-        selectDungeon->GetHeight() / 2);
+        TILEMAPTOOL_SIZE_X - selectMineImage->GetWidth() / 2,
+        selectMineImage->GetHeight() / 2);
 }
 
 void TilemapToolScene::Release()
 {
 }
+
+TilemapToolScene::TilemapToolScene() :
+    pen{},
+    oPen{},
+    sampleTileInfo{},
+    selectedSampleTile{},
+    sampleTileWidth{ NULL }, sampleTileHeight{ NULL },
+    mineImage{},
+    layer{},
+    mouse{},
+    mapInfo{},
+    mapPrintX{ 20 }, mapPrintY{ 20 },
+    mapPosX{ 0 }, mapPosY{ 0 },
+    tileState{ Tile_State::Empty }
+{}
 
 void TilemapToolScene::Save()
 {

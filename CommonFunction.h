@@ -32,3 +32,11 @@ inline int GetPosCount(int pos, int isSize, bool isPosX) {
 	if (Count > 26) Count = 26;
 	return Count;
 }
+
+inline void SetRect(RECT* rect, POINTFLOAT pos,int bodySize)
+{
+	rect->left = pos.x - (bodySize / 2);
+	rect->right = pos.x + (bodySize / 2);
+	rect->top = pos.y - (bodySize / 2);
+	rect->bottom = pos.y + (bodySize / 2);
+}

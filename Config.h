@@ -39,7 +39,7 @@ typedef struct ArgumentFuncPtr
 #include "ObjectPosManager.h"
 #include "MapManager.h"
 
-#define TIME TimerManager::GetSingleton()->GetDeltaTime() 
+#define DELTA_TIME TimerManager::GetSingleton()->GetDeltaTime() 
 #define GLOBAL_POS ObjectPosManager::GetSingleton()->GetGlobalPos()
 #define GLOBAL_POS_X GameDataManager::GetSingleton()->GetGlobalPosX()
 #define GLOBAL_POS_Y GameDataManager::GetSingleton()->GetGlobalPosY()

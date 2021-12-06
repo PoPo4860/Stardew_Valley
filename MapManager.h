@@ -2,6 +2,7 @@
 #include "Config.h"
 #include "MapInfo.h"
 #include "GameObject.h"
+#include <algorithm>
 #include <queue>
 
 class Image;
@@ -20,9 +21,7 @@ private:
 	Image* selectDungeon;
 	priority_queue<GameObject*, vector<GameObject*>, compare> objectQueue;
 public:
-	void PrintMapRayer1(HDC hdc);
-	void PrintMapRayer2(HDC hdc);
-	void PrintMapRayer3(HDC hdc);
+	void DrawMapLayer(HDC hdc, int LayerNum);
 	void CreateObject();
 	void ObjectRender(HDC hdc);
 	void pushQueue(GameObject* obj) { objectQueue.push(obj); }

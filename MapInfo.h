@@ -34,22 +34,6 @@ enum class Stone_Object_Info
 	SmallStone_Lv1, SmallStone_Lv2, SmallStone_Lv3
 };
 
-//struct MAP_INFO
-//{
-//	MAP_INFO() :
-//		dungeonTiles{ Dungeon_Tiles::Dungeon_Soil },
-//		tileInfo{ },
-//		tileState{ },
-//		rect{},
-//		object{},
-//		mapSizeX{ 20 }, mapSizeY{ 20 } {}
-//	Dungeon_Tiles dungeonTiles;
-//	TILE_INFO tileInfo[3][256][256];
-//	Tile_State tileState[256][256];
-//	GameObject** object;
-//	RECT rect[256][256];
-//	int mapSizeX, mapSizeY;
-//};
 struct MAP_INFO
 {
 	MAP_INFO() :
@@ -62,10 +46,27 @@ struct MAP_INFO
 	Dungeon_Tiles dungeonTiles;
 	TILE_INFO tileInfo[3][256][256];
 	Tile_State tileState[256][256];
-	GameObject* object[256][256];
+	Interaction* object[256][256];
 	RECT rect[256][256];
 	int mapSizeX, mapSizeY;
 };
+
+//struct MAP_INFO
+//{
+//	MAP_INFO() :
+//		dungeonTiles{ Dungeon_Tiles::Dungeon_Soil },
+//		tileInfo{ },
+//		tileState{ },
+//		rect{},
+//		object{},
+//		mapSizeX{ 20 }, mapSizeY{ 20 } {}
+//	Dungeon_Tiles dungeonTiles;
+//	TILE_INFO tileInfo[3][256][256];
+//	Tile_State tileState[256][256];
+//	GameObject* object[256][256];
+//	RECT rect[256][256];
+//	int mapSizeX, mapSizeY;
+//};
 
 
 

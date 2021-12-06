@@ -1,41 +1,20 @@
 #include "MapManager.h"
 #include "Image.h"
 #include "SmallStone.h"
-void MapManager::PrintMapRayer1(HDC hdc)
-{
-    for (int y = 0; y < mapInfo.mapSizeY; ++y) {
-        for (int x = 0; x < mapInfo.mapSizeX; ++x) {
-            selectDungeon->Render(hdc,
-                mapInfo.rect[y][x].left + (TILE_SIZE / 2) - GLOBAL_POS.x,
-                mapInfo.rect[y][x].top + (TILE_SIZE / 2) - GLOBAL_POS.y,
-                mapInfo.tileInfo[2][y][x].frameX,
-                mapInfo.tileInfo[2][y][x].frameY);
-        }
-    }
-}
 
-void MapManager::PrintMapRayer2(HDC hdc)
-{
-    for (int y = 0; y < mapInfo.mapSizeY; ++y) {
-        for (int x = 0; x < mapInfo.mapSizeX; ++x) {
-            selectDungeon->Render(hdc,
-                mapInfo.rect[y][x].left + (TILE_SIZE / 2) - GLOBAL_POS.x,
-                mapInfo.rect[y][x].top + (TILE_SIZE / 2) - GLOBAL_POS.y,
-                mapInfo.tileInfo[1][y][x].frameX,
-                mapInfo.tileInfo[1][y][x].frameY);
-        }
-    }
-}
 
-void MapManager::PrintMapRayer3(HDC hdc)
+void MapManager::DrawMapLayer(HDC hdc, int LayerNum)
 {
+    if (LayerNum == 1) LayerNum = 2;
+    else if (LayerNum == 2) LayerNum = 1;
+    else if (LayerNum == 3) LayerNum = 0;
     for (int y = 0; y < mapInfo.mapSizeY; ++y) {
         for (int x = 0; x < mapInfo.mapSizeX; ++x) {
             selectDungeon->Render(hdc,
                 mapInfo.rect[y][x].left + (TILE_SIZE / 2) - GLOBAL_POS.x,
                 mapInfo.rect[y][x].top + (TILE_SIZE / 2) - GLOBAL_POS.y,
-                mapInfo.tileInfo[0][y][x].frameX,
-                mapInfo.tileInfo[0][y][x].frameY);
+                mapInfo.tileInfo[LayerNum][y][x].frameX,
+                mapInfo.tileInfo[LayerNum][y][x].frameY);
         }
     }
 }
@@ -70,7 +49,6 @@ void MapManager::CreateObject()
         if (mapInfo.tileState[posY][posX] == Tile_State::Empty && mapInfo.object[posY][posX] == nullptr)
         {
             mapInfo.object[posY][posX] = new SmallStone(Stone_Object_Info::SmallStone_Lv1, posX, posY);
-            mapInfo.object[posY][posX]->Init();
             ++count;
         }
     }
@@ -97,70 +75,49 @@ void MapManager::SetDungeonImage()
 {
     if (mapInfo.dungeonTiles == Dungeon_Tiles::Dungeon_Soil)
     {
-        ImageManager::GetSingleton()->AddImage
-        ("Image/Dungeon/Dungeon_Soil.bmp", 256, 288, 16, 18, true, RGB(255, 0, 255));
-        selectDungeon = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Soil.bmp");
+        selectDungeon = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Soil.bmp", 256, 288, 16, 18);
     }
     else if (mapInfo.dungeonTiles == Dungeon_Tiles::Dungeon_Gray)
     {
-        ImageManager::GetSingleton()->AddImage
-        ("Image/Dungeon/Dungeon_Soil.bmp", 256, 288, 16, 18, true, RGB(255, 0, 255));
-        selectDungeon = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Gray.bmp");
+        selectDungeon = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Soil.bmp", 256, 288, 16, 18);
     }
     else if (mapInfo.dungeonTiles == Dungeon_Tiles::Dungeon_Ice)
-    {
-        ImageManager::GetSingleton()->AddImage
-        ("Image/Dungeon/Dungeon_Soil.bmp", 256, 288, 16, 18, true, RGB(255, 0, 255));
-        selectDungeon = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Ice.bmp");
+    {        
+        selectDungeon = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Soil.bmp", 256, 288, 16, 18);
     }
     else if (mapInfo.dungeonTiles == Dungeon_Tiles::Dungeon_Ice2)
     {
-        ImageManager::GetSingleton()->AddImage
-        ("Image/Dungeon/Dungeon_Soil.bmp", 256, 288, 16, 18, true, RGB(255, 0, 255));
-        selectDungeon = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Ice2.bmp");
+        selectDungeon = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Soil.bmp", 256, 288, 16, 18);
     }
     else if (mapInfo.dungeonTiles == Dungeon_Tiles::Dungeon_Red)
     {
-        ImageManager::GetSingleton()->AddImage
-        ("Image/Dungeon/Dungeon_Soil.bmp", 256, 288, 16, 18, true, RGB(255, 0, 255));
-        selectDungeon = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Red.bmp");
+        selectDungeon = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Soil.bmp", 256, 288, 16, 18);
     }
     else if (mapInfo.dungeonTiles == Dungeon_Tiles::Dungeon_Sand)
     {
-        ImageManager::GetSingleton()->AddImage
-        ("Image/Dungeon/Dungeon_Soil.bmp", 256, 288, 16, 18, true, RGB(255, 0, 255));
-        selectDungeon = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Sand.bmp");
+        selectDungeon = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Soil.bmp", 256, 288, 16, 18);
     }
     else if (mapInfo.dungeonTiles == Dungeon_Tiles::Dungeon_Sand2)
     {
-        ImageManager::GetSingleton()->AddImage
-        ("Image/Dungeon/Dungeon_Soil.bmp", 256, 288, 16, 18, true, RGB(255, 0, 255));
-        selectDungeon = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Sand2.bmp");
+        selectDungeon = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Soil.bmp", 256, 288, 16, 18);
     }
     else if (mapInfo.dungeonTiles == Dungeon_Tiles::Dungeon_Slime)
     {
-        ImageManager::GetSingleton()->AddImage
-        ("Image/Dungeon/Dungeon_Soil.bmp", 256, 288, 16, 18, true, RGB(255, 0, 255));
-        selectDungeon = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Slime.bmp");
+        selectDungeon = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Soil.bmp", 256, 288, 16, 18);
     }
     else if (mapInfo.dungeonTiles == Dungeon_Tiles::Dungeon_Soil)
     {
-        ImageManager::GetSingleton()->AddImage
-        ("Image/Dungeon/Dungeon_Soil.bmp", 256, 288, 16, 18, true, RGB(255, 0, 255));
-        selectDungeon = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Soil.bmp");
+        selectDungeon = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Soil.bmp", 256, 288, 16, 18);
     }
     else if (mapInfo.dungeonTiles == Dungeon_Tiles::Dungeon_Stone)
     {
-        ImageManager::GetSingleton()->AddImage
-        ("Image/Dungeon/Dungeon_Soil.bmp", 256, 288, 16, 18, true, RGB(255, 0, 255));
-        selectDungeon = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Stone.bmp");
+        selectDungeon = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Soil.bmp", 256, 288, 16, 18);
     }
 }
 
 void MapManager::Load(int num)
 {
-    string loadFileName = "Save/SaveMapData_" + to_string(num);
-    loadFileName += ".map";
+    string loadFileName = "Save/SaveMapData_" + to_string(num) + ".map";
 
     HANDLE hFile = CreateFile(loadFileName.c_str(),
         GENERIC_READ,           // 읽기, 쓰기

@@ -1,5 +1,7 @@
 #include "SceneManager.h"
 #include "GameEntity.h"
+#include "TilemapToolScene.h"
+#include "MineScene.h"
 
 GameEntity* SceneManager::currScene = nullptr;
 GameEntity* SceneManager::readyScene = nullptr;
@@ -20,6 +22,8 @@ DWORD CALLBACK LoadingThread(LPVOID pvParam)
 
 void SceneManager::Init()
 {
+	SceneManager::GetSingleton()->AddScene("TilemapToolScene", new TilemapToolScene());
+	SceneManager::GetSingleton()->AddScene("MineScene", new MineScene());
 }
 
 void SceneManager::Release()

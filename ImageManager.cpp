@@ -29,10 +29,7 @@ void ImageManager::Release()
 
 Image* ImageManager::AddImage(const char* fileName, int width, int height, bool isTrans, COLORREF transColor)
 {
-	if (FindImage(fileName))
-	{
-		return nullptr;
-	}
+
 
 	Image* img = new Image;
 	if (FAILED(img->Init(fileName, width, height, isTrans, transColor)))
@@ -49,10 +46,6 @@ Image* ImageManager::AddImage(const char* fileName, int width, int height, bool 
 Image* ImageManager::AddImage(const char* fileName, int width, int height, 
 	int maxFrameX, int maxFrameY, bool isTrans, COLORREF transColor)
 {
-	if (FindImage(fileName))
-	{
-		return nullptr;
-	}
 
 	Image* img = new Image;
 	if (FAILED(img->Init(fileName, width, height, maxFrameX, 
@@ -67,12 +60,13 @@ Image* ImageManager::AddImage(const char* fileName, int width, int height,
 	return img;
 }
 
-Image* ImageManager::FindImage(const char* fileName)
+Image* ImageManager::FindImage(const char* fileName, int width, int height,
+	int maxFrameX, int maxFrameY)
 {
 	map<string, Image*>::iterator it = mapImages.find(fileName);
 	if (it == mapImages.end())
 	{
-		return nullptr;
+		return AddImage(fileName, width, height, maxFrameX, maxFrameY,true,RGB(255,0,255));
 	}
 
 	return it->second;
