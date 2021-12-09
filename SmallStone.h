@@ -7,15 +7,12 @@ private:
 	Stone_Object_Info objectInfo;
 	int frame;
 public:
-	SmallStone(Stone_Object_Info obj, int x, int y)
-		:frame{NULL}, objectInfo{obj}
-	{pos.x = (float)x, pos.y = (float)y;
-	Init(); }
-	~SmallStone() = default;
+	SmallStone(Stone_Object_Info obj, int x, int y);
+	virtual ~SmallStone() = default;
 	virtual bool InteractionPick(int damage) override;
 	virtual HRESULT Init() override;
-	virtual void Update();
-	virtual void Render(HDC hdc);
-	virtual void Release();
+	virtual void Update() override;
+	virtual void Render(HDC hdc) override;
+	virtual void Release() override;
 };
 

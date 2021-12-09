@@ -60,6 +60,14 @@ void MainGame::Release()
 	SceneManager::GetSingleton()->Release();
 	SceneManager::GetSingleton()->ReleaseSingleton();
 
+	GameDataManager::GetSingleton()->Release();
+	GameDataManager::GetSingleton()->ReleaseSingleton();
+
+	MapManager::GetSingleton()->Release();
+	MapManager::GetSingleton()->ReleaseSingleton();
+
+	ObjectPosManager::GetSingleton()->Release();
+	ObjectPosManager::GetSingleton()->ReleaseSingleton();
 	KillTimer(g_hWnd, 0);
 }
 

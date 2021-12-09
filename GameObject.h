@@ -11,7 +11,6 @@ protected:	// 상속된 클래스에 노출시킨다.
 public:
 	GameObject();
 	virtual ~GameObject() = default;
-	bool operator<(GameObject& b);
 
 	inline void SetPos(POINTFLOAT pos) { this->pos = pos; }
 	inline POINTFLOAT GetPos() { return this->pos; }
@@ -36,7 +35,7 @@ protected:
 	float moveSpeed;
 	int hp;
 public:
-	~Character() = default;
+	virtual ~Character() = default;
 };
 
 

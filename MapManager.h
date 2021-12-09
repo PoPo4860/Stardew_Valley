@@ -4,7 +4,6 @@
 #include "GameObject.h"
 #include <algorithm>
 #include <queue>
-
 class Image;
 
 struct compare
@@ -23,9 +22,12 @@ private:
 public:
 	void DrawMapLayer(HDC hdc, int LayerNum);
 	void CreateObject();
+	void Update();
+	void Release();
 	void ObjectRender(HDC hdc);
 	void pushQueue(GameObject* obj) { objectQueue.push(obj); }
 	const MAP_INFO* GetMap() { return &mapInfo; }
+	void SetMapObject(int y, int x) { mapInfo.object[y][x] = nullptr; }
 	void SetDungeonImage();
 	void Load(int num);
 };

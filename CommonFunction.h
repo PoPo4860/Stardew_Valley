@@ -2,7 +2,7 @@
 #include "Image.h"
 #include <Windows.h>
 #include <math.h>
-
+#include "Config.h"
 inline void SetWindowSize(int startX, int startY, int sizeX, int sizeY)
 {
 	// 원하는 윈도우 작업영역 설정
@@ -18,19 +18,22 @@ inline void SetWindowSize(int startX, int startY, int sizeX, int sizeY)
 		rc.right - rc.left, rc.bottom - rc.top, true);
 }
 
-inline int GetPosCount(int pos, int isSize, bool isPosX) {
-	int Count = 0;
+inline POINT GetPosTile(POINTFLOAT pos, int mapSizeX = MAP->mapSizeX, int mapSizeY = MAP->mapSizeY) {
+	int CountX = 0;
+	CountX = ((int)pos.x / TILE_SIZE) % mapSizeX;
+	if (CountX < 0) CountX = 0;
+	if (CountX >= mapSizeX) CountX = mapSizeX - 1;
 
-	if (isPosX) {
-		Count = ((pos - 16) / 8) % 26;
-		Count += isSize;
-	} else {
-		Count = ((pos - 8) / 8) % 26;
-		Count += isSize;
-	}
-	if (Count < 0) Count = 0;
-	if (Count > 26) Count = 26;
-	return Count;
+	int CountY = 0;
+	CountY = ((int)pos.y / TILE_SIZE) % mapSizeY;
+	if (CountY < 0) CountY = 0;
+	if (CountY >= mapSizeY) CountY = mapSizeY - 1;
+
+	
+	POINT result;
+	result.x = CountX;
+	result.y = CountY;
+	return result;
 }
 
 inline void SetRect(RECT* rect, POINTFLOAT pos,int bodySize)

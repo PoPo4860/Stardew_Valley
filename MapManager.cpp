@@ -54,6 +54,32 @@ void MapManager::CreateObject()
     }
 }
 
+void MapManager::Update()
+{
+    for (int y = 0; y < mapInfo.mapSizeY; ++y)
+    {
+        for (int x = 0; x < mapInfo.mapSizeX; ++x)
+        {
+            if (mapInfo.tileState[y][x] == Tile_State::Empty && mapInfo.object[y][x] != nullptr)
+            {
+                mapInfo.object[y][x]->Update();
+            }
+        }
+    }
+}
+
+void MapManager::Release()
+{
+    for (int y = 0; y < mapInfo.mapSizeY; ++y)
+    {
+        for (int x = 0; x < mapInfo.mapSizeX; ++x)
+        {
+            if (mapInfo.tileState[y][x] == Tile_State::Empty && mapInfo.object[y][x] != nullptr)
+                mapInfo.object[y][x]->Release();
+        }
+    }
+}
+
 void MapManager::ObjectRender(HDC hdc)
 {
     for (int y = 0; y < mapInfo.mapSizeY; ++y)
@@ -66,6 +92,11 @@ void MapManager::ObjectRender(HDC hdc)
     }
     while (objectQueue.empty() == false)
     {
+        if (objectQueue.top() == nullptr)
+        {
+            objectQueue.pop();
+            continue;
+        }
         objectQueue.top()->Render(hdc);
         objectQueue.pop();
     }

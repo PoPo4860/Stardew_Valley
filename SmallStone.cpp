@@ -2,10 +2,15 @@
 #include "Config.h"
 #include "CommonFunction.h"
 #include "image.h"
+SmallStone::SmallStone(Stone_Object_Info obj, int x, int y) :frame{ NULL }, objectInfo{ obj }
+{
+	pos.x = (float)x, pos.y = (float)y;
+	Init(); 
+}
 bool SmallStone::InteractionPick(int damage)
 {
 	hp -= damage;
-	if (hp < 0) return true;
+
 	return false;
 }
 
@@ -15,7 +20,7 @@ HRESULT SmallStone::Init()
 	pos.x = (pos.x * 16) + 8;
 	pos.y = (pos.y * 16) + 8;
 	bodySize = 16;
-	SetRect(&rect,pos,bodySize);
+	SetRect(&rect, pos, bodySize);
 
 	if (objectInfo == Stone_Object_Info::SmallStone_Lv1)
 	{
@@ -35,13 +40,21 @@ HRESULT SmallStone::Init()
 
 void SmallStone::Update()
 {
+	if (hp < 0)
+	{
+		Release();
+	}
 }
 
 void SmallStone::Render(HDC hdc)
 {
-	img->Render(hdc, pos.x - GLOBAL_POS.x, pos.y - GLOBAL_POS.y, frame, 0);
+	if(hp > 0)
+		img->Render(hdc, pos.x - GLOBAL_POS.x, pos.y - GLOBAL_POS.y, frame, 0);
 }
 
 void SmallStone::Release()
 {
+	POINT result = GetPosTile(pos, MAP->mapSizeY, MAP->mapSizeX);
+	MAP_MANAGER->SetMapObject(result.y, result.x);
+	delete this;
 }

@@ -22,6 +22,7 @@ HRESULT MineScene::Init()
 void MineScene::Update()
 {
     player->Update();
+    MAP_MANAGER->Update();
 }
 
 void MineScene::Render(HDC hdc)
@@ -35,5 +36,7 @@ void MineScene::Render(HDC hdc)
 
 void MineScene::Release()
 {
-
+    player->Release();
+    delete player;
+    player = nullptr;
 }
