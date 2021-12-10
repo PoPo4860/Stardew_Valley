@@ -106,11 +106,11 @@ void Image::Release()
 	}
 }
 
-void Image::Render(HDC hdc)
+void Image::Render(HDC hdc, int destX, int destY)
 {
 	BitBlt(hdc,				// 복사 목적지 DC
-		0,					// 복사될 비트맵의 시작 위치 x
-		0,					// 복사될 비트맵의 시작 위치 y
+		destX,					// 복사될 비트맵의 시작 위치 x
+		destY,					// 복사될 비트맵의 시작 위치 y
 		imageInfo->width,	// 원본 복사할 가로 크기
 		imageInfo->height,	// 원본 복사할 세로 크기
 		imageInfo->hMemDc,	// 원본 DC
@@ -197,7 +197,7 @@ void Image::Render(HDC hdc, float destX, float destY, int frameX, int frameY, in
 			(int)(imageInfo->frameHeight * scale),	// 전체 프레임 수
 
 			imageInfo->hMemDc,
-			(int)(imageInfo->frameWidth* frameX),
+			(int)(imageInfo->frameWidth * frameX), 
 			(int)(imageInfo->frameHeight * frameY),
 			(int)(imageInfo->frameWidth* (width + 1)),
 			(int)(imageInfo->frameHeight * (height + 1)),

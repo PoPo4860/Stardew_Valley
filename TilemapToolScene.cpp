@@ -378,8 +378,8 @@ void TilemapToolScene::Render(HDC hdc)
     // 우측상단 샘플 영역
     selectMineImage->Render(
         hdc,
-        TILEMAPTOOL_SIZE_X - selectMineImage->GetWidth() / 2,
-        selectMineImage->GetHeight() / 2,0,0);
+        TILEMAPTOOL_SIZE_X - selectMineImage->GetWidth(),
+        0);
 }
 
 void TilemapToolScene::Release()

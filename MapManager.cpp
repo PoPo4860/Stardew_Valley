@@ -4,7 +4,7 @@
 
 
 MapManager::MapManager():
-    mapInfo{}, selectDungeon{nullptr} , objectQueue{} {}
+    mapInfo{}, selectDungeon{ nullptr }, objectQueue{}, exit{}{}
 
 void MapManager::DrawMapLayer(HDC hdc, int LayerNum)
 {
@@ -50,9 +50,26 @@ void MapManager::CreateObject()
         int posY = rand() % mapInfo.mapSizeY;
 
         if (mapInfo.tileState[posY][posX] == Tile_State::Empty && mapInfo.object[posY][posX] == nullptr)
-        {
-            mapInfo.object[posY][posX] = new SmallStone(Stone_Object_Info::SmallStone_Lv1, posX, posY);
-            ++count;
+        {   //  해당 타일이 비어있으며, 위칸에 사다리가 없을 경우 오브젝트 추가
+            if (posY > 0 && mapInfo.tileState[posY - 1][posX] != Tile_State::LadderUp)
+            {
+                mapInfo.object[posY][posX] = new SmallStone(Stone_Object_Info::SmallStone_Lv1, posX, posY);
+                ++count;
+                if (/*rand() % (objectCost / 3) == 0*/true)
+                {   // 생성될 스톤에 비례하여 탈출구 생성
+                    POINT buffer;
+                    buffer.x = posX;
+                    buffer.y = posY;
+                    exit.push_back(buffer);
+                }
+            }
+        }
+        if (count >= objectCost && exit.size() == 0)
+        {   // 생성된 탈출구가 없다면 탈출구 생성
+            POINT buffer;
+            buffer.x = posX;
+            buffer.y = posY;
+            exit.push_back(buffer);
         }
     }
 }
@@ -73,12 +90,21 @@ void MapManager::Update()
 
 void MapManager::Release()
 {
+    ObjectClear();
+    this->ReleaseSingleton();
+}
+
+void MapManager::ObjectClear()
+{
     for (int y = 0; y < mapInfo.mapSizeY; ++y)
     {
         for (int x = 0; x < mapInfo.mapSizeX; ++x)
         {
             if (mapInfo.tileState[y][x] == Tile_State::Empty && mapInfo.object[y][x] != nullptr)
+            {
                 mapInfo.object[y][x]->Release();
+                mapInfo.object[y][x] = nullptr;
+            }
         }
     }
 }
@@ -102,6 +128,34 @@ void MapManager::ObjectRender(HDC hdc)
         }
         objectQueue.top()->Render(hdc);
         objectQueue.pop();
+    }
+}       
+
+void MapManager::DeleteMapObject(POINT pos)
+{
+    mapInfo.object[pos.y][pos.x] = nullptr;
+    for (int i = 0; i < exit.size(); ++i)
+    {
+        if (exit[i].x == pos.x && exit[i].y == pos.y)
+        {
+            mapInfo.tileInfo[2][pos.y][pos.x].frameX = 13;
+            mapInfo.tileInfo[2][pos.y][pos.x].frameY = 10;
+            mapInfo.tileState[pos.y][pos.x] = Tile_State::LadderDown;
+        }
+    }
+}
+
+void MapManager::Interaction(POINT pos)
+{
+    if (mapInfo.tileState[pos.y][pos.x] == Tile_State::LadderDown)
+    {
+        ObjectClear();
+        exit.clear();
+        while (objectQueue.empty() == false)
+        {
+            objectQueue.pop();
+        }
+        SceneManager::GetSingleton()->ChangeScene("MineScene");
     }
 }
 
@@ -176,6 +230,9 @@ void MapManager::Load(int num)
 
     CreateObject();
     // 해당 맵에 알맞는 오브젝트 생성
+
+    ObjectPosManager::GetSingleton()->SetMapSize(MAP->mapSizeX, MAP->mapSizeY);
+    // 글로벌 포스에 맵 크기 지정
 
     CloseHandle(hFile);
 }

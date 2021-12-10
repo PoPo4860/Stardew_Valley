@@ -8,13 +8,13 @@ HRESULT MainGame::Init()
 	ImageManager::GetSingleton()->Init();
 	TimerManager::GetSingleton()->Init();
 	SceneManager::GetSingleton()->Init();
-
-
+	GameDataManager::GetSingleton()->Init();
+	MapManager::GetSingleton()->Init();
+	ObjectPosManager::GetSingleton()->Init();
+	
 	//TilemapToolScene
 	//MineScene
 	SceneManager::GetSingleton()->ChangeScene("MineScene");
-
-
 	// 타이머 셋팅
 	hTimer = (HANDLE)SetTimer(g_hWnd, 0, 10, NULL);
 
@@ -49,25 +49,13 @@ void MainGame::Release()
 	SAFE_RELEASE(backBuffer);
 
 	TimerManager::GetSingleton()->Release();
-	TimerManager::GetSingleton()->ReleaseSingleton();
-
 	ImageManager::GetSingleton()->Release();
-	ImageManager::GetSingleton()->ReleaseSingleton();
-
 	KeyManager::GetSingleton()->Release();
-	KeyManager::GetSingleton()->ReleaseSingleton();
-
 	SceneManager::GetSingleton()->Release();
-	SceneManager::GetSingleton()->ReleaseSingleton();
-
 	GameDataManager::GetSingleton()->Release();
-	GameDataManager::GetSingleton()->ReleaseSingleton();
-
 	MapManager::GetSingleton()->Release();
-	MapManager::GetSingleton()->ReleaseSingleton();
-
 	ObjectPosManager::GetSingleton()->Release();
-	ObjectPosManager::GetSingleton()->ReleaseSingleton();
+
 	KillTimer(g_hWnd, 0);
 }
 

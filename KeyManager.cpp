@@ -11,6 +11,7 @@ void KeyManager::Init()
 
 void KeyManager::Release()
 {
+	this->ReleaseSingleton();
 }
 
 bool KeyManager::IsOnceKeyDown(int key)

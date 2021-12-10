@@ -59,6 +59,6 @@ void SmallStone::Render(HDC hdc)
 void SmallStone::Release()
 {
 	POINT result = GetPosTile(pos, MAP->mapSizeY, MAP->mapSizeX);
-	MAP_MANAGER->DeleteMapObject(result.y, result.x);
+	MAP_MANAGER->DeleteMapObject(result);
 	delete this;
 }

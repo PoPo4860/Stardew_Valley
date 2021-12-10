@@ -21,6 +21,7 @@ void TimerManager::Render(HDC hdc)
 void TimerManager::Release()
 {
 	SAFE_DELETE(timer);
+	this->ReleaseSingleton();
 }
 
 

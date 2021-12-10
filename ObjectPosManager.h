@@ -10,9 +10,9 @@ public:
 	ObjectPosManager():
 		globalPos{},
 		tileSize{16},
-		mapSizeX{ NULL }, mapSizeY{ NULL }
-	{}
-
+		mapSizeX{ NULL }, mapSizeY{ NULL } {}
+	void Init() {}
+public:
 	inline void SetMapSize(int x, int y) 
 	{ 
 		mapSizeX = x * tileSize;
@@ -61,5 +61,5 @@ public:
 	}
 
 	inline POINTFLOAT GetGlobalPos() { return globalPos; }
-	inline void Release() {};
+	inline void Release() { this->ReleaseSingleton(); };
 };

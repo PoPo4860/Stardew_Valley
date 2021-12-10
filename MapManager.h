@@ -19,16 +19,21 @@ private:
 	MAP_INFO mapInfo;
 	Image* selectDungeon;
 	priority_queue<GameObject*, vector<GameObject*>, compare> objectQueue;
+	vector<POINT> exit;
 public:
 	MapManager();
+	void Init() {}
+	void Update();
+public:
 	void DrawMapLayer(HDC hdc, int LayerNum);
 	// 맵 그리기
 
-	void Update();
-	// 맵에 있는 오브젝트 업데이트
 	void Release();
+	// 맵에 있는 오브젝트 업데이트
+
+	void ObjectClear();
 	
-	void pushQueue(GameObject* obj) { objectQueue.push(obj); }
+	void PushQueue(GameObject* obj) { objectQueue.push(obj); }
 	// 렌더할 오브젝트 추가
 
 	void ObjectRender(HDC hdc);
@@ -36,8 +41,11 @@ public:
 	
 	
 	const MAP_INFO* GetMap() { return &mapInfo; }
-	void DeleteMapObject(int y, int x) { mapInfo.object[y][x] = nullptr; }
+	void DeleteMapObject(POINT pos);
 	// 맵에 있는 오브젝트 삭제
+
+	void Interaction(POINT pos);
+	// 상호작용
 
 	void SetDungeonImage();
 	void Load(int num);

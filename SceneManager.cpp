@@ -47,6 +47,7 @@ void SceneManager::Release()
 	//SAFE_RELEASE(currScene);
 	SAFE_RELEASE(readyScene);
 	SAFE_RELEASE(loadingScene);
+	this->ReleaseSingleton();
 }
 
 void SceneManager::Update()
@@ -93,11 +94,10 @@ HRESULT SceneManager::ChangeScene(string sceneName)
 	if (it == mapScenes.end())
 		return E_FAIL;
 
+	if (currScene)
+		currScene->Release();
 	if (SUCCEEDED((it->second)->Init()))
 	{
-		if (currScene)
-			currScene->Release();
-
 		currScene = it->second;
 
 		return S_OK;

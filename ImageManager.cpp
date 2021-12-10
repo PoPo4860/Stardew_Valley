@@ -13,6 +13,7 @@ void ImageManager::Release()
 		it = mapImages.erase(it);	// 다음 원소의 주소(iterator)가 갱신된다.
 	}
 	mapImages.clear();
+	this->ReleaseSingleton();
 }
 
 //void ImageManager::AddImage()

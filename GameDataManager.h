@@ -7,6 +7,10 @@ private:
 	POINTFLOAT playerPos;
 	int mapSizeX, mapSizeY;
 public:
+	GameDataManager() :
+		globalPos{}, playerPos{}, mapSizeX{}, mapSizeY{}{};
+	void Init() {}
+public:
 	inline POINTFLOAT GetGlobalPos() { return globalPos; }
 	inline float GetGlobalPosX() { return globalPos.x; }
 	inline float GetGlobalPosY() { return globalPos.y; }
@@ -19,6 +23,6 @@ public:
 	inline void SetGlobalPosX(float pos) { globalPos.x = pos; }
 	inline void SetGlobalPosY(float pos) { globalPos.y = pos; }
 
-	inline void Release() {  }
+	inline void Release() { this->ReleaseSingleton(); }
 
 };

@@ -29,6 +29,7 @@ private:
 	void StatePickUpdate();
 	void StatePickRender(HDC hdc, int frame);
 
+	POINT GetFrontTilePos();
 	void ActionPick();
 
 
