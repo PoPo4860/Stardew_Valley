@@ -1,3 +1,4 @@
+#pragma once
 #include "Player.h""
 #include "Image.h"
 #include "Config.h"
@@ -9,7 +10,6 @@
 Player::Player() :
 	direction{ MoveDirection::Down },
 	playerState{PlayerState::Normal},
-	moveCheck{ false },
 	actionCheck{ false },
 	frameX{ NULL },
 	time{ NULL },
@@ -150,7 +150,7 @@ void Player::StateNormalRender(HDC hdc, int frame)
 	{
 		playerImage.move->Render(hdc,
 			pos.x - GLOBAL_POS.x,
-			pos.y - bodySize - GLOBAL_POS.y,
+			pos.y - bodySize - GLOBAL_POS.y, 
 			0, direction);
 	}
 }
@@ -163,11 +163,14 @@ void Player::StatePickRender(HDC hdc, int frame) {
 	static bool actionCheck = false;
 	if (frame == 4 && actionCheck == false)
 	{
-		actionCheck = true;
 		ActionPick();
+		actionCheck = true;
+		COUT;;
 	}
-	else
+	else if (frame != 4)
+	{
 		actionCheck = false;
+	}
 	
 	playerImage.pick->Render(hdc,
 		pos.x - GLOBAL_POS.x,
@@ -202,6 +205,7 @@ void Player::ActionPick()
 		break;
 	}
 }
+
 int Player::GetFrame()
 {
 	static int frameNormal = 0;

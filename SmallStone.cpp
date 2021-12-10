@@ -40,7 +40,7 @@ HRESULT SmallStone::Init()
 
 void SmallStone::Update()
 {
-	if (hp < 0)
+	if (hp <= 0)
 	{
 		Release();
 	}
@@ -49,12 +49,16 @@ void SmallStone::Update()
 void SmallStone::Render(HDC hdc)
 {
 	if(hp > 0)
-		img->Render(hdc, pos.x - GLOBAL_POS.x, pos.y - GLOBAL_POS.y, frame, 0);
+		img->Render(hdc, 
+			pos.x - GLOBAL_POS.x, 
+			pos.y - GLOBAL_POS.y, 
+			frame, 
+			0);
 }
 
 void SmallStone::Release()
 {
 	POINT result = GetPosTile(pos, MAP->mapSizeY, MAP->mapSizeX);
-	MAP_MANAGER->SetMapObject(result.y, result.x);
+	MAP_MANAGER->DeleteMapObject(result.y, result.x);
 	delete this;
 }

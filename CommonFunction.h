@@ -38,8 +38,8 @@ inline POINT GetPosTile(POINTFLOAT pos, int mapSizeX = MAP->mapSizeX, int mapSiz
 
 inline void SetRect(RECT* rect, POINTFLOAT pos,int bodySize)
 {
-	rect->left = pos.x - (bodySize / 2);
-	rect->right = pos.x + (bodySize / 2);
-	rect->top = pos.y - (bodySize / 2);
-	rect->bottom = pos.y + (bodySize / 2);
+	rect->left = (LONG)pos.x - (bodySize / 2);
+	rect->right = (LONG)pos.x + (bodySize / 2);
+	rect->top = (LONG)pos.y - (bodySize / 2);
+	rect->bottom = (LONG)pos.y + (bodySize / 2);
 }

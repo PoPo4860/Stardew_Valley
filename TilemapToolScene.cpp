@@ -379,7 +379,7 @@ void TilemapToolScene::Render(HDC hdc)
     selectMineImage->Render(
         hdc,
         TILEMAPTOOL_SIZE_X - selectMineImage->GetWidth() / 2,
-        selectMineImage->GetHeight() / 2);
+        selectMineImage->GetHeight() / 2,0,0);
 }
 
 void TilemapToolScene::Release()

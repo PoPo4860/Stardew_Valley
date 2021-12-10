@@ -1,6 +1,7 @@
 #pragma once
 #include "Config.h"
 
+
 class Image
 {
 public:
@@ -49,17 +50,6 @@ public:
 		};
 	} IMAGE_INFO, *LPIMAGE_INFO;
 
-	//struct testImageInfo : public tagImageInfo
-	//{
-
-	//};
-
-	//tagImageInfo imageInfo;
-	//IMAGE_INFO imageInfo2;
-
-	//tagImageInfo* imageInfo;
-	//LPIMAGE_INFO imageInfo3;
-
 private:
 	LPIMAGE_INFO imageInfo;
 	bool isTransparent;
@@ -76,19 +66,20 @@ public:
 	void Release();	// 메모리 해제
 
 	void Render(HDC hdc);
-	void Render(HDC hdc, int destX, int destY, float scale = 1.0f);	// 이미지 데이터를 화면에 복사
 	void Render(HDC hdc, int destX, int destY, int frameX, int frameY, int width = 0, int height = 0, float scale = 1.0f);	// 이미지 데이터를 화면에 복사
+	void Render(HDC hdc, long destX, long destY, int frameX, int frameY, int width = 0, int height = 0, float scale = 1.0f);	// 이미지 데이터를 화면에 복사
+	void Render(HDC hdc, float destX, float destY, int frameX, int frameY, int width = 0, int height = 0, float scale = 1.0f);	// 이미지 데이터를 화면에 복사
 
 	HDC GetMemDC() { if (imageInfo) return imageInfo->hMemDc; return NULL; }
 	LPIMAGE_INFO GetImageInfo() { return imageInfo; }
 
-	int GetMaxFrameX() { return imageInfo->maxFrameX; }
-	int GetMaxFrameY() { return imageInfo->maxFrameY; }
+	int GetMaxFrameX() { return (int)imageInfo->maxFrameX; }
+	int GetMaxFrameY() { return (int)imageInfo->maxFrameY; }
 
-	int GetFrameWidth() { return imageInfo->frameWidth; }
-	int GetFrameHeight() { return imageInfo->frameHeight; }
+	int GetFrameWidth() { return (int)imageInfo->frameWidth; }
+	int GetFrameHeight() { return (int)imageInfo->frameHeight; }
 
-	int GetWidth() { return imageInfo->width; }
-	int GetHeight() { return imageInfo->height; }
+	int GetWidth() { return (int)imageInfo->width; }
+	int GetHeight() { return (int)imageInfo->height; }
 };
 

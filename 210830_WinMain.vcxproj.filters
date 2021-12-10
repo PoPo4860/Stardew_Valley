@@ -37,8 +37,8 @@
     <Filter Include="MainGame\Manager">
       <UniqueIdentifier>{01f0974d-3503-483f-9b14-f9bbdbf483cd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="MainGame\Object\ObjectTool">
-      <UniqueIdentifier>{32433a81-f109-43ee-a7ed-4cb250e33974}</UniqueIdentifier>
+    <Filter Include="MainGame\Object\MapObject">
+      <UniqueIdentifier>{2de91347-c1f8-4bf5-a6c4-2337f07fc002}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -81,11 +81,14 @@
     <ClCompile Include="MapManager.cpp">
       <Filter>MainGame\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="SmallStone.cpp">
-      <Filter>MainGame\Object</Filter>
+    <ClCompile Include="ItemManager.cpp">
+      <Filter>MainGame\Manager</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
-      <Filter>MainGame\Object\ObjectTool</Filter>
+      <Filter>MainGame\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="SmallStone.cpp">
+      <Filter>MainGame\Object\MapObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -143,11 +146,14 @@
     <ClInclude Include="GameDataManager.h">
       <Filter>MainGame\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="SmallStone.h">
-      <Filter>MainGame\Object</Filter>
+    <ClInclude Include="ItemManager.h">
+      <Filter>MainGame\Manager</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
-      <Filter>MainGame\Object\ObjectTool</Filter>
+      <Filter>MainGame\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="SmallStone.h">
+      <Filter>MainGame\Object\MapObject</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

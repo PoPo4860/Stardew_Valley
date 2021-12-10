@@ -17,11 +17,6 @@ HRESULT Image::Init(int width, int height)
 
 	ReleaseDC(g_hWnd, hdc);
 
-	//if (SUCCEEDED(E_FAIL))
-	//{
-
-	//}
-
 	if (imageInfo->hBitmap == NULL)	// 비트맵 생성에 실패했을 때
 	{
 		Release();
@@ -124,71 +119,101 @@ void Image::Render(HDC hdc)
 		SRCCOPY);			// 복사 옵션
 }
 
-void Image::Render(HDC hdc, int destX, int destY, float scale)
-{
-	if (isTransparent)
-	{
-		GdiTransparentBlt(
-			hdc,
-			destX - (imageInfo->width / 2),
-			destY - (imageInfo->height / 2),
-			(int)(imageInfo->width * scale),
-			(int)(imageInfo->height * scale),
-			imageInfo->hMemDc,
-			0, 0,
-			imageInfo->width, imageInfo->height,
-			transColor
-		);
-	}
-	else
-	{
-		BitBlt(hdc,				// 복사 목적지 DC
-			destX - (imageInfo->width / 2),				// 복사될 비트맵의 시작 위치 x
-			destY - (imageInfo->height / 2),			// 복사될 비트맵의 시작 위치 y
-			(int)imageInfo->width  * scale,	// 원본 복사할 가로 크기
-			(int)imageInfo->height * scale,	// 원본 복사할 세로 크기
-			imageInfo->hMemDc,	// 원본 DC
-			0,					// 원본 비트맵 복사 시작 위치 x
-			0,					// 원본 비트맵 복사 시작 위치 y
-			SRCCOPY);			// 복사 옵션
-	}
-
-}
-
 void Image::Render(HDC hdc, int destX, int destY, int frameX, int frameY, int width, int height, float scale/* = 1.0f*/)
 {
-	// frameX : 0, frameY : 0 => 시작 (68 * 0, 0) 얼마나 복사할건가 (68, 104)
-	// frameX : 1, frameY : 0 => 시작 (68 * 1, 0)  (68, 104)
-	// frameX : 2, frameY : 0 => 시작 (68 * 2, 0)  (68, 104)
-	// frameX : 3, frameY : 0 => 시작 (68 * 3, 0)  (68, 104)
-
 	if (isTransparent)
 	{
 		GdiTransparentBlt(
 			hdc,
-			destX - (imageInfo->frameWidth / 2),
-			destY - (imageInfo->frameHeight / 2),
-			(int)imageInfo->frameWidth * scale,
-			(int)imageInfo->frameHeight * scale,	// 전체 프레임 수
+			(int)(destX -(imageInfo->frameWidth / 2)),
+			(int)(destY -(imageInfo->frameHeight / 2)),
+			(int)(imageInfo->frameWidth * scale),
+			(int)(imageInfo->frameHeight * scale),	// 전체 프레임 수
 
 			imageInfo->hMemDc,
-			imageInfo->frameWidth * frameX,
-			imageInfo->frameHeight * frameY ,
-			imageInfo->frameWidth * (width + 1),
-			imageInfo->frameHeight * (height + 1),
+			(int)(imageInfo->frameWidth* frameX),
+			(int)(imageInfo->frameHeight* frameY),
+			(int)(imageInfo->frameWidth* (width + 1)),
+			(int)(imageInfo->frameHeight * (height + 1)),
 			transColor
 		);
 	}
 	else
 	{
 		BitBlt(hdc,				// 복사 목적지 DC
-			destX - (imageInfo->frameWidth / 2),		// 복사될 비트맵의 시작 위치 x
-			destY - (imageInfo->frameHeight / 2),		// 복사될 비트맵의 시작 위치 y
-			(int)imageInfo->frameWidth * scale,	// 원본 복사할 가로 크기
-			(int)imageInfo->frameHeight * scale,	// 원본 복사할 세로 크기
+			(int)(destX - (imageInfo->frameWidth / 2)),		// 복사될 비트맵의 시작 위치 x
+			(int)(destY - (imageInfo->frameHeight / 2)),		// 복사될 비트맵의 시작 위치 y
+			(int)(imageInfo->frameWidth * scale),	// 원본 복사할 가로 크기
+			(int)(imageInfo->frameHeight * scale),	// 원본 복사할 세로 크기
 			imageInfo->hMemDc,	// 원본 DC
-			imageInfo->frameWidth * frameX,				// 원본 비트맵 복사 시작 위치 x
-			imageInfo->frameHeight * frameY,			// 원본 비트맵 복사 시작 위치 y
+			(int)(imageInfo->frameWidth * frameX),				// 원본 비트맵 복사 시작 위치 x
+			(int)(imageInfo->frameHeight * frameY),			// 원본 비트맵 복사 시작 위치 y
+			SRCCOPY);			// 복사 옵션
+	}
+}
+
+void Image::Render(HDC hdc, long destX, long destY, int frameX, int frameY, int width, int height, float scale/* = 1.0f*/)
+{
+	if (isTransparent)
+	{
+		GdiTransparentBlt(
+			hdc,
+			(int)(destX - (imageInfo->frameWidth / 2)),
+			(int)(destY - (imageInfo->frameHeight / 2)),
+			(int)(imageInfo->frameWidth * scale),
+			(int)(imageInfo->frameHeight * scale),	// 전체 프레임 수
+
+			imageInfo->hMemDc,
+			(int)(imageInfo->frameWidth * frameX),
+			(int)(imageInfo->frameHeight * frameY),
+			(int)(imageInfo->frameWidth * (width + 1)),
+			(int)(imageInfo->frameHeight * (height + 1)),
+			transColor
+		);
+	}
+	else
+	{
+		BitBlt(hdc,				// 복사 목적지 DC
+			(int)(destX - (imageInfo->frameWidth / 2)),		// 복사될 비트맵의 시작 위치 x
+			(int)(destY - (imageInfo->frameHeight / 2)),		// 복사될 비트맵의 시작 위치 y
+			(int)(imageInfo->frameWidth * scale),	// 원본 복사할 가로 크기
+			(int)(imageInfo->frameHeight * scale),	// 원본 복사할 세로 크기
+			imageInfo->hMemDc, 	// 원본 DC
+			(int)(imageInfo->frameWidth * frameX), 				// 원본 비트맵 복사 시작 위치 x
+			(int)(imageInfo->frameHeight * frameY), 			// 원본 비트맵 복사 시작 위치 y
+			SRCCOPY);			// 복사 옵션
+	}
+}
+
+void Image::Render(HDC hdc, float destX, float destY, int frameX, int frameY, int width, int height, float scale/* = 1.0f*/)
+{
+	if (isTransparent)
+	{
+		GdiTransparentBlt(
+			hdc,
+			(int)(destX - (imageInfo->frameWidth / 2)),
+			(int)(destY - (imageInfo->frameHeight / 2)),
+			(int)(imageInfo->frameWidth * scale),
+			(int)(imageInfo->frameHeight * scale),	// 전체 프레임 수
+
+			imageInfo->hMemDc,
+			(int)(imageInfo->frameWidth* frameX),
+			(int)(imageInfo->frameHeight * frameY),
+			(int)(imageInfo->frameWidth* (width + 1)),
+			(int)(imageInfo->frameHeight * (height + 1)),
+			transColor
+		);
+	}
+	else
+	{
+		BitBlt(hdc,				// 복사 목적지 DC
+			(int)(destX - (imageInfo->frameWidth / 2)),		// 복사될 비트맵의 시작 위치 x
+			(int)(destY - (imageInfo->frameHeight / 2)),		// 복사될 비트맵의 시작 위치 y
+			(int)(imageInfo->frameWidth * scale),	// 원본 복사할 가로 크기
+			(int)(imageInfo->frameHeight * scale),	// 원본 복사할 세로 크기
+			imageInfo->hMemDc, 	// 원본 DC
+			(int)(imageInfo->frameWidth * frameX), 				// 원본 비트맵 복사 시작 위치 x
+			(int)(imageInfo->frameHeight * frameY), 			// 원본 비트맵 복사 시작 위치 y
 			SRCCOPY);			// 복사 옵션
 	}
 }

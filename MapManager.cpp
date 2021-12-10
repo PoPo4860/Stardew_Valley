@@ -3,6 +3,9 @@
 #include "SmallStone.h"
 
 
+MapManager::MapManager():
+    mapInfo{}, selectDungeon{nullptr} , objectQueue{} {}
+
 void MapManager::DrawMapLayer(HDC hdc, int LayerNum)
 {
     if (LayerNum == 1) LayerNum = 2;

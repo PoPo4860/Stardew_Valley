@@ -19,7 +19,6 @@ private:
 	MoveDirection direction;
 	PlayerState playerState;
 	float frameX;
-	bool moveCheck;
 	bool actionCheck;
 	// 움직임 관련
 	PlayerImage playerImage;
