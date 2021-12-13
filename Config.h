@@ -10,7 +10,6 @@
 using namespace std;
 
 #pragma comment(lib, "winmm.lib")
-
 #define WIN_START_POS_X	400
 #define WIN_START_POS_Y	100
 #define WIN_SIZE_X	420			// 16 * 16
@@ -35,15 +34,21 @@ typedef struct ArgumentFuncPtr
 #include "ImageManager.h"
 #include "KeyManager.h"
 #include "SceneManager.h"
+
 #include "GameDataManager.h"
 #include "ObjectPosManager.h"
+#include "ObjectRenderManager.h"
 #include "MapManager.h"
+#include "ItemManager.h"
 
 #define DELTA_TIME TimerManager::GetSingleton()->GetDeltaTime() 
 #define GLOBAL_POS ObjectPosManager::GetSingleton()->GetGlobalPos()
+#define GAMEDATA_MANAGER GameDataManager::GetSingleton()
 #define GLOBAL_POS_X GameDataManager::GetSingleton()->GetGlobalPosX()
 #define GLOBAL_POS_Y GameDataManager::GetSingleton()->GetGlobalPosY()
+#define RENDER_MANAGER ObjectRenderManager::GetSingleton()
 #define MAP_MANAGER MapManager::GetSingleton()
+#define ITEM_MANAGER ItemManager::GetSingleton()
 #define MAP MapManager::GetSingleton()->GetMap()
 
 extern HWND g_hWnd;

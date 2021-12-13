@@ -1,6 +1,8 @@
 #pragma once
 #include "GameObject.h"
 #include "MapInfo.h"
+#include "Interaction.h"
+#include "Character.h"
 class SmallStone : public Interaction, public Character
 {
 private:
@@ -8,7 +10,7 @@ private:
 	int frame;
 public:
 	SmallStone(Stone_Object_Info obj, int x, int y);
-	virtual ~SmallStone() = default;
+	~SmallStone() = default;
 	virtual bool InteractionPick(int damage) override;
 	virtual HRESULT Init() override;
 	virtual void Update() override;

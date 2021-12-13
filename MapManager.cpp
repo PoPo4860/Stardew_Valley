@@ -4,7 +4,7 @@
 
 
 MapManager::MapManager():
-    mapInfo{}, selectDungeon{ nullptr }, objectQueue{}, exit{}{}
+    mapInfo{}, selectDungeon{ nullptr }, exit{}{}
 
 void MapManager::DrawMapLayer(HDC hdc, int LayerNum)
 {
@@ -55,7 +55,7 @@ void MapManager::CreateObject()
             {
                 mapInfo.object[posY][posX] = new SmallStone(Stone_Object_Info::SmallStone_Lv1, posX, posY);
                 ++count;
-                if (/*rand() % (objectCost / 3) == 0*/true)
+                if (rand() % (objectCost / 3) == 0/*true*/)
                 {   // »ý¼ºµÉ ½ºÅæ¿¡ ºñ·ÊÇÏ¿© Å»Ãâ±¸ »ý¼º
                     POINT buffer;
                     buffer.x = posX;
@@ -91,7 +91,7 @@ void MapManager::Update()
 void MapManager::Release()
 {
     ObjectClear();
-    this->ReleaseSingleton();
+    ReleaseSingleton();
 }
 
 void MapManager::ObjectClear()
@@ -109,25 +109,15 @@ void MapManager::ObjectClear()
     }
 }
 
-void MapManager::ObjectRender(HDC hdc)
+void MapManager::ObjectPush()
 {
     for (int y = 0; y < mapInfo.mapSizeY; ++y)
     {
         for (int x = 0; x < mapInfo.mapSizeX; ++x)
         {
             if (mapInfo.tileState[y][x] == Tile_State::Empty && mapInfo.object[y][x] != nullptr)
-                objectQueue.push(mapInfo.object[y][x]);
+                RENDER_MANAGER->PushObjectQueue(mapInfo.object[y][x]);
         }
-    }
-    while (objectQueue.empty() == false)
-    {
-        if (objectQueue.top() == nullptr)
-        {
-            objectQueue.pop();
-            continue;
-        }
-        objectQueue.top()->Render(hdc);
-        objectQueue.pop();
     }
 }       
 
@@ -151,10 +141,8 @@ void MapManager::Interaction(POINT pos)
     {
         ObjectClear();
         exit.clear();
-        while (objectQueue.empty() == false)
-        {
-            objectQueue.pop();
-        }
+        RENDER_MANAGER->QueueClear();
+        ITEM_MANAGER->ItemVectorClear();
         SceneManager::GetSingleton()->ChangeScene("MineScene");
     }
 }

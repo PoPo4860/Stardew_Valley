@@ -37,7 +37,10 @@
     <Filter Include="MainGame\Manager">
       <UniqueIdentifier>{01f0974d-3503-483f-9b14-f9bbdbf483cd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="MainGame\Object\MapObject">
+    <Filter Include="MainGame\Object\Item">
+      <UniqueIdentifier>{7463a603-97db-47ec-a730-5323e3f1069b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainGame\Object\Stone">
       <UniqueIdentifier>{2de91347-c1f8-4bf5-a6c4-2337f07fc002}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -84,11 +87,20 @@
     <ClCompile Include="ItemManager.cpp">
       <Filter>MainGame\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>MainGame\Object</Filter>
-    </ClCompile>
     <ClCompile Include="SmallStone.cpp">
-      <Filter>MainGame\Object\MapObject</Filter>
+      <Filter>MainGame\Object\Stone</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectRenderManager.cpp">
+      <Filter>MainGame\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolItem.cpp">
+      <Filter>MainGame\Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceItem.cpp">
+      <Filter>MainGame\Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>MainGame\Object\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -153,7 +165,28 @@
       <Filter>MainGame\Object</Filter>
     </ClInclude>
     <ClInclude Include="SmallStone.h">
-      <Filter>MainGame\Object\MapObject</Filter>
+      <Filter>MainGame\Object\Stone</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectRenderManager.h">
+      <Filter>MainGame\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Interaction.h">
+      <Filter>MainGame\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>MainGame\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>MainGame\Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemCode.h">
+      <Filter>MainGame\Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolItem.h">
+      <Filter>MainGame\Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceItem.h">
+      <Filter>MainGame\Object\Item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

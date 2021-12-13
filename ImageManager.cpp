@@ -30,8 +30,6 @@ void ImageManager::Release()
 
 Image* ImageManager::AddImage(const char* fileName, int width, int height, bool isTrans, COLORREF transColor)
 {
-
-
 	Image* img = new Image;
 	if (FAILED(img->Init(fileName, width, height, isTrans, transColor)))
 	{

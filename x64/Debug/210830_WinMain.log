@@ -1,2 +1,24 @@
-﻿  SceneManager.cpp
-  210830_WinMain.vcxproj -> C:\Users\KGA_12_PM\Desktop\새 폴더\Stardew_Valley\x64\Debug\210830_WinMain.exe
+﻿  Image.cpp
+  ImageManager.cpp
+  Item.cpp
+C:\Users\dltng\Desktop\project\Stardew_Valley\Item.cpp(11,17): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  ItemManager.cpp
+  KeyManager.cpp
+  MainGame.cpp
+C:\Users\dltng\Desktop\project\Stardew_Valley\MainGame.cpp(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+  MapManager.cpp
+  MineScene.cpp
+  ObjectRenderManager.cpp
+  Player.cpp
+C:\Users\dltng\Desktop\project\Stardew_Valley\Player.cpp(2,10): warning C4067: 전처리기 지시문 다음에 예기치 않은 토큰이 있습니다. 줄 바꿈 문자가 필요합니다.
+  ResourceItem.cpp
+  SceneManager.cpp
+  SmallStone.cpp
+  TilemapToolScene.cpp
+  Timer.cpp
+  TimerManager.cpp
+  ToolItem.cpp
+  main.cpp
+C:\Users\dltng\Desktop\project\Stardew_Valley\main.cpp(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+  코드를 생성하고 있습니다...
+  210830_WinMain.vcxproj -> C:\Users\dltng\Desktop\project\Stardew_Valley\x64\Debug\210830_WinMain.exe

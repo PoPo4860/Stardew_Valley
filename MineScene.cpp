@@ -19,6 +19,7 @@ HRESULT MineScene::Init()
 void MineScene::Update()
 {
     player->Update();
+    ITEM_MANAGER->Update();
     MAP_MANAGER->Update();
 }
 
@@ -26,8 +27,11 @@ void MineScene::Render(HDC hdc)
 {
     MAP_MANAGER->DrawMapLayer(hdc, 1);
     MAP_MANAGER->DrawMapLayer(hdc, 2);
-    MAP_MANAGER->PushQueue(player);
-    MAP_MANAGER->ObjectRender(hdc);
+
+    RENDER_MANAGER->PushObjectQueue(player);
+    ITEM_MANAGER->PushObjectQueue();
+    MAP_MANAGER->ObjectPush();
+    RENDER_MANAGER->ObjectRender(hdc);
     MAP_MANAGER->DrawMapLayer(hdc, 3);
 }
 

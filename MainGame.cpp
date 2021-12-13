@@ -8,10 +8,12 @@ HRESULT MainGame::Init()
 	ImageManager::GetSingleton()->Init();
 	TimerManager::GetSingleton()->Init();
 	SceneManager::GetSingleton()->Init();
+
 	GameDataManager::GetSingleton()->Init();
+	ItemManager::GetSingleton()->Init();
 	MapManager::GetSingleton()->Init();
 	ObjectPosManager::GetSingleton()->Init();
-	
+	ObjectRenderManager::GetSingleton()->Init();
 	//TilemapToolScene
 	//MineScene
 	SceneManager::GetSingleton()->ChangeScene("MineScene");
@@ -48,13 +50,16 @@ void MainGame::Release()
 {
 	SAFE_RELEASE(backBuffer);
 
-	TimerManager::GetSingleton()->Release();
 	ImageManager::GetSingleton()->Release();
 	KeyManager::GetSingleton()->Release();
 	SceneManager::GetSingleton()->Release();
+	TimerManager::GetSingleton()->Release();
+
 	GameDataManager::GetSingleton()->Release();
+	ItemManager::GetSingleton()->Release();
 	MapManager::GetSingleton()->Release();
 	ObjectPosManager::GetSingleton()->Release();
+	ObjectRenderManager::GetSingleton()->Release();
 
 	KillTimer(g_hWnd, 0);
 }

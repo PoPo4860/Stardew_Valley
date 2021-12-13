@@ -75,7 +75,8 @@ void Player::Update()
 	}
 
 	ObjectPosManager::GetSingleton()->SetGlobalPos(pos);
-	//플레이어 기준으로 글로벌 좌표를 재설정 한다.
+	GAMEDATA_MANAGER->SetPlayerPos(pos);
+
 }
 
 void Player::Render(HDC hdc)
@@ -272,7 +273,6 @@ int Player::GetFrame()
 		}
 		return frameAction;		// 4 = 플레이어 곡괭이질 최대 프레임
 	}
-
 	return 0;
 }
 

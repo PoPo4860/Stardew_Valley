@@ -16,7 +16,7 @@ bool SmallStone::InteractionPick(int damage)
 
 HRESULT SmallStone::Init()
 {
-	img = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Stone_Object.bmp",192,64,12,4);
+	img = ImageManager::GetSingleton()->FindImage("Image/Stones/Stone_Object.bmp",192,64,12,4);
 	pos.x = (pos.x * 16) + 8;
 	pos.y = (pos.y * 16) + 8;
 	bodySize = 16;
@@ -42,6 +42,7 @@ void SmallStone::Update()
 {
 	if (hp <= 0)
 	{
+		ITEM_MANAGER->CreateResourceItem(STONE, pos);
 		Release();
 	}
 }

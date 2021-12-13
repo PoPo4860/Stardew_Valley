@@ -140,23 +140,27 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GameEntity.cpp" />
-    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemManager.cpp" />
     <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="MapManager.cpp" />
     <ClCompile Include="MineScene.cpp" />
+    <ClCompile Include="ObjectRenderManager.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="ResourceItem.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SmallStone.cpp" />
     <ClCompile Include="TilemapToolScene.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="TimerManager.cpp" />
+    <ClCompile Include="ToolItem.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Character.h" />
     <ClInclude Include="CommonFunction.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="GameDataManager.h" />
@@ -164,6 +168,9 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="ImageManager.h" />
+    <ClInclude Include="Interaction.h" />
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="ItemCode.h" />
     <ClInclude Include="ItemManager.h" />
     <ClInclude Include="KeyManager.h" />
     <ClInclude Include="MainGame.h" />
@@ -171,13 +178,16 @@
     <ClInclude Include="MapManager.h" />
     <ClInclude Include="MineScene.h" />
     <ClInclude Include="ObjectPosManager.h" />
+    <ClInclude Include="ObjectRenderManager.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="ResourceItem.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="SmallStone.h" />
     <ClInclude Include="TilemapToolScene.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="TimerManager.h" />
+    <ClInclude Include="ToolItem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
