@@ -30,8 +30,9 @@ void MineScene::Render(HDC hdc)
 
     RENDER_MANAGER->PushObjectQueue(player);
     ITEM_MANAGER->PushObjectQueue();
-    MAP_MANAGER->ObjectPush();
+    MAP_MANAGER->PushObjectQueue();
     RENDER_MANAGER->ObjectRender(hdc);
+
     MAP_MANAGER->DrawMapLayer(hdc, 3);
 }
 

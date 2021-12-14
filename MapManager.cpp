@@ -55,7 +55,7 @@ void MapManager::CreateObject()
             {
                 mapInfo.object[posY][posX] = new SmallStone(Stone_Object_Info::SmallStone_Lv1, posX, posY);
                 ++count;
-                if (rand() % (objectCost / 3) == 0/*true*/)
+                if (/*rand() % (objectCost / 3) == 0*/true)
                 {   // »ý¼ºµÉ ½ºÅæ¿¡ ºñ·ÊÇÏ¿© Å»Ãâ±¸ »ý¼º
                     POINT buffer;
                     buffer.x = posX;
@@ -109,7 +109,7 @@ void MapManager::ObjectClear()
     }
 }
 
-void MapManager::ObjectPush()
+void MapManager::PushObjectQueue()
 {
     for (int y = 0; y < mapInfo.mapSizeY; ++y)
     {

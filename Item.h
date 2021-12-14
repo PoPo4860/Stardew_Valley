@@ -1,20 +1,36 @@
 #pragma once
 #include "GameObject.h"
-enum class ItemInfo { ToolItem, ResourceItem };
+#include "ItemCode.h"
+
+struct Move 
+{
+	Move()
+		:landPos{}, gravity{}, gravityCheck{ true }, time{}, speed{}
+	{}
+	POINTFLOAT speed;
+	float landPos;
+	float gravity;
+	bool gravityCheck;
+	float time;
+};
 class Item : public GameObject
 {
 private:
-protected:
-	ItemInfo itemInfo;
-	POINTFLOAT landPos;
-	POINTFLOAT moveSpeed;
-	float gravity;
+	ItemType itemType;
+	ResourceItemInfo info;
+	Move move;
+
 public:
-	ItemInfo GetItemInfo() { return itemInfo; }
-	void PlayerFollow();
-	void GravityAction();
-	void ItemInit();
-	Item();
+	virtual HRESULT Init() override;
+	virtual void Update() override;
+	virtual void Render(HDC hdc) override;
+	virtual void Release() override;
+
+	Item(int key, POINTFLOAT pos);
 	virtual ~Item() = default;
+public:
+	ItemType GetItemInfo() { return itemType; }
+	bool PlayerFollow();
+	void GravityAction();
 };
 

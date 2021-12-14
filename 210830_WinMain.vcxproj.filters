@@ -93,12 +93,6 @@
     <ClCompile Include="ObjectRenderManager.cpp">
       <Filter>MainGame\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="ToolItem.cpp">
-      <Filter>MainGame\Object\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourceItem.cpp">
-      <Filter>MainGame\Object\Item</Filter>
-    </ClCompile>
     <ClCompile Include="Item.cpp">
       <Filter>MainGame\Object\Item</Filter>
     </ClCompile>
@@ -180,12 +174,6 @@
       <Filter>MainGame\Object\Item</Filter>
     </ClInclude>
     <ClInclude Include="ItemCode.h">
-      <Filter>MainGame\Object\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="ToolItem.h">
-      <Filter>MainGame\Object\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourceItem.h">
       <Filter>MainGame\Object\Item</Filter>
     </ClInclude>
   </ItemGroup>

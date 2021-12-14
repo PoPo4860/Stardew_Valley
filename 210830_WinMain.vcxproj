@@ -151,13 +151,11 @@
     <ClCompile Include="MineScene.cpp" />
     <ClCompile Include="ObjectRenderManager.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="ResourceItem.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SmallStone.cpp" />
     <ClCompile Include="TilemapToolScene.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="TimerManager.cpp" />
-    <ClCompile Include="ToolItem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -180,14 +178,12 @@
     <ClInclude Include="ObjectPosManager.h" />
     <ClInclude Include="ObjectRenderManager.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="ResourceItem.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="SmallStone.h" />
     <ClInclude Include="TilemapToolScene.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="TimerManager.h" />
-    <ClInclude Include="ToolItem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

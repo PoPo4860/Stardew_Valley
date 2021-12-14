@@ -14,7 +14,7 @@ public:
 	MapManager();
 	void Init() {}
 	void Update();
-	void ObjectPush();
+	void PushObjectQueue();
 	void Release();
 public:
 	void DrawMapLayer(HDC hdc, int LayerNum);

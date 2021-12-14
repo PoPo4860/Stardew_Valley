@@ -8,8 +8,13 @@
 #include <string>
 
 using namespace std;
+
+enum class ItemType { ToolItem, ResourceItem };
+
 struct ToolItemInfo
 {
+	ToolItemInfo()
+		: maxDamage{ 0 }, minDamage{ 0 }, attackSpeed{ 0 }, gold{ 0 }, info{""}{}
 	int maxDamage;
 	int minDamage;
 	int attackSpeed;
@@ -20,6 +25,8 @@ struct ToolItemInfo
 // 자원아이템
 struct ResourceItemInfo
 {
+	ResourceItemInfo()
+		:gold{ 0 }, info{ "" }{}
 	int gold;
 	string info;
 };
