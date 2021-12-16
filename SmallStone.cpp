@@ -5,6 +5,7 @@
 SmallStone::SmallStone(Stone_Object_Info obj, int x, int y) :frame{ NULL }, objectInfo{ obj }
 {
 	pos.x = (float)x, pos.y = (float)y;
+	RENDER_MANAGER->PushObjectVector(this);
 	Init(); 
 }
 bool SmallStone::InteractionPick(int damage)
@@ -42,8 +43,7 @@ void SmallStone::Update()
 {
 	if (hp <= 0)
 	{
-		ITEM_MANAGER->CreateResourceItem(STONE, pos);
-		Release();
+		CreateItem();
 	}
 }
 
@@ -61,5 +61,12 @@ void SmallStone::Release()
 {
 	POINT result = GetPosTile(pos, MAP->mapSizeY, MAP->mapSizeX);
 	MAP_MANAGER->DeleteMapObject(result);
+    RENDER_MANAGER->DeleteObjectVector(this);
 	delete this;
+}
+
+void SmallStone::CreateItem()
+{
+	ITEM_MANAGER->CreateResourceItem(STONE, pos);
+	Release();
 }

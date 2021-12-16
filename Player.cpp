@@ -47,12 +47,12 @@ void Player::Update()
 	time += DELTA_TIME;
 	if (actionCheck == false)
 	{
-		if (KeyManager::GetSingleton()->IsStayKeyDown('C'))
+		if (GET_KEY_STAY('C'))
 		{
 			playerState = PlayerState::Pick;
 			actionCheck = true;
 		}
-		else if (KeyManager::GetSingleton()->IsOnceKeyDown('X'))
+		else if (GET_KEY_DOWN('X'))
 		{
 			POINT result = GetFrontTilePos();
 			
@@ -137,22 +137,22 @@ void Player::Move(float posX, float posY)
 
 void Player::StateNormalUpdate()
 {
-	if (KeyManager::GetSingleton()->IsStayKeyDown(VK_UP))
+	if (GET_KEY_STAY(VK_UP))
 	{
 		direction = MoveDirection::Up;
 		Move(pos.x, pos.y - (moveSpeed * DELTA_TIME));
 	}
-	if (KeyManager::GetSingleton()->IsStayKeyDown(VK_DOWN))
+	if (GET_KEY_STAY(VK_DOWN))
 	{
 		direction = MoveDirection::Down;
 		Move(pos.x, pos.y + (moveSpeed * DELTA_TIME));
 	}
-	if (KeyManager::GetSingleton()->IsStayKeyDown(VK_LEFT))
+	if (GET_KEY_STAY(VK_LEFT))
 	{
 		direction = MoveDirection::Left;
 		Move(pos.x - (moveSpeed * DELTA_TIME), pos.y);
 	}
-	if (KeyManager::GetSingleton()->IsStayKeyDown(VK_RIGHT))
+	if (GET_KEY_STAY(VK_RIGHT))
 	{
 		direction = MoveDirection::Right;
 		Move(pos.x + (moveSpeed * DELTA_TIME), pos.y);
@@ -160,8 +160,8 @@ void Player::StateNormalUpdate()
 }
 void Player::StateNormalRender(HDC hdc, int frame)
 {
-	if (KeyManager::GetSingleton()->IsStayKeyDown(VK_UP)|| KeyManager::GetSingleton()->IsStayKeyDown(VK_DOWN) ||
-		KeyManager::GetSingleton()->IsStayKeyDown(VK_LEFT) || KeyManager::GetSingleton()->IsStayKeyDown(VK_RIGHT))
+	if (GET_KEY_STAY(VK_UP)|| GET_KEY_STAY(VK_DOWN) ||
+		GET_KEY_STAY(VK_LEFT) || GET_KEY_STAY(VK_RIGHT))
 	{
 		playerImage.move->Render(hdc,
 			pos.x - GLOBAL_POS.x,
@@ -187,7 +187,6 @@ void Player::StatePickRender(HDC hdc, int frame) {
 	{
 		ActionPick();
 		actionCheck = true;
-		COUT;;
 	}
 	else if (frame != 4)
 	{

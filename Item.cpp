@@ -78,10 +78,19 @@ void Item::Update()
 {
 	GravityAction();
 	if (move.time > 0.4f)
-		PlayerFollow();
+	{
+		if (PlayerFollow())
+		{
+			INVEN_MANAVER->InventoryPush(&info, &itemType);
+			ITEM_MANAGER->DeleteObjectVector(this);
+			Release();
+			return;
+		}
+	}
 	else
+	{
 		move.time += DELTA_TIME;
-
+	}
 }
 
 void Item::Render(HDC hdc)
@@ -92,6 +101,8 @@ void Item::Render(HDC hdc)
 
 void Item::Release()
 {
+	RENDER_MANAGER->DeleteObjectVector(this);
+	delete this;
 }
 
 Item::Item(int key, POINTFLOAT pos) :itemType{ ItemType::ToolItem }
@@ -99,4 +110,5 @@ Item::Item(int key, POINTFLOAT pos) :itemType{ ItemType::ToolItem }
 	this->pos = pos;
 	Init();
 	info = ITEM_MANAGER->GetResourceItem(key);
+	RENDER_MANAGER->PushObjectVector(this);
 };

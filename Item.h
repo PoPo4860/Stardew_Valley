@@ -5,7 +5,7 @@
 struct Move 
 {
 	Move()
-		:landPos{}, gravity{}, gravityCheck{ true }, time{}, speed{}
+		:landPos{ 0 }, gravity{ 0 }, gravityCheck{ true }, time{ 0 }, speed{ 0 }
 	{}
 	POINTFLOAT speed;
 	float landPos;

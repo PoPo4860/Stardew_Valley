@@ -4,7 +4,6 @@
 HRESULT MainGame::Init()
 {
 	srand((unsigned int) time(nullptr));
-	KeyManager::GetSingleton()->Init();
 	ImageManager::GetSingleton()->Init();
 	TimerManager::GetSingleton()->Init();
 	SceneManager::GetSingleton()->Init();
@@ -14,6 +13,7 @@ HRESULT MainGame::Init()
 	MapManager::GetSingleton()->Init();
 	ObjectPosManager::GetSingleton()->Init();
 	ObjectRenderManager::GetSingleton()->Init();
+	Input::Init(g_hWnd);
 	//TilemapToolScene
 	//MineScene
 	SceneManager::GetSingleton()->ChangeScene("MineScene");
@@ -32,6 +32,7 @@ HRESULT MainGame::Init()
 
 void MainGame::Update()
 {
+	Input::Update();
 	TimerManager::GetSingleton()->Update();
 	SceneManager::GetSingleton()->Update();
 
@@ -51,7 +52,6 @@ void MainGame::Release()
 	SAFE_RELEASE(backBuffer);
 
 	ImageManager::GetSingleton()->Release();
-	KeyManager::GetSingleton()->Release();
 	SceneManager::GetSingleton()->Release();
 	TimerManager::GetSingleton()->Release();
 

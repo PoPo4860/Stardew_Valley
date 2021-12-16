@@ -3,8 +3,12 @@
 #include "SmallStone.h"
 
 
-MapManager::MapManager():
-    mapInfo{}, selectDungeon{ nullptr }, exit{}{}
+MapManager::MapManager() :
+    mapInfo{}, selectDungeon{ nullptr }, ladderDownCheck{ false },  exit{}{}
+
+void MapManager::Init()
+{
+}
 
 void MapManager::DrawMapLayer(HDC hdc, int LayerNum)
 {
@@ -44,6 +48,7 @@ void MapManager::CreateObject()
     minObject = maxObject / 2;
     int objectCost = minObject + (rand() % (maxObject - minObject));
     // 현재 맵에 생성할 오브젝트의 비용을 설정함
+
     for (int count = 0; count < objectCost;)
     {
         int posX = rand() % mapInfo.mapSizeX;
@@ -109,17 +114,6 @@ void MapManager::ObjectClear()
     }
 }
 
-void MapManager::PushObjectQueue()
-{
-    for (int y = 0; y < mapInfo.mapSizeY; ++y)
-    {
-        for (int x = 0; x < mapInfo.mapSizeX; ++x)
-        {
-            if (mapInfo.tileState[y][x] == Tile_State::Empty && mapInfo.object[y][x] != nullptr)
-                RENDER_MANAGER->PushObjectQueue(mapInfo.object[y][x]);
-        }
-    }
-}       
 
 void MapManager::DeleteMapObject(POINT pos)
 {
@@ -141,7 +135,7 @@ void MapManager::Interaction(POINT pos)
     {
         ObjectClear();
         exit.clear();
-        RENDER_MANAGER->QueueClear();
+        RENDER_MANAGER->VectorClear();
         ITEM_MANAGER->ItemVectorClear();
         SceneManager::GetSingleton()->ChangeScene("MineScene");
     }
@@ -221,6 +215,7 @@ void MapManager::Load(int num)
 
     ObjectPosManager::GetSingleton()->SetMapSize(MAP->mapSizeX, MAP->mapSizeY);
     // 글로벌 포스에 맵 크기 지정
+
 
     CloseHandle(hFile);
 }

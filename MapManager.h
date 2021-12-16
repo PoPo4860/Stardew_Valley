@@ -10,17 +10,16 @@ private:
 	MAP_INFO mapInfo;
 	Image* selectDungeon;
 	vector<POINT> exit;
+	vector<POINT,GameObject> exitd;
+	bool ladderDownCheck;
 public:
 	MapManager();
-	void Init() {}
+	void Init();
 	void Update();
-	void PushObjectQueue();
 	void Release();
 public:
 	void DrawMapLayer(HDC hdc, int LayerNum);
 	// 맵 그리기
-
-	// 맵에 있는 오브젝트 업데이트
 
 	void ObjectClear();
 	

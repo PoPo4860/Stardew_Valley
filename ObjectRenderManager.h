@@ -12,13 +12,17 @@ struct compare
 class ObjectRenderManager : public Singleton<ObjectRenderManager>
 {
 private:
-	priority_queue<GameObject*, vector<GameObject*>, compare> objectQueue;
+	//priority_queue<GameObject*, vector<GameObject*>, compare> objectQueue;
+	vector<GameObject*> objectVector;
+
+
 public:
 	void Init() {}
-	void PushObjectQueue(GameObject* obj);
+	void PushObjectVector(GameObject* obj);
+	void DeleteObjectVector(GameObject* obj);
 	void ObjectRender(HDC hdc);
-	void QueueClear();
+	void VectorClear();
 	void Release();
-
+	void VectorSort();
 };
 

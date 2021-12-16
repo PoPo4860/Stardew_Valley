@@ -6,11 +6,12 @@
 #define PICK 10
 #define PICK_INFO "돌을 부술 때 사용합니다."
 #include <string>
-
+#include"ItemCode.h"
 using namespace std;
 
-enum class ItemType { ToolItem, ResourceItem };
+enum class ItemType { Empty, ToolItem, ResourceItem };
 
+// 도구아이템
 struct ToolItemInfo
 {
 	ToolItemInfo()
@@ -30,3 +31,4 @@ struct ResourceItemInfo
 	int gold;
 	string info;
 };
+

@@ -67,15 +67,15 @@ void TilemapToolScene::Update()
     
     // 타일맵툴 명령키
     {
-        if (KeyManager::GetSingleton()->IsOnceKeyDown('1'))             //==========================
+        if (GET_KEY_DOWN('1'))             //==========================
             layer.num = 0;                                               //
-        else if (KeyManager::GetSingleton()->IsOnceKeyDown('2'))        //
+        else if (GET_KEY_DOWN('2'))        //
             layer.num = 1;                                               //  레이어 선택
-        else if (KeyManager::GetSingleton()->IsOnceKeyDown('3'))        //
+        else if (GET_KEY_DOWN('3'))        //
             layer.num = 2;                                               //
-        else if (KeyManager::GetSingleton()->IsOnceKeyDown('4'))        //
+        else if (GET_KEY_DOWN('4'))        //
             layer.num = 3;                                               //
-        if (KeyManager::GetSingleton()->IsOnceKeyDown('Z'))             //==========================
+        if (GET_KEY_DOWN('Z'))             //==========================
         {                                                               //
             if (tileState == Tile_State::Empty)                         //
                 tileState = Tile_State::LadderDown;                     //
@@ -88,41 +88,41 @@ void TilemapToolScene::Update()
             else if (tileState == Tile_State::Wall)                     //
                 tileState = Tile_State::Empty;                          //
         }                                                               //
-        else if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_UP))      //==========================
+        else if (GET_KEY_DOWN(VK_UP))      //==========================
         {                                                               //
             --mapPosY;                                                  //
             if (mapPosY < 0) mapPosY = 0;                               //
         }                                                               //
-        else if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_DOWN))    //
+        else if (GET_KEY_DOWN(VK_DOWN))    //
         {                                                               //
             ++mapPosY;                                                  //
         }                                                               //
-        else if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_RIGHT))   // 보여지는 맵크기 결정
+        else if (GET_KEY_DOWN(VK_RIGHT))   // 보여지는 맵크기 결정
         {                                                               //
             ++mapPosX;                                                  //
         }                                                               //
-        else if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_LEFT))    //
+        else if (GET_KEY_DOWN(VK_LEFT))    //
         {                                                               //
             --mapPosX;                                                  //
             if (mapPosX < 0) mapPosX = 0;                               //
         }                                                               //==========================
-        else if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_NUMPAD6)) //
+        else if (GET_KEY_DOWN(VK_NUMPAD6)) //
         {                                                               //
             ++mapInfo.mapSizeX;                                         // 
         }                                                               //
-        else if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_NUMPAD4)) // 
+        else if (GET_KEY_DOWN(VK_NUMPAD4)) // 
         {                                                               //
             --mapInfo.mapSizeX;                                         //
         }                                                               //
-        else if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_NUMPAD8)) // 
+        else if (GET_KEY_DOWN(VK_NUMPAD8)) // 
         {                                                               //
             --mapInfo.mapSizeY;                                         // 실제 맵크기 결정
         }                                                               //
-        else if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_NUMPAD5)) // 
+        else if (GET_KEY_DOWN(VK_NUMPAD5)) // 
         {                                                               //
             ++mapInfo.mapSizeY;                                         // 
         }                                                               //==========================
-        else if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_NUMPAD3)) //
+        else if (GET_KEY_DOWN(VK_NUMPAD3)) //
         {                                                               //
             if (mapInfo.dungeonTiles == Dungeon_Tiles::Dungeon_Gray)    //
             {                                                           //
@@ -170,7 +170,7 @@ void TilemapToolScene::Update()
                 mapInfo.dungeonTiles = Dungeon_Tiles::Dungeon_Gray;     //=========================
             }                                                           //
         }                                                               //
-        else if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_NUMPAD1)) //
+        else if (GET_KEY_DOWN(VK_NUMPAD1)) //
         {                                                               //
             mapInfoTemp = mapInfo;                                      //
             for (int y = 0; y < mapInfo.mapSizeY; ++y)                  //  레이어 1칸씩 밀기
@@ -186,7 +186,7 @@ void TilemapToolScene::Update()
                 }
             }
         }
-        else if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_NUMPAD2))
+        else if (GET_KEY_DOWN(VK_NUMPAD2))
         {
             ++layer.mode;
             if (layer.mode == 4) layer.mode = 0;
@@ -224,14 +224,14 @@ void TilemapToolScene::Update()
 
     if (PtInRect(&(sampleArea), mouse))
     {
-        if (KeyManager::GetSingleton()->IsOnceKeyDown(VK_LBUTTON)) {
+        if (GET_KEY_DOWN(VK_LBUTTON)) {
             int posX = mouse.x - sampleArea.left;
             selectedSampleTile.frameX = sampleTileWidth = posX / TILE_SIZE;
             int posY = mouse.y - sampleArea.top;
             selectedSampleTile.frameY = sampleTileHeight = posY / TILE_SIZE;
         }
 
-        if (KeyManager::GetSingleton()->IsOnceKeyUp(VK_LBUTTON)) {
+        if (GET_KEY_UP(VK_LBUTTON)) {
             int posX = mouse.x - sampleArea.left;
             sampleTileWidth -= posX / TILE_SIZE;
             int posY = mouse.y - sampleArea.top;
@@ -251,7 +251,7 @@ void TilemapToolScene::Update()
                 rc.left -= (mapPosX * TILE_SIZE); rc.right -= (mapPosX * TILE_SIZE);
                 rc.top -= (mapPosY * TILE_SIZE); rc.bottom -= (mapPosY * TILE_SIZE);
                 if (PtInRect(&rc, mouse)) {
-                    if (KeyManager::GetSingleton()->IsStayKeyDown(VK_LBUTTON)) {
+                    if (GET_KEY_STAY(VK_LBUTTON)) {
                         for (int height = 0; height <= sampleTileHeight; ++height)
                         {
                             if (mapPosY + height >= mapPrintY) break;
@@ -275,7 +275,7 @@ void TilemapToolScene::Update()
                 rc.left -= (mapPosX * TILE_SIZE); rc.right -= (mapPosX * TILE_SIZE);
                 rc.top -= (mapPosY * TILE_SIZE); rc.bottom -= (mapPosY * TILE_SIZE);
                 if (PtInRect(&rc, mouse)) {
-                    if (KeyManager::GetSingleton()->IsStayKeyDown(VK_LBUTTON)) {
+                    if (GET_KEY_STAY(VK_LBUTTON)) {
                         mapInfo.tileState[y][x] = tileState;
                     }
                 }
@@ -284,10 +284,10 @@ void TilemapToolScene::Update()
     }
 
     // 세이브
-    if (KeyManager::GetSingleton()->IsOnceKeyUp(VK_NUMPAD7))
+    if (GET_KEY_UP(VK_NUMPAD7))
         Save();
     // 로드
-    if (KeyManager::GetSingleton()->IsOnceKeyUp(VK_NUMPAD9))
+    if (GET_KEY_UP(VK_NUMPAD9))
         Load();
 }
 

@@ -142,9 +142,10 @@
     <ClCompile Include="GameEntity.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
+    <ClCompile Include="Input.cpp" />
+    <ClCompile Include="InventoryManager.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemManager.cpp" />
-    <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="MapManager.cpp" />
@@ -166,11 +167,13 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="ImageManager.h" />
+    <ClInclude Include="Input.h" />
     <ClInclude Include="Interaction.h" />
+    <ClInclude Include="InventoryItem.h" />
+    <ClInclude Include="InventoryManager.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemCode.h" />
     <ClInclude Include="ItemManager.h" />
-    <ClInclude Include="KeyManager.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="MapInfo.h" />
     <ClInclude Include="MapManager.h" />

@@ -64,17 +64,28 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance,
 
 
 	// 메시지 큐에 있는 메시지 처리
-	MSG message;
-	while (GetMessage(&message, 0, 0, 0))
+	MSG msg;
+	while (TRUE)
 	{
-		TranslateMessage(&message);
-		DispatchMessage(&message);
+		if (PeekMessage(&msg, nullptr, NULL, NULL, PM_REMOVE))
+		{
+			if (msg.message == WM_QUIT)
+			{
+				break;
+			}
+
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+		}
+		else
+		{
+		}
 	}
 
 	// 메인게임 해제
 	g_mainGame.Release();
 
-	return (int)message.wParam;
+	return (int)msg.wParam;
 }
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)

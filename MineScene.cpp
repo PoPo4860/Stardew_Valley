@@ -12,7 +12,8 @@ HRESULT MineScene::Init()
 
     player = new Player;
     player->Init();
-    COUT;
+    RENDER_MANAGER->PushObjectVector(player);
+
     return S_OK;
 }
 
@@ -27,16 +28,13 @@ void MineScene::Render(HDC hdc)
 {
     MAP_MANAGER->DrawMapLayer(hdc, 1);
     MAP_MANAGER->DrawMapLayer(hdc, 2);
-
-    RENDER_MANAGER->PushObjectQueue(player);
-    ITEM_MANAGER->PushObjectQueue();
-    MAP_MANAGER->PushObjectQueue();
     RENDER_MANAGER->ObjectRender(hdc);
-
     MAP_MANAGER->DrawMapLayer(hdc, 3);
 }
 
 void MineScene::Release()
 {
     SAFE_RELEASE(player);
+
+    RENDER_MANAGER->VectorClear();
 }
