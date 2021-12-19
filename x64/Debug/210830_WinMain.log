@@ -1,10 +1,12 @@
 ﻿  Image.cpp
   ImageManager.cpp
   InventoryManager.cpp
+C:\Users\dltng\Desktop\새 폴더 (2)\Stardew_Valley\InventoryManager.cpp(114,51): warning C4244: '=': 'FLOAT'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dltng\Desktop\새 폴더 (2)\Stardew_Valley\InventoryManager.cpp(115,51): warning C4244: '=': 'FLOAT'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dltng\Desktop\새 폴더 (2)\Stardew_Valley\InventoryManager.cpp(121,51): warning C4244: '=': 'FLOAT'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\dltng\Desktop\새 폴더 (2)\Stardew_Valley\InventoryManager.cpp(122,51): warning C4244: '=': 'FLOAT'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Item.cpp
   ItemManager.cpp
-  main.cpp
-C:\Users\dltng\Desktop\새 폴더 (2)\Stardew_Valley\main.cpp(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
   MainGame.cpp
 C:\Users\dltng\Desktop\새 폴더 (2)\Stardew_Valley\MainGame.cpp(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
   MapManager.cpp
@@ -17,5 +19,7 @@ C:\Users\dltng\Desktop\새 폴더 (2)\Stardew_Valley\Player.cpp(2,10): warning C
   TilemapToolScene.cpp
   Timer.cpp
   TimerManager.cpp
+  main.cpp
+C:\Users\dltng\Desktop\새 폴더 (2)\Stardew_Valley\main.cpp(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
   코드를 생성하고 있습니다...
   210830_WinMain.vcxproj -> C:\Users\dltng\Desktop\새 폴더 (2)\Stardew_Valley\x64\Debug\210830_WinMain.exe

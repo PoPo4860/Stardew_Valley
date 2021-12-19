@@ -3,27 +3,36 @@
 #include "Image.h"
 class InventoryItem
 {
-public:
-	InventoryItem() :itemType{ ItemType::Empty }, toolItemInfo{}, resourceItemInfo{}{}
+private:
 	ItemType itemType;
 	ToolItemInfo* toolItemInfo;
 	ResourceItemInfo* resourceItemInfo;
 	Image* img;
+	int itemCode;
+public:
+	InventoryItem() :itemType{ ItemType::Empty }, toolItemInfo{}, resourceItemInfo{}, itemCode{ 0 } ,img{ nullptr }{}
+
 	void Release()
 	{
 		itemType = ItemType::Empty;
-		delete toolItemInfo;
-		delete resourceItemInfo;
-		delete img;
+		itemCode = 0;
 		toolItemInfo = nullptr;
 		resourceItemInfo = nullptr;
 		img = nullptr;
 	};
 
-	const ToolItemInfo GetToolItemInfo() { return *toolItemInfo; }
-	const ResourceItemInfo GetResourceItemInfo() { return *resourceItemInfo; }
+	ToolItemInfo GetToolItemInfo() { return *toolItemInfo; }
+	ResourceItemInfo GetResourceItemInfo() { return *resourceItemInfo; }
 
 	void SetToolItemInfo(ToolItemInfo item) { toolItemInfo = &item; }
 	void SetResourceItemInfo(ResourceItemInfo item) { resourceItemInfo = &item; }
+
+	int GetItemCode() { return itemCode; }
+	void SetItemCode(int itemCode) { this->itemCode = itemCode; }
+
+	ItemType GetItemType() { return itemType; }
+	void  SetItemType(ItemType itemType) { this->itemType = itemType; }
+
+	POINT GetFrame() { POINT result{ (itemCode - 1) % 6 ,(itemCode - 1) / 6 };  return result; }
 };
 

@@ -19,7 +19,7 @@ public:
 public:
 	ToolItemInfo GetToolItem(int key) { return toolItmeInfo.at(key);}
 	ResourceItemInfo GetResourceItem(int key) { return resourceItemInfo.at(key);}
-	void CreateResourceItem(int key, POINTFLOAT pos);
+	void CreateResourceItem(int key, POINTFLOAT pos, int num = 1);
 
 	void DeleteObjectVector(Item* obj);
 	void ItemVectorClear();

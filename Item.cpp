@@ -81,7 +81,7 @@ void Item::Update()
 	{
 		if (PlayerFollow())
 		{
-			INVEN_MANAVER->InventoryPush(&info, &itemType);
+			INVEN_MANAVER->InventoryPush(&info, &itemType, 1, 1);
 			ITEM_MANAGER->DeleteObjectVector(this);
 			Release();
 			return;
@@ -105,7 +105,9 @@ void Item::Release()
 	delete this;
 }
 
-Item::Item(int key, POINTFLOAT pos) :itemType{ ItemType::ToolItem }
+Item::Item(int key, POINTFLOAT pos, int itemNum) :
+	itemType{ ItemType::ToolItem },  itemNum{ itemNum }
+
 {
 	this->pos = pos;
 	Init();

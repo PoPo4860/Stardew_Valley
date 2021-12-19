@@ -30,6 +30,7 @@ typedef struct ArgumentFuncPtr
 	string sceneName;
 	string loadingSceneName;
 } ARGUMENT_PTR, *LPARGUMENT_PTR;
+
 #include "TimerManager.h"
 #include "ImageManager.h"
 #include "SceneManager.h"

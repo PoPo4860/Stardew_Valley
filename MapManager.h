@@ -10,7 +10,6 @@ private:
 	MAP_INFO mapInfo;
 	Image* selectDungeon;
 	vector<POINT> exit;
-	vector<POINT,GameObject> exitd;
 	bool ladderDownCheck;
 public:
 	MapManager();

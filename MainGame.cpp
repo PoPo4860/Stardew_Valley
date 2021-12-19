@@ -60,7 +60,7 @@ void MainGame::Release()
 	MapManager::GetSingleton()->Release();
 	ObjectPosManager::GetSingleton()->Release();
 	ObjectRenderManager::GetSingleton()->Release();
-
+	InventoryManager::GetSingleton()->Release();
 	KillTimer(g_hWnd, 0);
 }
 

@@ -43,3 +43,11 @@ inline void SetRect(RECT* rect, POINTFLOAT pos,int bodySize)
 	rect->top = (LONG)pos.y - (bodySize / 2);
 	rect->bottom = (LONG)pos.y + (bodySize / 2);
 }
+
+inline void SetRect(RECT* rect, POINTFLOAT pos, int bodySizeX, int bodySizeY)
+{
+	rect->left = (LONG)pos.x - (bodySizeX / 2);
+	rect->right = (LONG)pos.x + (bodySizeX / 2);
+	rect->top = (LONG)pos.y - (bodySizeY / 2);
+	rect->bottom = (LONG)pos.y + (bodySizeY / 2);
+}
