@@ -8,7 +8,7 @@ HRESULT MineScene::Init()
     SetWindowSize(20, 10, WIN_SIZE_X * 3, WIN_SIZE_Y * 3);
     windowX = WIN_SIZE_X;
     windowY = WIN_SIZE_Y;
-    MAP_MANAGER->Load(1);
+    MAP_MANAGER->Load(2);
 
     player = new Player;
     player->Init();

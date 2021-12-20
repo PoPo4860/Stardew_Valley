@@ -1,7 +1,7 @@
 #include "TilemapToolScene.h"
 #include "Image.h"
 #include "CommonFunction.h"
-
+#include "Config.h"
 HRESULT TilemapToolScene::Init()
 {
     SetWindowSize(20, 10, TILEMAPTOOL_SIZE_X*3, TILEMAPTOOL_SIZE_Y*3);
@@ -290,6 +290,12 @@ void TilemapToolScene::Update()
     // 로드
     if (GET_KEY_UP(VK_NUMPAD9))
         Load();
+
+    backUpTime += DELTA_TIME;
+    if (backUpTime >= 300.0f)
+    {
+        BackUpSave();
+    }
 }
 
 void TilemapToolScene::Render(HDC hdc)
@@ -399,6 +405,7 @@ TilemapToolScene::TilemapToolScene() :
     mapInfo{},
     mapPrintX{ 20 }, mapPrintY{ 20 },
     mapPosX{ 0 }, mapPosY{ 0 },
+    backUpNum{ 0 }, backUpTime{ 0 },
     tileState{ Tile_State::Empty }
 {}
 
@@ -441,6 +448,35 @@ void TilemapToolScene::Save()
     {
         cout << "저장 에러 \n";
     }
+    CloseHandle(hFile);
+}
+
+void TilemapToolScene::BackUpSave()
+{
+    string saveFileName = "Save/Back/BackUpMapData_" + to_string(backUpNum) + ".map";
+
+    HANDLE hFile = CreateFile(saveFileName.c_str(),
+        GENERIC_WRITE,          // 읽기, 쓰기
+        0, NULL,                // 공유, 보안 모드
+        CREATE_ALWAYS,          // 파일 만들거나 읽을 때 옵션
+        FILE_ATTRIBUTE_NORMAL,  // 파일 속성(읽기 전용, 숨김 등등)
+        NULL);
+    // 쓰기
+
+    DWORD byteSize = sizeof(MAP_INFO);
+    DWORD writtenByte;
+    if (WriteFile(hFile,                            // 파일 핸들
+        &mapInfo,                                   // 메모리 시작주소
+        sizeof(MAP_INFO),                           // 메모리 크기
+        &writtenByte,                               // 실제 쓰여진 파일 용량
+        NULL) == false)                             // ???
+        cout << "저장 에러 \n";
+    else
+    {
+        cout << backUpNum++ << "번 백업완료.\n";
+        backUpTime = 0;
+    }
+    if (backUpNum >= 100) backUpNum = 0;
     CloseHandle(hFile);
 }
 

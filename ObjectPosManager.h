@@ -30,11 +30,11 @@ public:
 			{	// 플레이어의 위치가 왼쪽과 오른쪽 사이일 때에
 				globalPos.x = playerPos.x - (WIN_SIZE_X / 2);
 			}
-			else if ((WIN_SIZE_X / 2) < playerPos.x)
+			else if ((WIN_SIZE_X / 2) > playerPos.x)
 			{	// 플레이어의 위치가 왼쪽에 있을때에
 				globalPos.x = 0;
 			}
-			else if (mapSizeX - (WIN_SIZE_X / 2) > playerPos.x)
+			else if (mapSizeX - (WIN_SIZE_X / 2) < playerPos.x)
 			{	// 플레이어의 위치가 오른쪽에 있을때에
 				globalPos.x = (float)mapSizeX - WIN_SIZE_X;
 			}

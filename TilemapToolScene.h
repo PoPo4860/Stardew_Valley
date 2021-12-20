@@ -35,6 +35,7 @@ public:
 	TilemapToolScene();
 	virtual ~TilemapToolScene() = default;
 	void Save();
+	void BackUpSave();
 	void Load();
 
 private:
@@ -58,5 +59,7 @@ private:
 	//MAP_INFO2 mapInfo2;
 	int mapPrintX, mapPrintY;	// 맵 출력 범위
 	int mapPosX, mapPosY;		// 현재 보는 맵 위치
+	float backUpTime;
+	int backUpNum;
 };
 
