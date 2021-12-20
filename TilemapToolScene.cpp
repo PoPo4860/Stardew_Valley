@@ -5,7 +5,7 @@
 HRESULT TilemapToolScene::Init()
 {
     SetWindowSize(20, 10, TILEMAPTOOL_SIZE_X*3, TILEMAPTOOL_SIZE_Y*3);
-    windowX = TILEMAPTOOL_SIZE_X;
+     windowX = TILEMAPTOOL_SIZE_X;
     windowY = TILEMAPTOOL_SIZE_Y;
     {
         mineImage[0] = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Gray.bmp", 256, 288, 16, 18);
@@ -183,6 +183,7 @@ void TilemapToolScene::Update()
                     mapInfo.tileInfo[2][y][x].frameY = mapInfoTemp.tileInfo[1][y][x].frameY;
                     mapInfo.tileInfo[0][y][x].frameX = mapInfoTemp.tileInfo[2][y][x].frameX;
                     mapInfo.tileInfo[0][y][x].frameY = mapInfoTemp.tileInfo[2][y][x].frameY;
+                    mapInfo.tileInfo[1][y][x].frameX = mapInfoTemp.tileInfo[0][y][x].frameX;
                 }
             }
         }

@@ -81,7 +81,7 @@ void Item::Update()
 	{
 		if (PlayerFollow())
 		{
-			INVEN_MANAVER->InventoryPush(&info, &itemType, 1, 1);
+			INVEN_MANAVER->InventoryPush(&info, &itemType, 1, itemNum);
 			ITEM_MANAGER->DeleteObjectVector(this);
 			Release();
 			return;

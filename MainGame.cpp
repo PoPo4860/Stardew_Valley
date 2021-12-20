@@ -16,7 +16,7 @@ HRESULT MainGame::Init()
 	Input::Init(g_hWnd);
 	//TilemapToolScene
 	//MineScene
-	SceneManager::GetSingleton()->ChangeScene("MineScene");
+	SceneManager::GetSingleton()->ChangeScene("TilemapToolScene");
 	// 타이머 셋팅
 	hTimer = (HANDLE)SetTimer(g_hWnd, 0, 10, NULL);
 

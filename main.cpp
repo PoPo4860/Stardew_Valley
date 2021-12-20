@@ -119,14 +119,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 		hdc = BeginPaint(g_hWnd, &ps);
 		RECT rect;
 		SetMapMode(hdc, MM_ANISOTROPIC); //표준화면으로
-
 		SetWindowExtEx(hdc, windowX, windowY, NULL); //화면에 맞춰주고 내가 조절해준다.
-
 		GetClientRect(g_hWnd, &rect);
 		SetViewportExtEx(hdc, rect.right, rect.bottom, NULL);
-
 		g_mainGame.Render(hdc);
-
 		EndPaint(g_hWnd, &ps);
 		break;
 	case WM_DESTROY:	// 닫기 버튼 메시지처리 (프로그램 종료)

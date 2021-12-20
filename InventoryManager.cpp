@@ -179,12 +179,17 @@ void InventoryManager::Render(HDC hdc)
 					continue;
 				}
 				int space = y >= 1 ? 4 : 0;
+				int posX = inventoryMain.pos.x - (inventoryMain.img->GetFrameWidth() / 2) + SPACE_X + (x * TILE_SIZE) + 9;
+				int posY = inventoryMain.pos.y - (inventoryMain.img->GetFrameHeight() / 2) + SPACE_Y + (y * TILE_SIZE) + 8 + space;
 				POINT frame = inventory[y][x].first.GetFrame();
-				item->Render(hdc,
-					inventoryMain.pos.x - (inventoryMain.img->GetFrameWidth() / 2) + SPACE_X + (x * TILE_SIZE) + 9, 
-					inventoryMain.pos.y - (inventoryMain.img->GetFrameHeight() / 2) + SPACE_Y + (y * TILE_SIZE) + 8 + space
-					, frame.x, frame.y);
+				item->Render(hdc, posX, posY, frame.x, frame.y);
 				// 아이템 출력
+
+				int number = inventory[y][x].second;
+				char num_char[10 + sizeof(char)];
+				sprintf_s(num_char, "%d", number);
+				OnBnClickedOk(hdc, num_char, posX, posY);
+				// 아이템 갯수 출력
 			}
 		}
 	}
@@ -214,21 +219,7 @@ void InventoryManager::Render(HDC hdc)
 		}
 		mouseClick = { -1,-1 };
 	}
-	//PAINTSTRUCT ps;
-	//HBRUSH MyBrush, OldBrush;
-	//hdc = BeginPaint(g_hWnd, &ps);
-	//MyBrush = CreateSolidBrush(RGB(0, 0, 255));
-	//OldBrush = (HBRUSH)SelectObject(hdc, MyBrush);
-	//Rectangle(hdc, 0, 0, 400, 200);
-	//SelectObject(hdc, OldBrush);
-	//SetBkMode(hdc, TRANSPARENT);
-	//TextOut(hdc, 50, 100, str2, lstrlen(str2));
-
-	//DeleteObject(MyBrush);
-	//EndPaint(g_hWnd, &ps);
 }
-
-
 
 void InventoryManager::Release()
 {
