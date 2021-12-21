@@ -216,6 +216,5 @@ void MapManager::Load(int num)
     ObjectPosManager::GetSingleton()->SetMapSize(MAP->mapSizeX, MAP->mapSizeY);
     // 글로벌 포스에 맵 크기 지정
 
-
     CloseHandle(hFile);
 }

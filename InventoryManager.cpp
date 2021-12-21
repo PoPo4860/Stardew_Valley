@@ -195,9 +195,16 @@ void InventoryManager::Render(HDC hdc)
 	}
 
 	if (mouseClick.x != -1 && mouseClick.y != -1)
-	{	// 마우스가 클릭한 인벤토리 아이템 출력
+	{	// 마우스가 클릭, 드래그한 인벤토리 아이템 출력
 		POINT frame = inventory[mouseClick.y][mouseClick.x].first.GetFrame();
 		item->Render(hdc, mouse.x, mouse.y, frame.x, frame.y);
+		// 아이템 출력
+
+		int number = inventory[mouseClick.y][mouseClick.x].second;
+		char num_char[10 + sizeof(char)];
+		sprintf_s(num_char, "%d", number);
+		OnBnClickedOk(hdc, num_char, mouse.x, mouse.y);
+		// 아이템 갯수 출력
 	}
 	
 	if (GET_KEY_UP(VK_LBUTTON) && mouseClick.x >= 0 && mouseClick.y >= 0)
