@@ -157,16 +157,18 @@ bool InventoryManager::Uadate()
 void InventoryManager::Render(HDC hdc)
 {
 	if (activeCheck == false) return;
+
+	// 인벤토리 메인창 렌더
 	inventoryMain.img->Render(hdc,
 		inventoryMain.pos.x, 
 		inventoryMain.pos.y,
 		0,0);
-	// 인벤토리 메인창 렌더
+	
+	// 인벤토리 메뉴창 렌더
 	inventoryMenu.img->Render(hdc,
 		inventoryMenu.pos.x,
 		inventoryMenu.pos.y,
 		0, 0);
-	// 인벤토리 메뉴창 렌더
 
 	for (int y = 0; y < INVEN_SIZE_Y; ++y)
 	{

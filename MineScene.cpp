@@ -23,6 +23,7 @@ void MineScene::Update()
     {   // 인벤토리가 열려있다면 바로 리턴
         return;
     }
+
     player->Update();
     ITEM_MANAGER->Update();
     MAP_MANAGER->Update();
@@ -40,6 +41,5 @@ void MineScene::Render(HDC hdc)
 void MineScene::Release()
 {
     SAFE_RELEASE(player);
-
     RENDER_MANAGER->VectorClear();
 }

@@ -33,7 +33,7 @@ void Item::GravityAction()
 	{
 		if (fabs(move.speed.x) > 0.1f)
 		{
-			move.speed.x -= 4 * DELTA_TIME;
+			move.speed.x -= 8 * DELTA_TIME;
 			pos.x += move.speed.x * DELTA_TIME;
 		}
 	}
@@ -41,7 +41,7 @@ void Item::GravityAction()
 	{
 		if (fabs(move.speed.x) > 0.1f)
 		{
-			move.speed.x += 4 * DELTA_TIME;
+			move.speed.x += 8 * DELTA_TIME;
 			pos.x += move.speed.x * DELTA_TIME;
 		}
 	}
@@ -65,12 +65,24 @@ HRESULT Item::Init()
 {
 	move.landPos = pos.y + 2;
 	
-	move.speed.x = (float)(5 + (rand() % 3));
+	move.speed.x = (float)(10 + (rand() % 10));
 	move.speed.y = (float)((60 + (rand() % 10))*-1);
 	if (rand() % 2) { move.speed.x *= -1; }
 	move.gravity = 200.0f;
 	itemType = ItemType::ResourceItem;
 	img = ImageManager::GetSingleton()->FindImage("Image/Stones/Stone_Object_Item.bmp", 192, 16, 12, 1);
+
+	if (itemCode == 1)
+		itemRender = rand() % 2;
+	else if (itemCode == 2)
+		itemRender = (rand() % 2) + 2;
+	else if (itemCode == 3)
+		itemRender = (rand() % 2) + 4;
+	else if (itemCode == 4)
+		itemRender = (rand() % 2) + 6;
+	else if (itemCode == 5)
+		itemRender = (rand() % 2) + 8;
+
 	return S_OK;
 }
 
@@ -81,7 +93,7 @@ void Item::Update()
 	{
 		if (PlayerFollow())
 		{
-			INVEN_MANAVER->InventoryPush(&info, &itemType, 1, itemNum);
+			INVEN_MANAVER->InventoryPush(&info, &itemType, itemCode, itemNum);
 			ITEM_MANAGER->DeleteObjectVector(this);
 			Release();
 			return;
@@ -95,8 +107,7 @@ void Item::Update()
 
 void Item::Render(HDC hdc)
 {
-	img->Render(hdc, pos.x - GLOBAL_POS.x, pos.y - GLOBAL_POS.y, 0, 0);
-
+	img->Render(hdc, pos.x - GLOBAL_POS.x, pos.y - GLOBAL_POS.y, itemRender, 0);
 }
 
 void Item::Release()
@@ -106,7 +117,7 @@ void Item::Release()
 }
 
 Item::Item(int key, POINTFLOAT pos, int itemNum) :
-	itemType{ ItemType::ToolItem },  itemNum{ itemNum }
+	itemType{ ItemType::ResourceItem }, itemCode{key}, itemNum{ itemNum }
 
 {
 	this->pos = pos;

@@ -60,7 +60,7 @@ void MapManager::CreateObject()
             {
                 mapInfo.object[posY][posX] = new SmallStone(Stone_Object_Info::SmallStone_Lv1, posX, posY);
                 ++count;
-                if (/*rand() % (objectCost / 3) == 0*/true)
+                if (rand() % (objectCost / 3) == 0)
                 {   // »ý¼ºµÉ ½ºÅæ¿¡ ºñ·ÊÇÏ¿© Å»Ãâ±¸ »ý¼º
                     POINT buffer;
                     buffer.x = posX;
@@ -114,7 +114,6 @@ void MapManager::ObjectClear()
     }
 }
 
-
 void MapManager::DeleteMapObject(POINT pos)
 {
     mapInfo.object[pos.y][pos.x] = nullptr;
@@ -149,31 +148,31 @@ void MapManager::SetDungeonImage()
     }
     else if (mapInfo.dungeonTiles == Dungeon_Tiles::Dungeon_Gray)
     {
-        selectDungeon = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Soil.bmp", 256, 288, 16, 18);
+        selectDungeon = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Gray.bmp", 256, 288, 16, 18);
     }
     else if (mapInfo.dungeonTiles == Dungeon_Tiles::Dungeon_Ice)
     {        
-        selectDungeon = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Soil.bmp", 256, 288, 16, 18);
+        selectDungeon = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Ice.bmp", 256, 288, 16, 18);
     }
     else if (mapInfo.dungeonTiles == Dungeon_Tiles::Dungeon_Ice2)
     {
-        selectDungeon = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Soil.bmp", 256, 288, 16, 18);
+        selectDungeon = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Ice2.bmp", 256, 288, 16, 18);
     }
     else if (mapInfo.dungeonTiles == Dungeon_Tiles::Dungeon_Red)
     {
-        selectDungeon = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Soil.bmp", 256, 288, 16, 18);
+        selectDungeon = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Red.bmp", 256, 288, 16, 18);
     }
     else if (mapInfo.dungeonTiles == Dungeon_Tiles::Dungeon_Sand)
     {
-        selectDungeon = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Soil.bmp", 256, 288, 16, 18);
+        selectDungeon = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Sand.bmp", 256, 288, 16, 18);
     }
     else if (mapInfo.dungeonTiles == Dungeon_Tiles::Dungeon_Sand2)
     {
-        selectDungeon = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Soil.bmp", 256, 288, 16, 18);
+        selectDungeon = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Sand2.bmp", 256, 288, 16, 18);
     }
     else if (mapInfo.dungeonTiles == Dungeon_Tiles::Dungeon_Slime)
     {
-        selectDungeon = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Soil.bmp", 256, 288, 16, 18);
+        selectDungeon = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Slime.bmp", 256, 288, 16, 18);
     }
     else if (mapInfo.dungeonTiles == Dungeon_Tiles::Dungeon_Soil)
     {
@@ -181,7 +180,7 @@ void MapManager::SetDungeonImage()
     }
     else if (mapInfo.dungeonTiles == Dungeon_Tiles::Dungeon_Stone)
     {
-        selectDungeon = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Soil.bmp", 256, 288, 16, 18);
+        selectDungeon = ImageManager::GetSingleton()->FindImage("Image/Dungeon/Dungeon_Stone.bmp", 256, 288, 16, 18);
     }
 }
 

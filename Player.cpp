@@ -19,24 +19,19 @@ HRESULT Player::Init()
 {
 	for (int y = 0; y < MAP->mapSizeY; ++y)
 	{
-		bool check = false;
 		for (int x = 0; x < MAP->mapSizeX; ++x)
 		{
 			if (MAP_MANAGER->GetMap()->tileState[y][x] == Tile_State::LadderUp)
 			{
 				pos.x = (float)((x + 1) * TILE_SIZE - (TILE_SIZE / 2));
 				pos.y = (float)((y + 1) * TILE_SIZE + (TILE_SIZE / 2));
-				check = true;
 				break;
 			}
-			if (check) break;
 		}
 	}
 	
 	playerImage.move = ImageManager::GetSingleton()->FindImage("Image/Player/Player_Move.bmp", 128, 128, 8, 4);
 	playerImage.pick = ImageManager::GetSingleton()->FindImage("Image/Player/Player_Pick.bmp", 80, 128, 5, 4);
-	//pos.x = 100.0f;
-	//pos.y = 150.0f;
 	moveSpeed = 70.0f;
 	bodySize = 10;
 	return S_OK;

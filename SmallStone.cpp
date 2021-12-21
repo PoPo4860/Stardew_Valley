@@ -44,6 +44,7 @@ void SmallStone::Update()
 	if (hp <= 0)
 	{
 		CreateItem();
+		Release();
 	}
 }
 
@@ -68,5 +69,5 @@ void SmallStone::Release()
 void SmallStone::CreateItem()
 {
 	ITEM_MANAGER->CreateResourceItem(STONE, pos);
-	Release();
+	ITEM_MANAGER->CreateResourceItem(COAL, pos);
 }

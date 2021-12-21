@@ -20,6 +20,8 @@ private:
 	ResourceItemInfo info;
 	Move move;
 	int itemNum;
+	int itemCode;
+	int itemRender;
 public:
 	virtual HRESULT Init() override;
 	virtual void Update() override;
