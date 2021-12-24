@@ -63,6 +63,7 @@ void Item::GravityAction()
 
 HRESULT Item::Init()
 {
+	Dungeon_Tiles::Dungeon_Soil;
 	move.landPos = pos.y + 2;
 	
 	move.speed.x = (float)(10 + (rand() % 10));
@@ -70,18 +71,8 @@ HRESULT Item::Init()
 	if (rand() % 2) { move.speed.x *= -1; }
 	move.gravity = 200.0f;
 	itemType = ItemType::ResourceItem;
-	img = ImageManager::GetSingleton()->FindImage("Image/Stones/Stone_Object_Item.bmp", 192, 16, 12, 1);
-
-	if (itemCode == 1)
-		itemRender = rand() % 2;
-	else if (itemCode == 2)
-		itemRender = (rand() % 2) + 2;
-	else if (itemCode == 3)
-		itemRender = (rand() % 2) + 4;
-	else if (itemCode == 4)
-		itemRender = (rand() % 2) + 6;
-	else if (itemCode == 5)
-		itemRender = (rand() % 2) + 8;
+	img = ImageManager::GetSingleton()->FindImage("Image/Stones/Mine_Item.bmp", 32, 192, 2, 12);
+	itemRender = rand() % 2;
 
 	return S_OK;
 }
@@ -107,7 +98,7 @@ void Item::Update()
 
 void Item::Render(HDC hdc)
 {
-	img->Render(hdc, pos.x - GLOBAL_POS.x, pos.y - GLOBAL_POS.y, itemRender, 0);
+	img->Render(hdc, pos.x - GLOBAL_POS.x, pos.y - GLOBAL_POS.y, itemRender, itemCode-1);
 }
 
 void Item::Release()

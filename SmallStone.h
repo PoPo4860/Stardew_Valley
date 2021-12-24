@@ -6,16 +6,22 @@
 class SmallStone : public Interaction, public Character
 {
 private:
-	Stone_Object_Info objectInfo;
-	int frame;
+	int frameX;
+	int frameY;
+	Dungeon_Tiles dungeonTiles;
+	int hitAction;
+	bool hitActionCheck;
+	void SetStoneInfo();
+
 public:
-	SmallStone(Stone_Object_Info obj, int x, int y);
-	~SmallStone() = default;
+	SmallStone(Dungeon_Tiles dungeonTiles, int x, int y);
+	virtual ~SmallStone() = default;
 	virtual bool InteractionPick(int damage) override;
 	virtual HRESULT Init() override;
 	virtual void Update() override;
 	virtual void Render(HDC hdc) override;
 	virtual void Release() override;
+	void HitAction();
 	void CreateItem();
 };
 

@@ -28,6 +28,7 @@ void MapManager::DrawMapLayer(HDC hdc, int LayerNum)
 
 void MapManager::CreateObject()
 {
+    if (GAMEDATA_MANAGER->GetMapNum() == 0) return;
     int maxObject = 0;
     int minObject = 0;
     if (mapInfo.mapSizeY == 0)mapInfo.mapSizeY = 1;
@@ -58,7 +59,7 @@ void MapManager::CreateObject()
         {   //  해당 타일이 비어있으며, 위칸에 사다리가 없을 경우 오브젝트 추가
             if (posY > 0 && mapInfo.tileState[posY - 1][posX] != Tile_State::LadderUp)
             {
-                mapInfo.object[posY][posX] = new SmallStone(Stone_Object_Info::SmallStone_Lv1, posX, posY);
+                mapInfo.object[posY][posX] = new SmallStone(mapInfo.dungeonTiles,posX, posY);
                 ++count;
                 if (rand() % (objectCost / 3) == 0)
                 {   // 생성될 스톤에 비례하여 탈출구 생성
@@ -136,6 +137,16 @@ void MapManager::Interaction(POINT pos)
         exit.clear();
         RENDER_MANAGER->VectorClear();
         ITEM_MANAGER->ItemVectorClear();
+        GAMEDATA_MANAGER->SetMapNum(GAMEDATA_MANAGER->GetMapNum()+1);
+        SceneManager::GetSingleton()->ChangeScene("MineScene");
+    }
+    if (mapInfo.tileState[pos.y][pos.x] == Tile_State::LadderUp)
+    {
+        ObjectClear();
+        exit.clear();
+        RENDER_MANAGER->VectorClear();
+        ITEM_MANAGER->ItemVectorClear();
+        GAMEDATA_MANAGER->SetMapNum(0);
         SceneManager::GetSingleton()->ChangeScene("MineScene");
     }
 }

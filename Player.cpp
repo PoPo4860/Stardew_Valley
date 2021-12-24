@@ -31,7 +31,7 @@ HRESULT Player::Init()
 	}
 	
 	playerImage.move = ImageManager::GetSingleton()->FindImage("Image/Player/Player_Move.bmp", 128, 128, 8, 4);
-	playerImage.pick = ImageManager::GetSingleton()->FindImage("Image/Player/Player_Pick.bmp", 80, 128, 5, 4);
+	playerImage.pick = ImageManager::GetSingleton()->FindImage("Image/Player/Player_Pick_Action.bmp", 240, 192, 5, 4);
 	moveSpeed = 70.0f;
 	bodySize = 10;
 	return S_OK;
@@ -190,7 +190,7 @@ void Player::StatePickRender(HDC hdc, int frame) {
 	
 	playerImage.pick->Render(hdc,
 		pos.x - GLOBAL_POS.x,
-		pos.y - bodySize - GLOBAL_POS.y,
+		pos.y - bodySize - GLOBAL_POS.y - 8,
 		frame,
 		direction);
 }
