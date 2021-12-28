@@ -5,11 +5,13 @@
 #include "ItemCode.h"
 #include <unordered_map>
 
+
 class ItemManager : public Singleton<ItemManager>
 {
 private:
 	unordered_map<int, ToolItemInfo> toolItmeInfo;
 	unordered_map<int, ResourceItemInfo> resourceItemInfo;
+	queue<Item*> itemQueue;
 	vector<Item*> itemVector;
 public:
 	ItemManager();
@@ -21,7 +23,8 @@ public:
 	ResourceItemInfo GetResourceItem(int key) { return resourceItemInfo.at(key);}
 	void CreateResourceItem(int key, POINTFLOAT pos, int num = 1);
 
-	void DeleteObjectVector(Item* obj);
+	void DeleteObjectVector();
+	void DeleteObject(Item* obj);
 	void ItemVectorClear();
 };
 

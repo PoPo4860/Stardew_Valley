@@ -196,7 +196,7 @@ void Player::StatePickRender(HDC hdc, int frame) {
 }
 POINT Player::GetFrontTilePos()
 {
-	POINT result = GetPosTile(pos, MAP->mapSizeX, MAP->mapSizeY);
+	POINT result = GetPosTile(pos);
 	switch (direction)
 	{
 	case MoveDirection::Up:

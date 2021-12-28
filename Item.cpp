@@ -1,7 +1,7 @@
 #include "Item.h"
 #include "Image.h"
 #include "Config.h"
-bool Item::PlayerFollow()
+bool Item::FollowPlayer()
 {
 	static POINTFLOAT playerPos;
 	static float distance;
@@ -82,11 +82,11 @@ void Item::Update()
 	GravityAction();
 	if (move.time > 0.4f)
 	{
-		if (PlayerFollow())
+		if (FollowPlayer())
 		{
 			INVEN_MANAVER->InventoryPush(&info, &itemType, itemCode, itemNum);
-			ITEM_MANAGER->DeleteObjectVector(this);
-			Release();
+			ITEM_MANAGER->DeleteObject(this);
+			RENDER_MANAGER->DeleteObject(this);
 			return;
 		}
 	}
@@ -103,7 +103,6 @@ void Item::Render(HDC hdc)
 
 void Item::Release()
 {
-	RENDER_MANAGER->DeleteObjectVector(this);
 	delete this;
 }
 

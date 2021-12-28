@@ -32,7 +32,7 @@ public:
 	virtual ~Item() = default;
 public:
 	ItemType GetItemInfo() { return itemType; }
-	bool PlayerFollow();
+	bool FollowPlayer();
 	void GravityAction();
 };
 

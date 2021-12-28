@@ -14,6 +14,11 @@ bool SmallStone::InteractionPick(int damage)
 {
 	hp -= damage;
 	hitActionCheck = true;
+	if (hp <= 0)
+	{
+		RENDER_MANAGER->DeleteObject(this);
+		CreateItem();
+	}
 	return false;
 }
 
@@ -31,11 +36,6 @@ HRESULT SmallStone::Init()
 
 void SmallStone::Update()
 {
-	if (hp <= 0)
-	{
-		CreateItem();
-		Release();
-	}
 	if(hitActionCheck)HitAction();
 }
 
@@ -49,9 +49,8 @@ void SmallStone::Render(HDC hdc)
 
 void SmallStone::Release()
 {
-	POINT result = GetPosTile(pos, MAP->mapSizeY, MAP->mapSizeX);
+	POINT result = GetPosTile(pos);
 	MAP_MANAGER->DeleteMapObject(result);
-    RENDER_MANAGER->DeleteObjectVector(this);
 	delete this;
 }
 

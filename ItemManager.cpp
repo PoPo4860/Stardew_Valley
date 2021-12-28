@@ -86,8 +86,13 @@ void ItemManager::Init()
 
 void ItemManager::Update()
 {
-	for (int i = 0; i < itemVector.size(); ++i)
-		itemVector[i]->Update();
+	DeleteObjectVector();
+	for (vector<Item*>::iterator iter = itemVector.begin();
+		iter != itemVector.end();
+		++iter)
+	{
+		(*iter)->Update();
+	}
 }
 
 void ItemManager::Release()
@@ -103,17 +108,26 @@ void ItemManager::CreateResourceItem(int key, POINTFLOAT pos, int num)
 	itemVector.push_back(new Item (key, pos , num));
 }
 
-void ItemManager::DeleteObjectVector(Item* obj)
+void ItemManager::DeleteObjectVector()
 {
-	for (vector<Item*>::iterator iter = itemVector.begin();
-		iter != itemVector.end();++iter)
-	{	// 백터를 순회하며 삭제
-		if ((*iter) == obj)
-		{
-			itemVector.erase(iter);
-			return;
+	while (itemQueue.empty() == false)
+	{
+		for (vector<Item*>::iterator iter = itemVector.begin();
+			iter != itemVector.end(); ++iter)
+		{	// 백터를 순회하며 삭제
+			if ((*iter) == itemQueue.front())
+			{
+				itemVector.erase(iter);
+				itemQueue.pop();
+				break;
+			}
 		}
 	}
+}
+
+void ItemManager::DeleteObject(Item* obj)
+{
+	itemQueue.push(obj);
 }
 
 void ItemManager::ItemVectorClear()
@@ -125,4 +139,8 @@ void ItemManager::ItemVectorClear()
 		iter = itemVector.erase(iter);
 	}
 	itemVector.clear();
+	while (itemQueue.empty() == false)
+	{
+		itemQueue.pop();
+	}
 }

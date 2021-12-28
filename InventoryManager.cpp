@@ -111,17 +111,17 @@ void InventoryManager::Init()
 {
 	inventoryMain.img = ImageManager::GetSingleton()->FindImage("Image/Inventory/Inventory_Main.bmp", 213, 146, 1, 1);
 	inventoryMain.pos.x = (WIN_SIZE_X / 2); inventoryMain.pos.y = (WIN_SIZE_Y / 2);
-	inventoryMain.correctPos.x = inventoryMain.pos.x - (inventoryMain.img->GetFrameWidth() / 2);
-	inventoryMain.correctPos.y = inventoryMain.pos.y - (inventoryMain.img->GetFrameHeight() / 2);
+	inventoryMain.correctPos.x = (LONG)(inventoryMain.pos.x - (inventoryMain.img->GetFrameWidth() / 2));
+	inventoryMain.correctPos.y = (LONG)(inventoryMain.pos.y - (inventoryMain.img->GetFrameHeight() / 2));
 	SetRect(&inventoryMain.rect,inventoryMain.pos, 
 		(inventoryMain.img->GetFrameWidth()), (inventoryMain.img->GetFrameHeight()));
 
-	inventoryMenu.img = ImageManager::GetSingleton()->FindImage("Image/Inventory/Inventory_Menu.bmp", 128, 16, 8, 1);
-	inventoryMenu.pos.x = (WIN_SIZE_X / 2); inventoryMenu.pos.y = (WIN_SIZE_Y / 2);
-	inventoryMenu.correctPos.x = inventoryMenu.pos.x - (inventoryMenu.img->GetFrameWidth() / 2);
-	inventoryMenu.correctPos.y = inventoryMenu.pos.y - (inventoryMenu.img->GetFrameHeight() / 2);
-	SetRect(&inventoryMenu.rect, inventoryMenu.pos,
-		(inventoryMenu.img->GetFrameWidth(), (inventoryMenu.img->GetFrameHeight())));
+	//inventoryMenu.img = ImageManager::GetSingleton()->FindImage("Image/Inventory/Inventory_Menu.bmp", 128, 16, 8, 1);
+	//inventoryMenu.pos.x = (WIN_SIZE_X / 2); inventoryMenu.pos.y = (WIN_SIZE_Y / 2);
+	//inventoryMenu.correctPos.x = inventoryMenu.pos.x - (inventoryMenu.img->GetFrameWidth() / 2);
+	//inventoryMenu.correctPos.y = inventoryMenu.pos.y - (inventoryMenu.img->GetFrameHeight() / 2);
+	//SetRect(&inventoryMenu.rect, inventoryMenu.pos,
+	//	(inventoryMenu.img->GetFrameWidth(), (inventoryMenu.img->GetFrameHeight())));
 
 	item = ImageManager::GetSingleton()->FindImage
 	("Image/Inventory/Inventory_Item.bmp", 96, 48, 6, 3);
@@ -165,10 +165,10 @@ void InventoryManager::Render(HDC hdc)
 		0,0);
 	
 	// 인벤토리 메뉴창 렌더
-	inventoryMenu.img->Render(hdc,
-		inventoryMenu.pos.x,
-		inventoryMenu.pos.y,
-		0, 0);
+	//inventoryMenu.img->Render(hdc,
+	//	inventoryMenu.pos.x,
+	//	inventoryMenu.pos.y,
+	//	0, 0);
 
 	for (int y = 0; y < INVEN_SIZE_Y; ++y)
 	{
@@ -181,8 +181,8 @@ void InventoryManager::Render(HDC hdc)
 					continue;
 				}
 				int space = y >= 1 ? 4 : 0;
-				int posX = inventoryMain.pos.x - (inventoryMain.img->GetFrameWidth() / 2) + SPACE_X + (x * TILE_SIZE) + 9;
-				int posY = inventoryMain.pos.y - (inventoryMain.img->GetFrameHeight() / 2) + SPACE_Y + (y * TILE_SIZE) + 8 + space;
+				int posX = (int)inventoryMain.pos.x - (inventoryMain.img->GetFrameWidth() / 2) + SPACE_X + (x * TILE_SIZE) + 9;
+				int posY = (int)inventoryMain.pos.y - (inventoryMain.img->GetFrameHeight() / 2) + SPACE_Y + (y * TILE_SIZE) + 8 + space;
 				POINT frame = inventory[y][x].first.GetFrame();
 				item->Render(hdc, posX, posY, frame.x, frame.y);
 				// 아이템 출력
@@ -190,7 +190,7 @@ void InventoryManager::Render(HDC hdc)
 				int number = inventory[y][x].second;
 				char num_char[10 + sizeof(char)];
 				sprintf_s(num_char, "%d", number);
-				OnBnClickedOk(hdc, num_char, posX, posY);
+				PrintText(hdc, num_char, posX, posY);
 				// 아이템 갯수 출력
 			}
 		}
@@ -205,7 +205,7 @@ void InventoryManager::Render(HDC hdc)
 		int number = inventory[mouseClick.y][mouseClick.x].second;
 		char num_char[10 + sizeof(char)];
 		sprintf_s(num_char, "%d", number);
-		OnBnClickedOk(hdc, num_char, mouse.x, mouse.y);
+		PrintText(hdc, num_char, mouse.x, mouse.y);
 		// 아이템 갯수 출력
 	}
 	
