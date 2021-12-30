@@ -18,7 +18,7 @@ HRESULT MineScene::Init()
 
 void MineScene::Update()
 {
-    if (INVEN_MANAVER->Uadate() == true)
+    if (INVEN_MANAGER->Uadate() == true)
     {   // 인벤토리가 열려있다면 바로 리턴
         return;
     }
@@ -34,7 +34,8 @@ void MineScene::Render(HDC hdc)
     MAP_MANAGER->DrawMapLayer(hdc, 2);
     RENDER_MANAGER->ObjectRender(hdc);
     MAP_MANAGER->DrawMapLayer(hdc, 3);
-    INVEN_MANAVER->Render(hdc);
+    INVEN_MANAGER->Render(hdc);
+    UI_MANAGER->Render(hdc);
 }
 
 void MineScene::Release()

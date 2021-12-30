@@ -84,7 +84,7 @@ void Item::Update()
 	{
 		if (FollowPlayer())
 		{
-			INVEN_MANAVER->PushInventory(info, &itemType, itemCode, itemNum);
+			INVEN_MANAGER->PushInventory(info, &itemType, itemCode, itemNum);
 			ITEM_MANAGER->DeleteObject(this);
 			RENDER_MANAGER->DeleteObject(this);
 			return;

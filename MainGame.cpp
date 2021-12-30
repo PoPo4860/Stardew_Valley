@@ -13,6 +13,7 @@ HRESULT MainGame::Init()
 	MapManager::GetSingleton()->Init();
 	CamerManager::GetSingleton()->Init();
 	ObjectRenderManager::GetSingleton()->Init();
+	UIManager::GetSingleton()->Init();
 	Input::Init(g_hWnd);
 	//TilemapToolScene
 	//MineScene
@@ -61,6 +62,7 @@ void MainGame::Release()
 	CamerManager::GetSingleton()->Release();
 	ObjectRenderManager::GetSingleton()->Release();
 	InventoryManager::GetSingleton()->Release();
+	UIManager::GetSingleton()->Release();
 	KillTimer(g_hWnd, 0);
 }
 

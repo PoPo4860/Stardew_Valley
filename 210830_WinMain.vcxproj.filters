@@ -40,7 +40,7 @@
     <Filter Include="MainGame\Object\Item">
       <UniqueIdentifier>{7463a603-97db-47ec-a730-5323e3f1069b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="MainGame\Object\Stone">
+    <Filter Include="MainGame\Object\MineObject">
       <UniqueIdentifier>{2de91347-c1f8-4bf5-a6c4-2337f07fc002}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -85,7 +85,7 @@
       <Filter>MainGame\Manager</Filter>
     </ClCompile>
     <ClCompile Include="OreObject.cpp">
-      <Filter>MainGame\Object\Stone</Filter>
+      <Filter>MainGame\Object\MineObject</Filter>
     </ClCompile>
     <ClCompile Include="ObjectRenderManager.cpp">
       <Filter>MainGame\Manager</Filter>
@@ -168,7 +168,7 @@
       <Filter>MainGame\Object</Filter>
     </ClInclude>
     <ClInclude Include="OreObject.h">
-      <Filter>MainGame\Object\Stone</Filter>
+      <Filter>MainGame\Object\MineObject</Filter>
     </ClInclude>
     <ClInclude Include="ObjectRenderManager.h">
       <Filter>MainGame\Manager</Filter>

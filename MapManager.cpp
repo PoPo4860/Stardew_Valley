@@ -197,9 +197,7 @@ void MapManager::SetDungeonImage()
 
 void MapManager::Load(int num)
 {
-    string loadFileName = "Save/SaveMapData_" + to_string(num) + ".map";
-
-    HANDLE hFile = CreateFile(loadFileName.c_str(),
+    HANDLE hFile = CreateFile(GAMEDATA_MANAGER->GetMapString().c_str(),
         GENERIC_READ,           // 읽기, 쓰기
         0, NULL,                // 공유, 보안 모드
         OPEN_EXISTING,          // 파일 만들거나 읽을 때 옵션
