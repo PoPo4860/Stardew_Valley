@@ -17,7 +17,7 @@ class Item : public GameObject
 {
 private:
 	ItemType itemType;
-	ResourceItemInfo info;
+	const ResourceItemInfo* info;
 	Move move;
 	int itemNum;
 	int itemCode;

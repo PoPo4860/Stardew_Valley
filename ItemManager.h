@@ -19,12 +19,12 @@ public:
 	void Update();
 	void Release();
 public:
-	ToolItemInfo GetToolItem(int key) { return toolItmeInfo.at(key);}
-	ResourceItemInfo GetResourceItem(int key) { return resourceItemInfo.at(key);}
+	const ToolItemInfo* GetToolItem(int key) const { return &toolItmeInfo.at(key);}
+	const ResourceItemInfo* GetResourceItem(int key)  { return &resourceItemInfo.at(key);}
 	void CreateResourceItem(int key, POINTFLOAT pos, int num = 1);
 
 	void DeleteObjectVector();
 	void DeleteObject(Item* obj);
-	void ItemVectorClear();
+	void ItemClear();
 };
 

@@ -12,10 +12,20 @@ struct InventoryImage
 	RECT rect;			// 실제 Rect
 	POINT correctPos;	// 보정 좌표
 };
+struct Inventory
+{
+	InventoryItem item;	// 아이템
+	int itemNum = 0;	// 아이템 갯수
+};
+struct InventoryMouse
+{
+	bool inInventory;
+	POINT mouse;
+};
 class InventoryManager : public Singleton<InventoryManager>
 {
 private:
-	pair<InventoryItem, int> inventory[INVEN_SIZE_Y][INVEN_SIZE_X];
+	Inventory inventory[INVEN_SIZE_Y][INVEN_SIZE_X];
 	InventoryImage inventoryMain;
 	InventoryImage inventoryMenu;
 	Image* item;
@@ -23,7 +33,7 @@ private:
 	POINT mouse;
 	POINT mouseClick;
 
-	pair<bool,POINT> GetInventoryNum(POINT mouse);
+	InventoryMouse GetInventoryNum(POINT mouse);
 public:
 	InventoryManager();
 	void Init();
@@ -31,10 +41,10 @@ public:
 	bool Uadate();
 	void Release();
 public:
-	void InventoryPush(ToolItemInfo* item, ItemType* type, int itemCode, int itemNum);
-	void InventoryPush(ResourceItemInfo* item, ItemType* type, int itemCode, int itemNum);
-	int InventoryAdd(int itemCode, int itemNum);
-	POINT InventoryEmptyAdd(ItemType* type, int itemCode, int itemNum);
-	bool InventoryEmptyCheck();
+	const void PushInventory(const ToolItemInfo* item, ItemType* type, int itemCode, int itemNum);
+	const void PushInventory(const ResourceItemInfo* item, ItemType* type, int itemCode, int itemNum);
+	int AddInventory(int itemCode, int itemNum);
+	POINT AddInventoryEmpty(ItemType* type, int itemCode, int itemNum);
+	bool CheckInventoryEmpty();
 };
 

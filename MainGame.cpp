@@ -11,7 +11,7 @@ HRESULT MainGame::Init()
 	GameDataManager::GetSingleton()->Init();
 	ItemManager::GetSingleton()->Init();
 	MapManager::GetSingleton()->Init();
-	ObjectPosManager::GetSingleton()->Init();
+	CamerManager::GetSingleton()->Init();
 	ObjectRenderManager::GetSingleton()->Init();
 	Input::Init(g_hWnd);
 	//TilemapToolScene
@@ -58,7 +58,7 @@ void MainGame::Release()
 	GameDataManager::GetSingleton()->Release();
 	ItemManager::GetSingleton()->Release();
 	MapManager::GetSingleton()->Release();
-	ObjectPosManager::GetSingleton()->Release();
+	CamerManager::GetSingleton()->Release();
 	ObjectRenderManager::GetSingleton()->Release();
 	InventoryManager::GetSingleton()->Release();
 	KillTimer(g_hWnd, 0);

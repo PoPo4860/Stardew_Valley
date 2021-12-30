@@ -1,8 +1,8 @@
-#include "SmallStone.h"
+#include "OreObject.h"
 #include "Config.h"
 #include "CommonFunction.h"
 #include "image.h"
-SmallStone::SmallStone(Dungeon_Tiles dungeonTiles, int x, int y)
+OreObject::OreObject(Dungeon_Tiles dungeonTiles, int x, int y)
 	:frameX{ NULL }, frameY{ NULL }, dungeonTiles{}, hitAction{ 0 }, hitActionCheck{ false }
 {
 	this->dungeonTiles = dungeonTiles;
@@ -10,7 +10,7 @@ SmallStone::SmallStone(Dungeon_Tiles dungeonTiles, int x, int y)
 	RENDER_MANAGER->PushObjectVector(this);
 	Init(); 
 }
-bool SmallStone::InteractionPick(int damage)
+bool OreObject::InteractionPick(int damage)
 {
 	hp -= damage;
 	hitActionCheck = true;
@@ -22,7 +22,7 @@ bool SmallStone::InteractionPick(int damage)
 	return false;
 }
 
-HRESULT SmallStone::Init()
+HRESULT OreObject::Init()
 {
 	img = ImageManager::GetSingleton()->FindImage("Image/Stones/Mine_Object.bmp",96,80,6,5);
 	pos.x = (pos.x * 16) + 8;
@@ -30,16 +30,18 @@ HRESULT SmallStone::Init()
 	bodySize = 16;
 	SetRect(&rect, pos, bodySize);
 	SetStoneInfo();
-
 	return S_OK;
 }
 
-void SmallStone::Update()
+void OreObject::Update()
 {
-	if(hitActionCheck)HitAction();
+	if (hitActionCheck)
+	{
+		HitAction();
+	}
 }
 
-void SmallStone::Render(HDC hdc)
+void OreObject::Render(HDC hdc)
 {
 	if (hp > 0)
 	{
@@ -47,14 +49,14 @@ void SmallStone::Render(HDC hdc)
 	}
 }
 
-void SmallStone::Release()
+void OreObject::Release()
 {
 	POINT result = GetPosTile(pos);
 	MAP_MANAGER->DeleteMapObject(result);
 	delete this;
 }
 
-void SmallStone::HitAction()
+void OreObject::HitAction()
 {
 	static float time;
 	time += DELTA_TIME;
@@ -64,25 +66,34 @@ void SmallStone::HitAction()
 		hitActionCheck = false;
 	}
 	else if (time >= 0.20f)
+	{
 		hitAction = -1;
+	}
 	else if (time >= 0.15f)
+	{
 		hitAction = +1;
+	}
 	else if (time >= 0.10f)
+	{
 		hitAction = -1;
+	}
 	else if (time >= 0.05f)
+	{
 		hitAction = +1;
+	}
 }
 
-void SmallStone::SetStoneInfo()
+void OreObject::SetStoneInfo()
 {
-	if (rand() % 30 == 0)
+	int num = (rand() % 100) + 1;
+	if (num > 90 && num <= 100)
 	{
 		frameY = 4;
 		frameX = rand() % 6;
 		hp = 4;
 		return;
 	}
-	if (rand() % 10 == 0)
+	else if (num > 70 && num <= 90)
 	{
 		if (dungeonTiles == Dungeon_Tiles::Dungeon_Soil)
 		{
@@ -102,65 +113,70 @@ void SmallStone::SetStoneInfo()
 		{
 			frameY = 3;
 			if (rand() % 5 != 5)
+			{
 				frameX = 2;
+			}
 			else
+			{
 				frameX = 3;
+			}
 			hp = 3;
 		}
 		return;
 	}
-
-
-	if (dungeonTiles == Dungeon_Tiles::Dungeon_Soil)
+	else if (num > 0 && num <= 70)
 	{
-		if (3 != rand() % 4)
+		if (dungeonTiles == Dungeon_Tiles::Dungeon_Soil)
 		{
-			frameX = rand() % 3;
-			hp = 1;
+			if (3 != rand() % 4)
+			{
+				frameX = rand() % 3;
+				hp = 1;
+			}
+			else
+			{
+				frameX = 2 + rand() % 2;
+				hp = 2;
+			}
+			frameY = 0;
+			return;
 		}
-		else
-		{
-			frameX = 2 + rand() % 2;
-			hp = 2;
-		}
-		frameY = 0;
-		return;
-	}
 
-	if (dungeonTiles == Dungeon_Tiles::Dungeon_Ice2)
-	{
-		if (3 != rand() % 4)
+		if (dungeonTiles == Dungeon_Tiles::Dungeon_Ice2)
 		{
-			frameX = rand() % 3;
-			hp = 2;
+			if (3 != rand() % 4)
+			{
+				frameX = rand() % 3;
+				hp = 2;
+			}
+			else
+			{
+				frameX = 2 + rand() % 2;
+				hp = 3;
+			}
+			frameY = 1;
+			return;
 		}
-		else
-		{
-			frameX = 2 + rand() % 2;
-			hp = 3;
-		}
-		frameY = 1;
-		return;
-	}
 
-	if (dungeonTiles == Dungeon_Tiles::Dungeon_Red)
-	{
-		if (3 != rand() % 4)
+		if (dungeonTiles == Dungeon_Tiles::Dungeon_Red)
 		{
-			frameX = 1 + rand() % 4;
-			hp = 3;
+			if (3 != rand() % 4)
+			{
+				frameX = 1 + rand() % 4;
+				hp = 3;
+			}
+			else
+			{
+				frameX = 0;
+				hp = 2;
+			}
+			frameY = 2;
+			return;
 		}
-		else
-		{
-			frameX = 0;
-			hp = 2;
-		}
-		frameY = 2;
-		return;
 	}
 }
 
-void SmallStone::CreateItem()
+void OreObject::CreateItem()
 {
 	if (frameY <= 2)
 	{
@@ -210,5 +226,4 @@ void SmallStone::CreateItem()
 			break;
 		}
 	}
-
 }

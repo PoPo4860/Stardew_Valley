@@ -84,7 +84,7 @@ void Item::Update()
 	{
 		if (FollowPlayer())
 		{
-			INVEN_MANAVER->InventoryPush(&info, &itemType, itemCode, itemNum);
+			INVEN_MANAVER->PushInventory(info, &itemType, itemCode, itemNum);
 			ITEM_MANAGER->DeleteObject(this);
 			RENDER_MANAGER->DeleteObject(this);
 			return;
@@ -103,11 +103,10 @@ void Item::Render(HDC hdc)
 
 void Item::Release()
 {
-	delete this;
 }
 
 Item::Item(int key, POINTFLOAT pos, int itemNum) :
-	itemType{ ItemType::ResourceItem }, itemCode{key}, itemNum{ itemNum }
+	itemType{ ItemType::ResourceItem }, itemCode{ key }, itemNum{ itemNum }, info{}
 
 {
 	this->pos = pos;

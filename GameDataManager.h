@@ -7,7 +7,7 @@ private:
 	int mapNum;
 public:
 	GameDataManager() :
-		playerPos{}, mapNum{ 5 }{};
+		playerPos{}, mapNum{ 6 }{};
 	void Init() {}
 public:
 

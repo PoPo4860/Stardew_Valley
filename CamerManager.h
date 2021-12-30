@@ -1,13 +1,13 @@
 #pragma once
 #include "Singleton.h"
-class ObjectPosManager : public Singleton<ObjectPosManager>
+class CamerManager : public Singleton<CamerManager>
 {
 private:
 	POINTFLOAT globalPos;
 	int mapSizeX, mapSizeY;
 	int tileSize;
 public:
-	ObjectPosManager():
+	CamerManager():
 		globalPos{},
 		tileSize{16},
 		mapSizeX{ NULL }, mapSizeY{ NULL } {}

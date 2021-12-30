@@ -37,7 +37,7 @@ typedef struct ArgumentFuncPtr
 #include "SceneManager.h"
 
 #include "GameDataManager.h"
-#include "ObjectPosManager.h"
+#include "CamerManager.h"
 #include "ObjectRenderManager.h"
 #include "InventoryManager.h"
 #include "ItemManager.h"
@@ -48,7 +48,7 @@ typedef struct ArgumentFuncPtr
 #define GAMEDATA_MANAGER GameDataManager::GetSingleton()
 #define GLOBAL_POS_X GameDataManager::GetSingleton()->GetGlobalPosX()
 #define GLOBAL_POS_Y GameDataManager::GetSingleton()->GetGlobalPosY()
-#define GLOBAL_POS ObjectPosManager::GetSingleton()->GetGlobalPos()
+#define GLOBAL_POS CamerManager::GetSingleton()->GetGlobalPos()
 #define RENDER_MANAGER ObjectRenderManager::GetSingleton()
 #define MAP_MANAGER MapManager::GetSingleton()
 #define MAP MapManager::GetSingleton()->GetMap()

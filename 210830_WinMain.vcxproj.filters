@@ -84,7 +84,7 @@
     <ClCompile Include="ItemManager.cpp">
       <Filter>MainGame\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="SmallStone.cpp">
+    <ClCompile Include="OreObject.cpp">
       <Filter>MainGame\Object\Stone</Filter>
     </ClCompile>
     <ClCompile Include="ObjectRenderManager.cpp">
@@ -98,6 +98,15 @@
     </ClCompile>
     <ClCompile Include="InventoryManager.cpp">
       <Filter>MainGame\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="UIManager.cpp">
+      <Filter>MainGame\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerStatePick.cpp">
+      <Filter>MainGame\Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerStateMove.cpp">
+      <Filter>MainGame\Object\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -143,7 +152,7 @@
     <ClInclude Include="Player.h">
       <Filter>MainGame\Object\Player</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectPosManager.h">
+    <ClInclude Include="CamerManager.h">
       <Filter>MainGame\Manager</Filter>
     </ClInclude>
     <ClInclude Include="MapManager.h">
@@ -158,7 +167,7 @@
     <ClInclude Include="GameObject.h">
       <Filter>MainGame\Object</Filter>
     </ClInclude>
-    <ClInclude Include="SmallStone.h">
+    <ClInclude Include="OreObject.h">
       <Filter>MainGame\Object\Stone</Filter>
     </ClInclude>
     <ClInclude Include="ObjectRenderManager.h">
@@ -184,6 +193,15 @@
     </ClInclude>
     <ClInclude Include="InventoryItem.h">
       <Filter>MainGame\Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="UIManager.h">
+      <Filter>MainGame\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerStatePick.h">
+      <Filter>MainGame\Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerStateMove.h">
+      <Filter>MainGame\Object\Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

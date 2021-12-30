@@ -3,38 +3,24 @@
 #include "Character.h"
 class Image;
 enum MoveDirection { Up = 0, Down = 1, Left = 2, Right = 3 };
-enum class PlayerState { Normal, Pick };
-struct PlayerImage
-{
-	PlayerImage() :
-		move{ nullptr },
-		pick{ nullptr }
-	{}
-	Image* move;
-	Image* pick;
-};
+enum class PlayerState { Normal, Move, Pick };
+
+class PlayerStateMove;
+class PlayerStatePick;
 class Player : public GameObject, public Character
 {
 private:
-	MoveDirection direction;
+	friend class PlayerStateMove;
+	PlayerStateMove* playerStateMove;
+	friend class PlayerStatePick;
+	PlayerStatePick* playerStatePick;
+	
+	MoveDirection playerDirection;
 	PlayerState playerState;
-	PlayerImage playerImage;
-	float frameX;
-	bool actionCheck;
-	// 움직임 관련
 
-	void Move(float posX, float posY);
-	void StateNormalUpdate();
-	void StateNormalRender(HDC hdc, int frame);
-	void StatePickUpdate();
-	void StatePickRender(HDC hdc, int frame);
-
-	POINT GetFrontTilePos();
-	void ActionPick();
-
-
-	int GetFrame();
-	float time;
+	const void SetPos(POINTFLOAT pos) { this->pos = pos; }
+	const POINT GetFrontTilePos() const;
+	void KeyDownChangeState();
 public:
 	Player();
 	

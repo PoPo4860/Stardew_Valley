@@ -1,22 +1,22 @@
 #pragma once
 #include "Player.h""
+#include "PlayerStatePick.h"
+#include "PlayerStateMove.h"
+
 #include "Image.h"
 #include "Config.h"
 #include "CommonFunction.h"
 
-// 메세지루프와 인풋
-
 Player::Player() :
-	direction{ MoveDirection::Down },
-	playerState{PlayerState::Normal},
-	actionCheck{ false },
-	frameX{ NULL },
-	time{ NULL },
-	playerImage{ }
+	playerStateMove{ nullptr },
+	playerStatePick{ nullptr },
+	playerDirection{ MoveDirection::Down },
+	playerState{ PlayerState::Normal }
 {}
 
 HRESULT Player::Init()
 {
+	// 플레이어 스폰위치
 	for (int y = 0; y < MAP->mapSizeY; ++y)
 	{
 		for (int x = 0; x < MAP->mapSizeX; ++x)
@@ -29,9 +29,15 @@ HRESULT Player::Init()
 			}
 		}
 	}
-	
-	playerImage.move = ImageManager::GetSingleton()->FindImage("Image/Player/Player_Move.bmp", 128, 128, 8, 4);
-	playerImage.pick = ImageManager::GetSingleton()->FindImage("Image/Player/Player_Pick_Action.bmp", 240, 192, 5, 4);
+
+	// 플레이어 상태클래스 초가화
+	playerStateMove = new PlayerStateMove(this);
+	playerStateMove->Init();
+	playerStatePick = new PlayerStatePick(this);
+	playerStatePick->Init();
+
+	//플레이어 기본정보
+	img = ImageManager::GetSingleton()->FindImage("Image/Player/Player_Normal.bmp", 16, 128, 1, 4);
 	moveSpeed = 70.0f;
 	bodySize = 10;
 	return S_OK;
@@ -39,234 +45,104 @@ HRESULT Player::Init()
 
 void Player::Update()
 {
-	time += DELTA_TIME;
-	if (actionCheck == false)
-	{
-		if (GET_KEY_STAY('C'))
+	SetRect(&rect, pos, bodySize);
+
+	switch (playerState) {
+	case PlayerState::Normal:
+		if (GET_KEY_STAY(VK_UP) || GET_KEY_STAY(VK_DOWN) || GET_KEY_STAY(VK_LEFT) || GET_KEY_STAY(VK_RIGHT))
 		{
-			playerState = PlayerState::Pick;
-			actionCheck = true;
+			playerState = PlayerState::Move;
 		}
-		else if (GET_KEY_DOWN('X'))
-		{
-			POINT result = GetFrontTilePos();
-			
-			MAP_MANAGER->Interaction(result);
-		} 
-		else 
+		KeyDownChangeState();
+		break;
+	case PlayerState::Move:
+		playerStateMove->Update();
+		if (playerStateMove->CheckAction())
 		{
 			playerState = PlayerState::Normal;
 		}
-	}
-	
-	SetRect(&rect, pos, bodySize);
-	switch (playerState) {
-	case PlayerState::Normal:
-		StateNormalUpdate();
+		KeyDownChangeState();
 		break;
 	case PlayerState::Pick:
-		StatePickUpdate();
+		playerStatePick->Update();
+		if (playerStatePick->CheckAction())
+		{
+			playerState = PlayerState::Normal;
+		}
 		break;
 	}
 
-	ObjectPosManager::GetSingleton()->SetGlobalPos(pos);
+	CamerManager::GetSingleton()->SetGlobalPos(pos);
 	GAMEDATA_MANAGER->SetPlayerPos(pos);
-
 }
 
 void Player::Render(HDC hdc)
 {
-	int frame = GetFrame();
-	// 각 렌더에 적용할 프레임 
-
 	switch (playerState) {
 	case PlayerState::Normal:
-		StateNormalRender(hdc, frame);
+		img->Render(hdc,
+			pos.x - GLOBAL_POS.x,
+			pos.y - bodySize - GLOBAL_POS.y,
+			0,
+			playerDirection);
 		break;
 	case PlayerState::Pick:
-		StatePickRender(hdc, frame);
+		playerStatePick->Render(hdc);
+		break;
+	case PlayerState::Move:
+		playerStateMove->Render(hdc);
 		break;
 	}
 }
 
 void Player::Release()
 {
+	SAFE_RELEASE(playerStatePick);
+	SAFE_RELEASE(playerStateMove);
 }
 
-void Player::Move(float posX, float posY)
-{
-	RECT rectTemp;
-	POINTFLOAT posTemp;
-	posTemp.x = posX;
-	posTemp.y = posY;
-	SetRect(&rectTemp, posTemp, bodySize);
-	// 플레이어 충돌체크할 RECT 생성
-
-	POINT result = GetPosTile(pos);
-	// 자기 pos값을 기준으로, 몇번째 타일인지 확인하는 함수
-
-	for (int y = result.y - 2; y < result.y + 2; ++y)
-	{
-		for (int x = result.x - 2; x < result.x + 2; ++x)
-		{
-			if (MAP->tileState[y][x] != Tile_State::Empty)
-			{	// 해당 타일이 비어있는 공간이 아니라면 충돌검사
-				RECT rc;
-				if (IntersectRect(&rc, &rectTemp, &MAP->rect[y][x]))
-					return;
-			}
-			if (MAP->object[y][x] != nullptr)
-			{	// 해당 타일에 오브젝트가 있다면 충돌검사
-				RECT rc;
-				RECT temp = MAP->object[y][x]->GetRect();
-				if (IntersectRect(&rc, &rectTemp, &temp))
-					return;
-			}
-		}
-	}
-
-	pos.x = posX;
-	pos.y = posY;
-	// 충돌이 생기지 않았다면 바뀐 pos로 적용
-}
-
-void Player::StateNormalUpdate()
-{
-	if (GET_KEY_STAY(VK_UP))
-	{
-		direction = MoveDirection::Up;
-		Move(pos.x, pos.y - (moveSpeed * DELTA_TIME));
-	}
-	if (GET_KEY_STAY(VK_DOWN))
-	{
-		direction = MoveDirection::Down;
-		Move(pos.x, pos.y + (moveSpeed * DELTA_TIME));
-	}
-	if (GET_KEY_STAY(VK_LEFT))
-	{
-		direction = MoveDirection::Left;
-		Move(pos.x - (moveSpeed * DELTA_TIME), pos.y);
-	}
-	if (GET_KEY_STAY(VK_RIGHT))
-	{
-		direction = MoveDirection::Right;
-		Move(pos.x + (moveSpeed * DELTA_TIME), pos.y);
-	}
-}
-void Player::StateNormalRender(HDC hdc, int frame)
-{
-	if (GET_KEY_STAY(VK_UP)|| GET_KEY_STAY(VK_DOWN) ||
-		GET_KEY_STAY(VK_LEFT) || GET_KEY_STAY(VK_RIGHT))
-	{
-		playerImage.move->Render(hdc,
-			pos.x - GLOBAL_POS.x,
-			pos.y - bodySize - GLOBAL_POS.y,
-			frame, direction);
-	}
-	else
-	{
-		playerImage.move->Render(hdc,
-			pos.x - GLOBAL_POS.x,
-			pos.y - bodySize - GLOBAL_POS.y, 
-			0, direction);
-	}
-}
-
-void Player::StatePickUpdate()
-{
-
-}
-void Player::StatePickRender(HDC hdc, int frame) {
-	static bool actionCheck = false;
-	if (frame == 4 && actionCheck == false)
-	{
-		ActionPick();
-		actionCheck = true;
-	}
-	else if (frame != 4)
-	{
-		actionCheck = false;
-	}
-	
-	playerImage.pick->Render(hdc,
-		pos.x - GLOBAL_POS.x,
-		pos.y - bodySize - GLOBAL_POS.y - 8,
-		frame,
-		direction);
-}
-POINT Player::GetFrontTilePos()
+const POINT Player::GetFrontTilePos() const
 {
 	POINT result = GetPosTile(pos);
-	switch (direction)
+	switch (playerDirection)
 	{
 	case MoveDirection::Up:
-		if (result.y != 0) result.y -= 1;
+		if (result.y != 0)
+		{
+			result.y -= 1;
+		}
 		break;
 	case MoveDirection::Down:
-		if (result.y != MAP->mapSizeY) result.y += 1;
+		if (result.y != MAP->mapSizeY) 
+		{
+			result.y += 1;
+		}
 		break;
 	case MoveDirection::Left:
-		if (result.x != 0) result.x -= 1;
+		if (result.x != 0) 
+		{
+			result.x -= 1;
+		}
 		break;
 	case MoveDirection::Right:
-		if (result.x != MAP->mapSizeX) result.x += 1;
+		if (result.x != MAP->mapSizeX) 
+		{
+			result.x += 1;
+		}
 		break;
 	}
 	return result;
 }
-void Player::ActionPick()
+void Player::KeyDownChangeState()
 {
-	POINT result = GetFrontTilePos();
-	if (MAP->object[result.y][result.x] != nullptr)
+	if (GET_KEY_STAY('C'))
 	{
-		MAP->object[result.y][result.x]->InteractionPick(1);
+		playerState = PlayerState::Pick;
+	}
+	else if (GET_KEY_DOWN('X'))
+	{
+		POINT result = GetFrontTilePos();
+		MAP_MANAGER->Interaction(result);
 	}
 }
-
-int Player::GetFrame()
-{
-	static int frameNormal = 0;
-	static int frameAction = 0;
-	// 플레이어 프레임 조정
-
-	switch (playerState) {
-	case PlayerState::Normal:
-		if (time > 0.2f)
-		{
-			time = 0.0f;
-			frameNormal = 0;
-		}
-		else if (time > 0.1f)
-		{
-			time = 0.0f;
-			++frameNormal;
-			if (frameNormal >= 8 * 6) frameNormal -= 8 * 6;
-		}
-
-		if (direction == MoveDirection::Left || direction == MoveDirection::Right)
-		{
-			frameNormal %= 6;	// 6 = 플레이어 위, 아래 움직임 최대 프레임
-		}
-		else if (direction == MoveDirection::Up || direction == MoveDirection::Down)
-		{
-			frameNormal %= 8; // 8 = 플레이어 왼쪽, 오른쪽 최대 프레임
-		}
-		return frameNormal;
-	case PlayerState::Pick:
-		if (time > 0.1f)
-		{
-			time = 0.0f;
-			++frameAction;
-			if (frameAction == 5)
-			{
-				frameNormal = 0;
-				frameAction = 0;
-				actionCheck = false;
-				playerState = PlayerState::Normal;
-			}
-		}
-		return frameAction;		// 4 = 플레이어 곡괭이질 최대 프레임
-	}
-	return 0;
-}
-
+;

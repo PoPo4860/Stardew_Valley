@@ -54,10 +54,9 @@ enum class ItemType { Empty, ToolItem, ResourceItem };
 struct ToolItemInfo
 {
 	ToolItemInfo()
-		: maxDamage{ 0 }, minDamage{ 0 }, attackSpeed{ 0 }, gold{ 0 }, info{ "" }, name{""}{}
+		: maxDamage{ 0 }, minDamage{ 0 }, gold{ 0 }, info{ "" }, name{""}{}
 	int maxDamage;
 	int minDamage;
-	int attackSpeed;
 	int gold;
 	string name;
 	string info;

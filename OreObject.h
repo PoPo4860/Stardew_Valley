@@ -3,7 +3,7 @@
 #include "MapInfo.h"
 #include "Interaction.h"
 #include "Character.h"
-class SmallStone : public Interaction, public Character
+class OreObject : public Interaction, public Character
 {
 private:
 	int frameX;
@@ -14,8 +14,8 @@ private:
 	void SetStoneInfo();
 
 public:
-	SmallStone(Dungeon_Tiles dungeonTiles, int x, int y);
-	virtual ~SmallStone() = default;
+	OreObject(Dungeon_Tiles dungeonTiles, int x, int y);
+	virtual ~OreObject() = default;
 	virtual bool InteractionPick(int damage) override;
 	virtual HRESULT Init() override;
 	virtual void Update() override;

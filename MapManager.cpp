@@ -1,6 +1,6 @@
 #include "MapManager.h"
 #include "Image.h"
-#include "SmallStone.h"
+#include "OreObject.h"
 
 
 MapManager::MapManager() :
@@ -59,9 +59,9 @@ void MapManager::CreateObject()
         {   //  해당 타일이 비어있으며, 위칸에 사다리가 없을 경우 오브젝트 추가
             if (posY > 0 && mapInfo.tileState[posY - 1][posX] != Tile_State::LadderUp)
             {
-                mapInfo.object[posY][posX] = new SmallStone(mapInfo.dungeonTiles,posX, posY);
+                mapInfo.object[posY][posX] = new OreObject(mapInfo.dungeonTiles,posX, posY);
                 ++count;
-                if (rand() % (objectCost / 3) == 0)
+                if (rand() % (objectCost / 6) == 0)
                 {   // 생성될 스톤에 비례하여 탈출구 생성
                     POINT buffer;
                     buffer.x = posX;
@@ -136,7 +136,7 @@ void MapManager::Interaction(POINT pos)
         ObjectClear();
         exit.clear();
         RENDER_MANAGER->VectorClear();
-        ITEM_MANAGER->ItemVectorClear();
+        ITEM_MANAGER->ItemClear();
         GAMEDATA_MANAGER->SetMapNum(GAMEDATA_MANAGER->GetMapNum()+1);
         SceneManager::GetSingleton()->ChangeScene("MineScene");
     }
@@ -145,7 +145,7 @@ void MapManager::Interaction(POINT pos)
         ObjectClear();
         exit.clear();
         RENDER_MANAGER->VectorClear();
-        ITEM_MANAGER->ItemVectorClear();
+        ITEM_MANAGER->ItemClear();
         GAMEDATA_MANAGER->SetMapNum(0);
         SceneManager::GetSingleton()->ChangeScene("MineScene");
     }
@@ -223,7 +223,7 @@ void MapManager::Load(int num)
     CreateObject();
     // 해당 맵에 알맞는 오브젝트 생성
 
-    ObjectPosManager::GetSingleton()->SetMapSize(MAP->mapSizeX, MAP->mapSizeY);
+    CamerManager::GetSingleton()->SetMapSize(MAP->mapSizeX, MAP->mapSizeY);
     // 글로벌 포스에 맵 크기 지정
 
     CloseHandle(hFile);
