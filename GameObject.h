@@ -1,4 +1,5 @@
 #pragma once
+#include"stdafx.h"
 #include "GameEntity.h"
 class Image;
 class GameObject : public GameEntity

@@ -1,10 +1,13 @@
 #include "ItemManager.h"
+#include "Image.h"
 #include <fstream>
 #include <locale>
-ItemManager::ItemManager() :toolItmeInfo{}, resourceItemInfo{}, itemVector{}
+
+ItemManager::ItemManager() :toolItmeInfo{}, resourceItemInfo{}, itemVector{}, itemImage{nullptr}
 {}
 void ItemManager::Init()
 {
+	itemImage = ImageManager::GetSingleton()->FindImage("Image/Inventory/Inventory_Item.bmp", 96, 48, 6, 3);
 	ResourceItemInfo resource;
 	ToolItemInfo tool;
 	string str = "";
@@ -103,4 +106,10 @@ void ItemManager::ItemClear()
 	{
 		itemQueue.pop();
 	}
+}
+
+void ItemManager::ItemRender(HDC hdc, int itemCode, int posX, int posY)
+{
+	POINT frame{ (itemCode - 1) % 6 ,(itemCode - 1) / 6 };
+	itemImage->Render(hdc, posX, posY, frame.x, frame.y);
 }

@@ -96,11 +96,11 @@ void MapManager::Update()
 
 void MapManager::Release()
 {
-    ObjectClear();
+    ClearObject();
     ReleaseSingleton();
 }
 
-void MapManager::ObjectClear()
+void MapManager::ClearObject()
 {
     for (int y = 0; y < mapInfo.mapSizeY; ++y)
     {
@@ -133,7 +133,7 @@ void MapManager::Interaction(POINT pos)
 {
     if (mapInfo.tileState[pos.y][pos.x] == Tile_State::LadderDown)
     {
-        ObjectClear();
+        ClearObject();
         exit.clear();
         RENDER_MANAGER->VectorClear();
         ITEM_MANAGER->ItemClear();
@@ -142,7 +142,7 @@ void MapManager::Interaction(POINT pos)
     }
     if (mapInfo.tileState[pos.y][pos.x] == Tile_State::LadderUp)
     {
-        ObjectClear();
+        ClearObject();
         exit.clear();
         RENDER_MANAGER->VectorClear();
         ITEM_MANAGER->ItemClear();

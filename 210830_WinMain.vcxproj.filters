@@ -43,6 +43,9 @@
     <Filter Include="MainGame\Object\MineObject">
       <UniqueIdentifier>{2de91347-c1f8-4bf5-a6c4-2337f07fc002}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MainGame\UI">
+      <UniqueIdentifier>{1f435ee2-ae0a-40e5-9ade-16e3b03afc9b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -106,6 +109,12 @@
       <Filter>MainGame\Object\Player</Filter>
     </ClCompile>
     <ClCompile Include="PlayerStateMove.cpp">
+      <Filter>MainGame\Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerInventoryUI.cpp">
+      <Filter>MainGame\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerItemHold.cpp">
       <Filter>MainGame\Object\Player</Filter>
     </ClCompile>
   </ItemGroup>
@@ -201,6 +210,12 @@
       <Filter>MainGame\Object\Player</Filter>
     </ClInclude>
     <ClInclude Include="PlayerStateMove.h">
+      <Filter>MainGame\Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerInventoryUI.h">
+      <Filter>MainGame\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerItemHold.h">
       <Filter>MainGame\Object\Player</Filter>
     </ClInclude>
   </ItemGroup>

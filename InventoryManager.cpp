@@ -118,6 +118,21 @@ bool InventoryManager::CheckInventoryEmpty()
 	return false;
 }
 
+void InventoryManager::RenderItem(HDC hdc, POINT inventoryNum, POINT pos)
+{
+	int itemCode = inventory[inventoryNum.y][inventoryNum.x].item.GetItemCode();
+	ITEM_MANAGER->ItemRender(hdc, itemCode, pos.x, pos.y);
+
+	// 아이템 갯수 출력
+	int number = inventory[inventoryNum.y][inventoryNum.x].itemNum;
+	if (number != 0)
+	{
+		char num_char[10 + sizeof(char)];
+		sprintf_s(num_char, "%d", number);
+		PrintText(hdc, num_char, pos.x, pos.y);
+	}
+}
+
 void InventoryManager::Init()
 {
 	inventoryMain.img = ImageManager::GetSingleton()->FindImage("Image/Inventory/Inventory_Main.bmp", 213, 146, 1, 1);
@@ -126,8 +141,6 @@ void InventoryManager::Init()
 	inventoryMain.correctPos.y = (LONG)(inventoryMain.pos.y - (inventoryMain.img->GetFrameHeight() / 2));
 	SetRect(&inventoryMain.rect,inventoryMain.pos, 
 		(inventoryMain.img->GetFrameWidth()), (inventoryMain.img->GetFrameHeight()));
-	item = ImageManager::GetSingleton()->FindImage
-	("Image/Inventory/Inventory_Item.bmp", 96, 48, 6, 3);
 }
 
 bool InventoryManager::Uadate()
@@ -182,33 +195,20 @@ void InventoryManager::Render(HDC hdc)
 				{	// 마우스가 인벤토리 아이템을 클릭한 경우 일때 출력 안함
 					continue;
 				}
+				// 아이템 출력
 				int space = y >= 1 ? 4 : 0;
 				int posX = (int)inventoryMain.pos.x - (inventoryMain.img->GetFrameWidth() / 2) + SPACE_X + (x * TILE_SIZE) + 9;
 				int posY = (int)inventoryMain.pos.y - (inventoryMain.img->GetFrameHeight() / 2) + SPACE_Y + (y * TILE_SIZE) + 8 + space;
-				POINT frame = inventory[y][x].item.GetFrame();
-				item->Render(hdc, posX, posY, frame.x, frame.y);
-				// 아이템 출력
-
-				int number = inventory[y][x].itemNum;
-				char num_char[10 + sizeof(char)];
-				sprintf_s(num_char, "%d", number);
-				PrintText(hdc, num_char, posX, posY);
-				// 아이템 갯수 출력
+				int itemCode = inventory[y][x].item.GetItemCode();
+				RenderItem(hdc, POINT{ x, y }, POINT{ posX, posY });
 			}
 		}
 	}
 
 	if (mouseClick.x != -1 && mouseClick.y != -1)
 	{	// 마우스가 클릭, 드래그한 인벤토리 아이템 출력
-		POINT frame = inventory[mouseClick.y][mouseClick.x].item.GetFrame();
-		item->Render(hdc, mouse.x, mouse.y, frame.x, frame.y);
-		// 아이템 출력
-
-		int number = inventory[mouseClick.y][mouseClick.x].itemNum;
-		char num_char[10 + sizeof(char)];
-		sprintf_s(num_char, "%d", number);
-		PrintText(hdc, num_char, mouse.x, mouse.y);
-		// 아이템 갯수 출력
+		int itemCode = inventory[mouseClick.y][mouseClick.x].item.GetItemCode();
+		RenderItem(hdc, mouseClick, mouse);
 	}
 	
 	if (GET_KEY_UP(VK_LBUTTON) && mouseClick.x >= 0 && mouseClick.y >= 0)

@@ -116,6 +116,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -152,6 +153,8 @@
     <ClCompile Include="MineScene.cpp" />
     <ClCompile Include="ObjectRenderManager.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerInventoryUI.cpp" />
+    <ClCompile Include="PlayerItemHold.cpp" />
     <ClCompile Include="PlayerStateMove.cpp" />
     <ClCompile Include="PlayerStatePick.cpp" />
     <ClCompile Include="SceneManager.cpp" />
@@ -184,6 +187,8 @@
     <ClInclude Include="CamerManager.h" />
     <ClInclude Include="ObjectRenderManager.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerInventoryUI.h" />
+    <ClInclude Include="PlayerItemHold.h" />
     <ClInclude Include="PlayerStateMove.h" />
     <ClInclude Include="PlayerStatePick.h" />
     <ClInclude Include="SceneManager.h" />

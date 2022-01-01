@@ -11,10 +11,10 @@ private:
 	int frame;
 protected:
 public:
-	virtual HRESULT Init();
-	virtual void Update();
-	virtual void Render(HDC hdc);
-	virtual void Release();
+	virtual HRESULT Init() override;
+	virtual void Update() override;
+	virtual void Render(HDC hdc) override;
+	virtual void Release() override;
 	bool CheckAction();
 	PlayerStatePick(const Player* player);
 	virtual ~PlayerStatePick() = default;

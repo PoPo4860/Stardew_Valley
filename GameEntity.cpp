@@ -1,6 +1,5 @@
 #include "GameEntity.h"
 #include "Singleton.h"
-
 HRESULT GameEntity::Init()
 {
 	return S_OK;

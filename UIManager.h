@@ -1,24 +1,19 @@
 #pragma once
 #include "Config.h"
+#include "PlayerInventoryUI.h"
 
-class Imgage;
-struct UIImage
-{
-	Image* inventory;
-	POINT inventoryPos;
-	Image* inventorySelect;
-	POINT inventorySelectPos;
-};
+class PlayerInventoryUI;
 class UIManager : public Singleton<UIManager>
 {
 private:
-	UIImage uiImage;
-	int inventorySelectNum;
+	PlayerInventoryUI* playerInventoryUI;
 public:
 	UIManager();
 	HRESULT Init();
 	void Update();
 	void Render(HDC hdc);
 	void Release();
+
+	void GetSelectItem(int num);
 };
 

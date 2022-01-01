@@ -20,14 +20,13 @@ public:
 	void DrawMapLayer(HDC hdc, int LayerNum);
 	// 맵 그리기
 
-	void ObjectClear();
-	
-	// 오브젝트 렌더
+	void ClearObject();
 	
 	
 	const MAP_INFO* GetMap() { return &mapInfo; }
-	void DeleteMapObject(POINT pos);
+	
 	// 맵에 있는 오브젝트 삭제
+	void DeleteMapObject(POINT pos);
 
 	void Interaction(POINT pos);
 	// 상호작용

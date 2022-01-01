@@ -7,6 +7,7 @@ enum class PlayerState { Normal, Move, Pick };
 
 class PlayerStateMove;
 class PlayerStatePick;
+class PlayerItemHold;
 class Player : public GameObject, public Character
 {
 private:
@@ -14,7 +15,9 @@ private:
 	PlayerStateMove* playerStateMove;
 	friend class PlayerStatePick;
 	PlayerStatePick* playerStatePick;
-	
+	friend class PlayerItemHold;
+	PlayerItemHold* playerItemHold;
+
 	MoveDirection playerDirection;
 	PlayerState playerState;
 

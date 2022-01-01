@@ -32,7 +32,5 @@ public:
 
 	ItemType GetItemType() { return itemType; }
 	void  SetItemType(ItemType itemType) { this->itemType = itemType; }
-
-	POINT GetFrame() { POINT result{ (itemCode - 1) % 6 ,(itemCode - 1) / 6 };  return result; }
 };
 
