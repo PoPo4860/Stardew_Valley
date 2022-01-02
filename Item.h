@@ -16,12 +16,9 @@ struct Move
 class Item : public GameObject
 {
 private:
-	ItemType itemType;
-	const ResourceItemInfo* info;
 	Move move;
 	int itemNum;
 	int itemCode;
-	int itemRender;
 public:
 	virtual HRESULT Init() override;
 	virtual void Update() override;
@@ -31,7 +28,6 @@ public:
 	Item(int key, POINTFLOAT pos, int itemNum = 1);
 	virtual ~Item() = default;
 public:
-	ItemType GetItemInfo() { return itemType; }
 	bool FollowPlayer();
 	void GravityAction();
 };

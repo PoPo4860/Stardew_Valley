@@ -200,9 +200,6 @@
     <ClInclude Include="InventoryManager.h">
       <Filter>MainGame\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="InventoryItem.h">
-      <Filter>MainGame\Object\Item</Filter>
-    </ClInclude>
     <ClInclude Include="UIManager.h">
       <Filter>MainGame\Manager</Filter>
     </ClInclude>

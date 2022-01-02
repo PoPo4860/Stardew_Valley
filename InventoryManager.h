@@ -1,7 +1,6 @@
 #pragma once
 #include "Config.h"
 #include "ItemCode.h"
-#include "InventoryItem.h"
 #define INVEN_SIZE_X 12
 #define INVEN_SIZE_Y 3
 class Image;
@@ -14,7 +13,7 @@ struct InventoryImage
 };
 struct Inventory
 {
-	InventoryItem item;	// 아이템
+	int itemCode = 0;	// 아이템 코드
 	int itemNum = 0;	// 아이템 갯수
 };
 struct InventoryMouse
@@ -40,10 +39,9 @@ public:
 	bool Uadate();
 	void Release();
 public:
-	const void PushInventory(const ToolItemInfo* item, ItemType* type, int itemCode, int itemNum);
-	const void PushInventory(const ResourceItemInfo* item, ItemType* type, int itemCode, int itemNum);
+	void PushInventory(int itemCode, int itemNum);
 	int AddInventory(int itemCode, int itemNum);
-	POINT AddInventoryEmpty(ItemType* type, int itemCode, int itemNum);
+	POINT AddInventoryEmpty(int itemCode, int itemNum);
 	bool CheckInventoryEmpty();
 
 	void RenderItem(HDC hdc, POINT inventoryNum, POINT pos);

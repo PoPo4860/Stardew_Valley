@@ -35,25 +35,15 @@ InventoryMouse InventoryManager::GetInventoryNum(POINT mouse)
 }
 InventoryManager::InventoryManager()
 	:inventory{}, inventoryMain{}, inventoryMenu{}, mouseClick{ -1,-1 }, activeCheck{ false }
-{Init(); }
+{ }
 
-const void InventoryManager::PushInventory(const ToolItemInfo* item ,ItemType* type, int itemCode, int itemNum)
+void InventoryManager::PushInventory(int itemCode, int itemNum)
 {
 	itemNum = AddInventory(itemCode, itemNum);
 	if (itemNum > 0)
 	{
-		POINT retult = AddInventoryEmpty(type, itemCode, itemNum);
-		inventory[retult.y][retult.x].item.SetToolItemInfo(*item);
-	}
-}
-
-const void InventoryManager::PushInventory(const ResourceItemInfo* item, ItemType* type, int itemCode, int itemNum)
-{
-	itemNum = AddInventory(itemCode , itemNum);
-	if (itemNum > 0)
-	{
-		POINT retult = AddInventoryEmpty(type, itemCode, itemNum);
-		inventory[retult.y][retult.x].item.SetResourceItemInfo(*item);
+		POINT retult = AddInventoryEmpty(itemCode, itemNum);
+		inventory[retult.y][retult.x].itemCode = itemCode;
 	}
 }
 
@@ -64,7 +54,7 @@ int InventoryManager::AddInventory(int itemCode, int itemNum)
 	{
 		for (int x = 0; x < INVEN_SIZE_X; ++x)
 		{
-			if (inventory[y][x].item.GetItemCode() == itemCode &&
+			if (inventory[y][x].itemCode == itemCode &&
 				inventory[y][x].itemNum < 64)
 			{
 				inventory[y][x].itemNum += itemNum;
@@ -83,19 +73,17 @@ int InventoryManager::AddInventory(int itemCode, int itemNum)
 	return itemNum;
 }
 
-POINT InventoryManager::AddInventoryEmpty(ItemType* type, int itemCode, int itemNum)
+POINT InventoryManager::AddInventoryEmpty(int itemCode, int itemNum)
 {	// 비어있는 곳에 아이템을 추가하고, 그 위치 반환
-	POINT result;
-	result.x = 0;
-	result.y = 0;
+	POINT result{ -1,-1 };
+
 	for (int y = 0; y < INVEN_SIZE_Y; ++y)
 	{
 		for (int x = 0; x < INVEN_SIZE_X; ++x)
 		{
-			if (inventory[y][x].item.GetItemType() == ItemType::Empty)
+			if (inventory[y][x].itemCode == 0)
 			{
-				inventory[y][x].item.SetItemCode(itemCode);
-				inventory[y][x].item.SetItemType(*type);
+				inventory[y][x].itemCode = itemCode;
 				inventory[y][x].itemNum = itemNum;
 				result.x = x;
 				result.y = y;
@@ -112,7 +100,10 @@ bool InventoryManager::CheckInventoryEmpty()
 	{
 		for (int x = 0; x < INVEN_SIZE_X; ++x)
 		{
-			if (inventory[y][x].item.GetItemType() == ItemType::Empty) return true;
+			if (inventory[y][x].itemCode == 0)
+			{
+				return true;
+			}
 		}
 	}
 	return false;
@@ -120,7 +111,11 @@ bool InventoryManager::CheckInventoryEmpty()
 
 void InventoryManager::RenderItem(HDC hdc, POINT inventoryNum, POINT pos)
 {
-	int itemCode = inventory[inventoryNum.y][inventoryNum.x].item.GetItemCode();
+	int itemCode = inventory[inventoryNum.y][inventoryNum.x].itemCode;
+	if (itemCode == 0)
+	{
+		return;
+	}
 	ITEM_MANAGER->ItemRender(hdc, itemCode, pos.x, pos.y);
 
 	// 아이템 갯수 출력
@@ -141,6 +136,8 @@ void InventoryManager::Init()
 	inventoryMain.correctPos.y = (LONG)(inventoryMain.pos.y - (inventoryMain.img->GetFrameHeight() / 2));
 	SetRect(&inventoryMain.rect,inventoryMain.pos, 
 		(inventoryMain.img->GetFrameWidth()), (inventoryMain.img->GetFrameHeight()));
+
+	PushInventory(PICK, 1);
 }
 
 bool InventoryManager::Uadate()
@@ -189,7 +186,7 @@ void InventoryManager::Render(HDC hdc)
 	{
 		for (int x = 0; x < INVEN_SIZE_X; ++x)
 		{
-			if (inventory[y][x].item.GetItemType() != ItemType::Empty)
+			if (inventory[y][x].itemCode != 0)
 			{	// 인벤토리에 아이템이 있을 경우
 				if (mouseClick.x == x && mouseClick.y == y)
 				{	// 마우스가 인벤토리 아이템을 클릭한 경우 일때 출력 안함
@@ -199,7 +196,6 @@ void InventoryManager::Render(HDC hdc)
 				int space = y >= 1 ? 4 : 0;
 				int posX = (int)inventoryMain.pos.x - (inventoryMain.img->GetFrameWidth() / 2) + SPACE_X + (x * TILE_SIZE) + 9;
 				int posY = (int)inventoryMain.pos.y - (inventoryMain.img->GetFrameHeight() / 2) + SPACE_Y + (y * TILE_SIZE) + 8 + space;
-				int itemCode = inventory[y][x].item.GetItemCode();
 				RenderItem(hdc, POINT{ x, y }, POINT{ posX, posY });
 			}
 		}
@@ -207,7 +203,7 @@ void InventoryManager::Render(HDC hdc)
 
 	if (mouseClick.x != -1 && mouseClick.y != -1)
 	{	// 마우스가 클릭, 드래그한 인벤토리 아이템 출력
-		int itemCode = inventory[mouseClick.y][mouseClick.x].item.GetItemCode();
+		int itemCode = inventory[mouseClick.y][mouseClick.x].itemCode;
 		RenderItem(hdc, mouseClick, mouse);
 	}
 	
@@ -217,11 +213,11 @@ void InventoryManager::Render(HDC hdc)
 		if (result.inInventory == false)
 		{	// 마우스로 아이템을 끌어다 놓은곳이 인벤창 밖이라면
 			ITEM_MANAGER->CreateResourceItem(
-				inventory[mouseClick.y][mouseClick.x].item.GetItemCode(),
+				inventory[mouseClick.y][mouseClick.x].itemCode,
 				GAMEDATA_MANAGER->GetPlayerPos(), 
 				inventory[mouseClick.y][mouseClick.x].itemNum);
 
-			inventory[mouseClick.y][mouseClick.x].item.Release();
+			inventory[mouseClick.y][mouseClick.x].itemCode = 0;
 			inventory[mouseClick.y][mouseClick.x].itemNum = 0;
 		}
 		else if (result.mouse.x >= 0 && result.mouse.y >= 0)

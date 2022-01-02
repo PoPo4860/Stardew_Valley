@@ -175,7 +175,6 @@
     <ClInclude Include="ImageManager.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Interaction.h" />
-    <ClInclude Include="InventoryItem.h" />
     <ClInclude Include="InventoryManager.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemCode.h" />

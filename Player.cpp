@@ -10,9 +10,10 @@
 Player::Player() :
 	playerStateMove{ nullptr },
 	playerStatePick{ nullptr },
-	playerItemHold{ nullptr }, 
+	playerItemHold{ nullptr },
 	playerDirection{ MoveDirection::Down },
-	playerState{ PlayerState::Normal }
+	playerState{ PlayerState::Normal },
+	checkAction{ false }
 {}
 
 HRESULT Player::Init()
@@ -50,28 +51,18 @@ HRESULT Player::Init()
 void Player::Update()
 {
 	SetRect(&rect, pos, bodySize);
-
 	switch (playerState) {
 	case PlayerState::Normal:
 		KeyDownChangeState();
 		break;
 	case PlayerState::Move:
 		playerStateMove->Update();
-		if (playerStateMove->CheckAction())
-		{
-			playerState = PlayerState::Normal;
-		}
 		KeyDownChangeState();
 		break;
 	case PlayerState::Pick:
 		playerStatePick->Update();
-		if (playerStatePick->CheckAction())
-		{
-			playerState = PlayerState::Normal;
-		}
 		break;
 	}
-
 	CamerManager::GetSingleton()->SetGlobalPos(pos);
 	GAMEDATA_MANAGER->SetPlayerPos(pos);
 }
@@ -97,7 +88,6 @@ void Player::Render(HDC hdc)
 
 void Player::Release()
 {
-	
 	SAFE_RELEASE(playerStatePick);
 	SAFE_RELEASE(playerStateMove);
 	SAFE_RELEASE(playerItemHold);
@@ -135,6 +125,7 @@ const POINT Player::GetFrontTilePos() const
 	}
 	return result;
 }
+
 void Player::KeyDownChangeState()
 {
 	if (GET_KEY_STAY(VK_UP) || GET_KEY_STAY(VK_DOWN) || GET_KEY_STAY(VK_LEFT) || GET_KEY_STAY(VK_RIGHT))
@@ -150,16 +141,14 @@ void Player::KeyDownChangeState()
 		POINT result = GetFrontTilePos();
 		MAP_MANAGER->Interaction(result);
 	}
-	else
+
+	// 인벤토리에서 플레이어가 들 아이템을 선택
+	static const int key[12] = { '1','2','3','4','5','6','7','8','9','0',VK_OEM_MINUS,VK_OEM_PLUS };
+	for (int i = 0; i < 12; ++i)
 	{
-		// 인벤토리에서 플레이어가 들 아이템을 선택
-		static const int key[12] = { '1','2','3','4','5','6','7','8','9','0',VK_OEM_MINUS,VK_OEM_PLUS };
-		for (int i = 0; i < 12; ++i)
+		if (GET_KEY_DOWN(key[i]))
 		{
-			if (GET_KEY_DOWN(key[i]))
-			{
-				playerItemHold->SelectItem(i);
-			}
+			playerItemHold->SelectItem(i);
 		}
 	}
 }

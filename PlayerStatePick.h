@@ -5,7 +5,7 @@ class Image;
 class PlayerStatePick : public GameEntity
 {
 private:
-	const Player* player;
+	Player* player;
 	Image* img;
 	float frameTime;
 	int frame;
@@ -16,7 +16,7 @@ public:
 	virtual void Render(HDC hdc) override;
 	virtual void Release() override;
 	bool CheckAction();
-	PlayerStatePick(const Player* player);
+	PlayerStatePick(Player* player);
 	virtual ~PlayerStatePick() = default;
 
 public:

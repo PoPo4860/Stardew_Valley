@@ -16,6 +16,7 @@ void PlayerStatePick::Update()
 		frameTime -= 0.1f;
 		++frame;
 	}
+	CheckAction();
 }
 
 void PlayerStatePick::Render(HDC hdc)
@@ -40,10 +41,10 @@ bool PlayerStatePick::CheckAction()
 		{
 			MAP->object[result.y][result.x]->InteractionPick(1);
 		}
-		return true;
+		player->playerState = PlayerState::Normal;
 	}
 	return false;
 }
 
-PlayerStatePick::PlayerStatePick(const Player* player)
+PlayerStatePick::PlayerStatePick(Player* player)
 	:player{ player }, img{ nullptr }, frameTime{ 0.0f }, frame{ 0 }{};
