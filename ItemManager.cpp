@@ -7,7 +7,7 @@ ItemManager::ItemManager() :toolItmeInfo{}, resourceItemInfo{}, itemVector{}, it
 {}
 void ItemManager::Init()
 {
-	itemImage = ImageManager::GetSingleton()->FindImage("Image/Inventory/Inventory_Item.bmp", 96, 48, 6, 3);
+	itemImage = ImageManager::GetSingleton()->FindImage("Image/item/Item.bmp", 192, 32, 12, 2);
 	ResourceItemInfo resource;
 	ToolItemInfo tool;
 	string str = "";
@@ -110,6 +110,7 @@ void ItemManager::ItemClear()
 
 void ItemManager::ItemRender(HDC hdc, int itemCode, int posX, int posY)
 {
-	POINT frame{ (itemCode - 1) % 6 ,(itemCode - 1) / 6 };
+	POINT frame{ itemCode - 1 ,(LONG)(itemCode / 12) };
+	frame.x = frame.x % 12;
 	itemImage->Render(hdc, posX, posY, frame.x, frame.y);
 }

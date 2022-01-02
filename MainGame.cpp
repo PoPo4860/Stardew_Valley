@@ -10,15 +10,16 @@ HRESULT MainGame::Init()
 
 	GameDataManager::GetSingleton()->Init();
 	ItemManager::GetSingleton()->Init();
+	InventoryManager::GetSingleton()->Init();
 	MapManager::GetSingleton()->Init();
 	CamerManager::GetSingleton()->Init();
 	ObjectRenderManager::GetSingleton()->Init();
 	UIManager::GetSingleton()->Init();
 	Input::Init(g_hWnd);
+
 	//TilemapToolScene
 	//MineScene
 	SceneManager::GetSingleton()->ChangeScene("MineScene");
-	// 타이머 셋팅
 	hTimer = (HANDLE)SetTimer(g_hWnd, 0, 10, NULL);
 
 	clickedMousePosX = 0; 

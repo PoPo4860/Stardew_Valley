@@ -1,4 +1,8 @@
 #pragma once
+#include <string>
+#define RESOURCE_ITEM(num) (1 <= num && num <= 12 )
+#define TOOL_ITEM(num) (13>= num && 14 <= num)
+
 #define STONE 1
 #define COAL 2
 #define COPPER 3
@@ -16,11 +20,7 @@
 #define STEEL_SHORT_SWORD 13
 #define PICK 14
 
-#include <string>
-#include"ItemCode.h"
 using namespace std;
-
-enum class ItemType { Empty, ToolItem, ResourceItem };
 
 // 도구아이템
 struct ToolItemInfo

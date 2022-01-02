@@ -70,10 +70,6 @@ HRESULT Item::Init()
 	move.speed.y = (float)((60 + (rand() % 10))*-1);
 	if (rand() % 2) { move.speed.x *= -1; }
 	move.gravity = 200.0f;
-	itemType = ItemType::ResourceItem;
-	img = ImageManager::GetSingleton()->FindImage("Image/Stones/Mine_Item.bmp", 32, 192, 2, 12);
-	itemRender = rand() % 2;
-
 	return S_OK;
 }
 
@@ -84,7 +80,7 @@ void Item::Update()
 	{
 		if (FollowPlayer())
 		{
-			INVEN_MANAGER->PushInventory(info, &itemType, itemCode, itemNum);
+			INVEN_MANAGER->PushInventory(itemCode, itemNum);
 			ITEM_MANAGER->DeleteObject(this);
 			RENDER_MANAGER->DeleteObject(this);
 			return;
@@ -98,7 +94,7 @@ void Item::Update()
 
 void Item::Render(HDC hdc)
 {
-	img->Render(hdc, pos.x - GLOBAL_POS.x, pos.y - GLOBAL_POS.y, itemRender, itemCode-1);
+	ITEM_MANAGER->ItemRender(hdc, itemCode, pos.x - GLOBAL_POS.x, pos.y - GLOBAL_POS.y);
 }
 
 void Item::Release()
@@ -106,11 +102,9 @@ void Item::Release()
 }
 
 Item::Item(int key, POINTFLOAT pos, int itemNum) :
-	itemType{ ItemType::ResourceItem }, itemCode{ key }, itemNum{ itemNum }, info{}
-
+	itemCode{ key }, itemNum{ itemNum }
 {
 	this->pos = pos;
 	Init();
-	info = ITEM_MANAGER->GetResourceItem(key);
 	RENDER_MANAGER->PushObjectVector(this);
 };

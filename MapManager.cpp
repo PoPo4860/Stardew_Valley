@@ -28,7 +28,10 @@ void MapManager::DrawMapLayer(HDC hdc, int LayerNum)
 
 void MapManager::CreateObject()
 {
-    if (GAMEDATA_MANAGER->GetMapNum() == 0) return;
+    if (GAMEDATA_MANAGER->GetMapNum() == 0 || GAMEDATA_MANAGER->GetMapNum() == 4)
+    {
+        return;
+    }
     int maxObject = 0;
     int minObject = 0;
     if (mapInfo.mapSizeY == 0)mapInfo.mapSizeY = 1;

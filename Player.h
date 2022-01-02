@@ -20,8 +20,9 @@ private:
 
 	MoveDirection playerDirection;
 	PlayerState playerState;
+	bool checkAction;
 
-	const void SetPos(POINTFLOAT pos) { this->pos = pos; }
+	void SetPos(POINTFLOAT pos) { this->pos = pos; }
 	const POINT GetFrontTilePos() const;
 	void KeyDownChangeState();
 public:

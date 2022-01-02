@@ -80,6 +80,7 @@ void PlayerStateMove::Update()
 		++frame;
 	}
 	MovePlayer();
+	CheckAction();
 }
 void PlayerStateMove::Render(HDC hdc)
 {
@@ -113,7 +114,7 @@ bool PlayerStateMove::CheckAction()
 	{
 		frame = 0;
 		frameTime = 0.0f;
-		return true;
+		player->playerState = PlayerState::Normal;
 	}
 	return false;
 }
