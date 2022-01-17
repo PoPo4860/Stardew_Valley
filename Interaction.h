@@ -6,7 +6,7 @@ class Interaction : public GameObject
 public:
 	virtual bool InteractionPick(int damage) { return false; }
 	virtual bool InteractionSword(int damage) { return false; };
-	virtual void InteractionRightClick() {};
+	virtual void InteractionAction() {};
 	Interaction() {};
 	virtual ~Interaction() = default;
 };

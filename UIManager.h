@@ -14,6 +14,7 @@ public:
 	void Render(HDC hdc);
 	void Release();
 
-	void GetSelectItem(int num);
+	void SetSelectItemNum(int num);
+	int GetSelectItemNum();
 };
 

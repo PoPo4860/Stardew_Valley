@@ -10,10 +10,9 @@
 Player::Player() :
 	playerStateMove{ nullptr },
 	playerStatePick{ nullptr },
-	playerItemHold{ nullptr },
 	playerDirection{ MoveDirection::Down },
-	playerState{ PlayerState::Normal },
-	checkAction{ false }
+	playerState{ PlayerState::Idle },
+	isHoldCheck{ false }
 {}
 
 HRESULT Player::Init()
@@ -37,8 +36,6 @@ HRESULT Player::Init()
 	playerStateMove->Init();
 	playerStatePick = new PlayerStatePick(this);
 	playerStatePick->Init();
-	playerItemHold = new PlayerItemHold(this);
-	playerItemHold->Init();
 
 
 	//플레이어 기본정보
@@ -52,7 +49,7 @@ void Player::Update()
 {
 	SetRect(&rect, pos, bodySize);
 	switch (playerState) {
-	case PlayerState::Normal:
+	case PlayerState::Idle:
 		KeyDownChangeState();
 		break;
 	case PlayerState::Move:
@@ -65,17 +62,14 @@ void Player::Update()
 	}
 	CamerManager::GetSingleton()->SetGlobalPos(pos);
 	GAMEDATA_MANAGER->SetPlayerPos(pos);
+
 }
 
 void Player::Render(HDC hdc)
 {
 	switch (playerState) {
-	case PlayerState::Normal:
-		img->Render(hdc,
-			pos.x - GLOBAL_POS.x,
-			pos.y - bodySize - GLOBAL_POS.y,
-			0,
-			playerDirection);
+	case PlayerState::Idle:
+		IdelRender(hdc);
 		break;
 	case PlayerState::Pick:
 		playerStatePick->Render(hdc);
@@ -90,7 +84,6 @@ void Player::Release()
 {
 	SAFE_RELEASE(playerStatePick);
 	SAFE_RELEASE(playerStateMove);
-	SAFE_RELEASE(playerItemHold);
 }
 
 const POINT Player::GetFrontTilePos() const
@@ -134,21 +127,35 @@ void Player::KeyDownChangeState()
 	}
 	if (GET_KEY_STAY('C'))
 	{
-		playerState = PlayerState::Pick;
+		int itemCode = INVEN_MANAGER->GetInventoryItemCode(UI_MANAGER->GetSelectItemNum(),0);
+		if (TOOL_ITEM(itemCode))
+		{
+			playerState = PlayerState::Pick;
+		}
 	}
 	else if (GET_KEY_DOWN('X'))
 	{
 		POINT result = GetFrontTilePos();
-		MAP_MANAGER->Interaction(result);
+		MAP_MANAGER->Interactions(result);
 	}
 
 	// 인벤토리에서 플레이어가 들 아이템을 선택
 	static const int key[12] = { '1','2','3','4','5','6','7','8','9','0',VK_OEM_MINUS,VK_OEM_PLUS };
-	for (int i = 0; i < 12; ++i)
+	for (int input = 0; input < 12; ++input)
 	{
-		if (GET_KEY_DOWN(key[i]))
+		if (GET_KEY_DOWN(key[input]))
 		{
-			playerItemHold->SelectItem(i);
+			UI_MANAGER->SetSelectItemNum(input);
 		}
 	}
+
+}
+
+void Player::IdelRender(HDC hdc)
+{
+	img->Render(hdc,
+		pos.x - GLOBAL_POS.x,
+		pos.y - bodySize - GLOBAL_POS.y,
+		0,
+		playerDirection);
 }

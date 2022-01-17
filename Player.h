@@ -3,7 +3,7 @@
 #include "Character.h"
 class Image;
 enum MoveDirection { Up = 0, Down = 1, Left = 2, Right = 3 };
-enum class PlayerState { Normal, Move, Pick };
+enum class PlayerState { Idle, Move, Pick };
 
 class PlayerStateMove;
 class PlayerStatePick;
@@ -15,16 +15,16 @@ private:
 	PlayerStateMove* playerStateMove;
 	friend class PlayerStatePick;
 	PlayerStatePick* playerStatePick;
-	friend class PlayerItemHold;
-	PlayerItemHold* playerItemHold;
 
 	MoveDirection playerDirection;
 	PlayerState playerState;
-	bool checkAction;
+
+	bool isHoldCheck;
 
 	void SetPos(POINTFLOAT pos) { this->pos = pos; }
 	const POINT GetFrontTilePos() const;
 	void KeyDownChangeState();
+	void IdelRender(HDC hdc);
 public:
 	Player();
 	

@@ -1,7 +1,7 @@
 #include "MapManager.h"
 #include "Image.h"
 #include "OreObject.h"
-
+#include "Interaction.h"
 
 MapManager::MapManager() :
     mapInfo{}, selectDungeon{ nullptr }, ladderDownCheck{ false },  exit{}{}
@@ -26,12 +26,8 @@ void MapManager::DrawMapLayer(HDC hdc, int LayerNum)
     }
 }
 
-void MapManager::CreateObject()
+void MapManager::CreateOreObject()
 {
-    if (GAMEDATA_MANAGER->GetMapNum() == 0 || GAMEDATA_MANAGER->GetMapNum() == 4)
-    {
-        return;
-    }
     int maxObject = 0;
     int minObject = 0;
     if (mapInfo.mapSizeY == 0)mapInfo.mapSizeY = 1;
@@ -99,7 +95,7 @@ void MapManager::Update()
 
 void MapManager::Release()
 {
-    ClearObject();
+    Clear();
     ReleaseSingleton();
 }
 
@@ -111,11 +107,18 @@ void MapManager::ClearObject()
         {
             if (mapInfo.tileState[y][x] == Tile_State::Empty && mapInfo.object[y][x] != nullptr)
             {
-                mapInfo.object[y][x]->Release();
-                mapInfo.object[y][x] = nullptr;
+                SAFE_RELEASE(mapInfo.object[y][x]);
             }
         }
     }
+}
+
+void MapManager::Clear()
+{
+    ClearObject();
+    exit.clear();
+    RENDER_MANAGER->VectorClear();
+    ITEM_MANAGER->ItemClear();
 }
 
 void MapManager::DeleteMapObject(POINT pos)
@@ -132,26 +135,34 @@ void MapManager::DeleteMapObject(POINT pos)
     }
 }
 
-void MapManager::Interaction(POINT pos)
+void MapManager::CreateObject(Interaction* object, POINT pos)
 {
-    if (mapInfo.tileState[pos.y][pos.x] == Tile_State::LadderDown)
+    mapInfo.object[pos.y][pos.x] = object;
+}
+
+void MapManager::Interactions(POINT pos)
+{
+    switch (mapInfo.tileState[pos.y][pos.x])
     {
-        ClearObject();
-        exit.clear();
-        RENDER_MANAGER->VectorClear();
-        ITEM_MANAGER->ItemClear();
-        GAMEDATA_MANAGER->SetMapNum(GAMEDATA_MANAGER->GetMapNum()+1);
+    case Tile_State::LadderDown:
+        Clear();
+        GAMEDATA_MANAGER->SetMapNum(GAMEDATA_MANAGER->GetMapNum() + 1);
         SceneManager::GetSingleton()->ChangeScene("MineScene");
-    }
-    if (mapInfo.tileState[pos.y][pos.x] == Tile_State::LadderUp)
-    {
-        ClearObject();
-        exit.clear();
-        RENDER_MANAGER->VectorClear();
-        ITEM_MANAGER->ItemClear();
+        break;
+    case Tile_State::LadderUp:
+        Clear();
         GAMEDATA_MANAGER->SetMapNum(0);
-        SceneManager::GetSingleton()->ChangeScene("MineScene");
+        SceneManager::GetSingleton()->ChangeScene("TopFloorScene");
+        break;
+    default:
+        if(mapInfo.object[pos.y][pos.x] != nullptr)
+        {
+
+            mapInfo.object[pos.y][pos.x]->InteractionAction();
+        }
+        break;
     }
+    cout << pos.y << pos.x << endl;
 }
 
 void MapManager::SetDungeonImage()
@@ -220,9 +231,6 @@ void MapManager::Load(int num)
 
     SetDungeonImage();
     // 해당 맵에 알맞는 이미지 설정
-
-    CreateObject();
-    // 해당 맵에 알맞는 오브젝트 생성
 
     CamerManager::GetSingleton()->SetMapSize(MAP->mapSizeX, MAP->mapSizeY);
     // 글로벌 포스에 맵 크기 지정

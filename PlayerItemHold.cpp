@@ -22,5 +22,4 @@ void PlayerItemHold::Release()
 
 void PlayerItemHold::SelectItem(int num)
 {
-	UI_MANAGER->GetSelectItem(num);
 }

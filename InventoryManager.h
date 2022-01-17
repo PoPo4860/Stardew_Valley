@@ -27,7 +27,7 @@ private:
 	Inventory inventory[INVEN_SIZE_Y][INVEN_SIZE_X];
 	InventoryImage inventoryMain;
 	InventoryImage inventoryMenu;
-	bool activeCheck;
+	bool isActive;
 	POINT mouse;
 	POINT mouseClick;
 
@@ -43,7 +43,8 @@ public:
 	int AddInventory(int itemCode, int itemNum);
 	POINT AddInventoryEmpty(int itemCode, int itemNum);
 	bool CheckInventoryEmpty();
-
 	void RenderItem(HDC hdc, POINT inventoryNum, POINT pos);
+
+	int GetInventoryItemCode(int y, int x);
 };
 

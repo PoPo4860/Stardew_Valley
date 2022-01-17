@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #define RESOURCE_ITEM(num) (1 <= num && num <= 12 )
-#define TOOL_ITEM(num) (13>= num && 14 <= num)
+#define TOOL_ITEM(num) (13 <= num && num <= 14)
 
 #define STONE 1
 #define COAL 2

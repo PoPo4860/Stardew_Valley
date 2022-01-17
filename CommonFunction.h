@@ -48,13 +48,31 @@ inline void SetRect(RECT* rect, POINTFLOAT pos, int bodySizeX, int bodySizeY)
 	rect->bottom = (LONG)pos.y + (bodySizeY / 2);
 }
 
-inline void PrintText(HDC hdc, char* text, int posX, int posY)
+inline POINT GetMousePoint()
+{
+	RECT rect;
+	POINT mouse = Input::GetMousePosition();
+	POINT view;
+	GetClientRect(g_hWnd, &rect);
+	view.x = rect.right - rect.left;
+	view.y = rect.bottom - rect.top;
+	if (view.x != WIN_SIZE_X || view.y != WIN_SIZE_Y)
+	{
+		view.x /= WIN_SIZE_X;
+		view.y /= WIN_SIZE_Y;
+		mouse.x /= view.x;
+		mouse.y /= view.y;
+	}
+	return mouse;
+}
+
+inline void PrintText(HDC hdc, char* text, int posX, int posY, int size = 8)
 {
 	HFONT font , oldfont;
 	SetBkMode(hdc, 1);
 	SetTextColor(hdc, RGB(255, 255, 255));
 	font = CreateFont(
-		8,			// 폰트의 높이
+		size,			// 폰트의 높이
 		0,			// 폰트의 폭
 		0,			// 폰트의 각도
 		0,			// 각 글자의 각도
@@ -79,4 +97,3 @@ inline void PrintText(HDC hdc, char* text, int posX, int posY)
 	SelectObject(hdc, oldfont);
 	DeleteObject(font);
 }
-

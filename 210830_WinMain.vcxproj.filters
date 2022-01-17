@@ -46,6 +46,9 @@
     <Filter Include="MainGame\UI">
       <UniqueIdentifier>{1f435ee2-ae0a-40e5-9ade-16e3b03afc9b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MainGame\Object\NPC">
+      <UniqueIdentifier>{d082361f-c96b-43ae-9f2e-56c1c239b026}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -102,9 +105,6 @@
     <ClCompile Include="InventoryManager.cpp">
       <Filter>MainGame\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="UIManager.cpp">
-      <Filter>MainGame\Manager</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerStatePick.cpp">
       <Filter>MainGame\Object\Player</Filter>
     </ClCompile>
@@ -116,6 +116,18 @@
     </ClCompile>
     <ClCompile Include="PlayerItemHold.cpp">
       <Filter>MainGame\Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="UIManager.cpp">
+      <Filter>MainGame\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="TopFloorScene.cpp">
+      <Filter>MainGame\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopManager.cpp">
+      <Filter>MainGame\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Shop_Blacksmith.cpp">
+      <Filter>MainGame\Object\NPC</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -200,9 +212,6 @@
     <ClInclude Include="InventoryManager.h">
       <Filter>MainGame\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="UIManager.h">
-      <Filter>MainGame\Manager</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerStatePick.h">
       <Filter>MainGame\Object\Player</Filter>
     </ClInclude>
@@ -214,6 +223,18 @@
     </ClInclude>
     <ClInclude Include="PlayerItemHold.h">
       <Filter>MainGame\Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="UIManager.h">
+      <Filter>MainGame\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="TopFloorScene.h">
+      <Filter>MainGame\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopManager.h">
+      <Filter>MainGame\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Shop_Blacksmith.h">
+      <Filter>MainGame\Object\NPC</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

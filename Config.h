@@ -43,6 +43,7 @@ typedef struct ArgumentFuncPtr
 #include "ItemManager.h"
 #include "MapManager.h"
 #include "UIManager.h"
+#include "ShopManager.h"
 #include "Input.h"
 
 #define DELTA_TIME TimerManager::GetSingleton()->GetDeltaTime() 
@@ -55,6 +56,7 @@ typedef struct ArgumentFuncPtr
 #define MAP MapManager::GetSingleton()->GetMap()
 #define INVEN_MANAGER InventoryManager::GetSingleton()
 #define ITEM_MANAGER ItemManager::GetSingleton()
+#define SHOP_MANAGER ShopManager::GetSingleton()
 #define GET_KEY_DOWN(key) Input::GetButtonDown(key)
 #define GET_KEY_UP(key) Input::GetButtonUp(key)
 #define GET_KEY_STAY(key) Input::GetButton(key)

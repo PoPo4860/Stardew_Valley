@@ -41,7 +41,7 @@ bool PlayerStatePick::CheckAction()
 		{
 			MAP->object[result.y][result.x]->InteractionPick(1);
 		}
-		player->playerState = PlayerState::Normal;
+		player->playerState = PlayerState::Idle;
 	}
 	return false;
 }

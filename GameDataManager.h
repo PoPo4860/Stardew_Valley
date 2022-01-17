@@ -6,9 +6,12 @@ private:
 	POINTFLOAT playerPos;
 	const string mapName[5];
 	int mapNum;
+	int playerMoney;
 public:
 	GameDataManager() :
-		playerPos{}, mapNum{ 0 },
+		playerPos{}, 
+		mapNum{ 0 }, 
+		playerMoney{ 0 },
 		mapName
 	{
 		"Save/SaveMapData_Main.map",
@@ -20,11 +23,17 @@ public:
 	void Init() {}
 public:
 
-	inline void SetPlayerPos(POINTFLOAT pos) { playerPos = pos; }
-	inline POINTFLOAT GetPlayerPos() { return playerPos; }
+	void SetPlayerPos(POINTFLOAT pos) { playerPos = pos; }
+	POINTFLOAT GetPlayerPos() { return playerPos; }
+
+	int GetPlayerMoney() { return playerMoney; }
+	void SetPlayerMoney(int newMoney) { playerMoney = newMoney; }
 
 	void SetMapNum(int num) { mapNum = num; }
 	int GetMapNum() { return mapNum; }
-	const string GetMapString() { return mapName[mapNum]; }
-	inline void Release() { this->ReleaseSingleton(); }
+	const string GetMapString() const { return mapName[mapNum]; }
+
+
+
+	void Release() { this->ReleaseSingleton(); }
 };

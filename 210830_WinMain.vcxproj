@@ -159,9 +159,12 @@
     <ClCompile Include="PlayerStatePick.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="OreObject.cpp" />
+    <ClCompile Include="ShopManager.cpp" />
+    <ClCompile Include="Shop_Blacksmith.cpp" />
     <ClCompile Include="TilemapToolScene.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="TimerManager.cpp" />
+    <ClCompile Include="TopFloorScene.cpp" />
     <ClCompile Include="UIManager.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -191,11 +194,14 @@
     <ClInclude Include="PlayerStateMove.h" />
     <ClInclude Include="PlayerStatePick.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="ShopManager.h" />
+    <ClInclude Include="Shop_Blacksmith.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="OreObject.h" />
     <ClInclude Include="TilemapToolScene.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="TimerManager.h" />
+    <ClInclude Include="TopFloorScene.h" />
     <ClInclude Include="UIManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

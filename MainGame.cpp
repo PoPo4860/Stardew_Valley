@@ -1,6 +1,7 @@
 #include "MainGame.h"
 #include "Image.h"
 #include "ImageManager.h"
+#include "CommonFunction.h"
 HRESULT MainGame::Init()
 {
 	srand((unsigned int) time(nullptr));
@@ -15,11 +16,15 @@ HRESULT MainGame::Init()
 	CamerManager::GetSingleton()->Init();
 	ObjectRenderManager::GetSingleton()->Init();
 	UIManager::GetSingleton()->Init();
+	ShopManager::GetSingleton()->Init();
 	Input::Init(g_hWnd);
 
 	//TilemapToolScene
 	//MineScene
-	SceneManager::GetSingleton()->ChangeScene("MineScene");
+	SetWindowSize(20, 10, WIN_SIZE_X * 3, WIN_SIZE_Y * 3);
+	windowX = WIN_SIZE_X;
+	windowY = WIN_SIZE_Y;
+	SceneManager::GetSingleton()->ChangeScene("TopFloorScene");
 	hTimer = (HANDLE)SetTimer(g_hWnd, 0, 10, NULL);
 
 	clickedMousePosX = 0; 
@@ -64,6 +69,7 @@ void MainGame::Release()
 	ObjectRenderManager::GetSingleton()->Release();
 	InventoryManager::GetSingleton()->Release();
 	UIManager::GetSingleton()->Release();
+	ShopManager::GetSingleton()->Release();
 	KillTimer(g_hWnd, 0);
 }
 

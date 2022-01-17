@@ -20,6 +20,7 @@ public:
 	void Update();
 	void Render(HDC hdc);
 	void Release();
-	void SelectItemNum(int num) { SelectItem = num; }
+	void SetSelectItemNum(int num) { SelectItem = num; }
+	int GetSelectItemNum() { return SelectItem; }
 };
 

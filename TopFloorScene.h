@@ -1,10 +1,7 @@
 #pragma once
 #include "GameEntity.h"
-#include "Config.h"
-
 class Player;
-class Image;
-class MineScene : public GameEntity
+class TopFloorScene : public GameEntity
 {
 private:
 	Player* player;
@@ -13,8 +10,9 @@ public:
 	virtual void Update() override;
 	virtual void Render(HDC hdc) override;
 	virtual void Release() override;
-	MineScene() :
+	TopFloorScene() :
 		player{ nullptr }
 	{}
-	virtual ~MineScene() = default;
+	virtual ~TopFloorScene() = default;
 };
+

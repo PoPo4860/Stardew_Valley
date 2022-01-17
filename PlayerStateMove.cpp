@@ -114,7 +114,7 @@ bool PlayerStateMove::CheckAction()
 	{
 		frame = 0;
 		frameTime = 0.0f;
-		player->playerState = PlayerState::Normal;
+		player->playerState = PlayerState::Idle;
 	}
 	return false;
 }

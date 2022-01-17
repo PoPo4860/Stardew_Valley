@@ -2,6 +2,7 @@
 #include "GameEntity.h"
 #include "TilemapToolScene.h"
 #include "MineScene.h"
+#include "TopFloorScene.h"
 
 GameEntity* SceneManager::currScene = nullptr;
 GameEntity* SceneManager::readyScene = nullptr;
@@ -24,6 +25,7 @@ void SceneManager::Init()
 {
 	SceneManager::GetSingleton()->AddScene("TilemapToolScene", new TilemapToolScene());
 	SceneManager::GetSingleton()->AddScene("MineScene", new MineScene());
+	SceneManager::GetSingleton()->AddScene("TopFloorScene", new TopFloorScene());
 }
 
 void SceneManager::Release()
@@ -44,7 +46,6 @@ void SceneManager::Release()
 	}
 	mapLoadingScenes.clear();
 
-	//SAFE_RELEASE(currScene);
 	SAFE_RELEASE(readyScene);
 	SAFE_RELEASE(loadingScene);
 	this->ReleaseSingleton();

@@ -2,7 +2,7 @@
 #include "CommonFunction.h"
 #include "Image.h"
 
-#define SPACE_X 11
+#define SPACE_X 10
 #define SPACE_Y 10
 
 InventoryMouse InventoryManager::GetInventoryNum(POINT mouse)
@@ -34,7 +34,7 @@ InventoryMouse InventoryManager::GetInventoryNum(POINT mouse)
 	return InventoryMouse{ check, num };
 }
 InventoryManager::InventoryManager()
-	:inventory{}, inventoryMain{}, inventoryMenu{}, mouseClick{ -1,-1 }, activeCheck{ false }
+	:inventory{}, inventoryMain{}, inventoryMenu{}, mouseClick{ -1,-1 }, isActive{ false }
 { }
 
 void InventoryManager::PushInventory(int itemCode, int itemNum)
@@ -128,6 +128,11 @@ void InventoryManager::RenderItem(HDC hdc, POINT inventoryNum, POINT pos)
 	}
 }
 
+int InventoryManager::GetInventoryItemCode(int x, int y)
+{
+	return inventory[y][x].itemCode;
+}
+
 void InventoryManager::Init()
 {
 	inventoryMain.img = ImageManager::GetSingleton()->FindImage("Image/Inventory/Inventory_Main.bmp", 213, 146, 1, 1);
@@ -142,21 +147,9 @@ void InventoryManager::Init()
 
 bool InventoryManager::Uadate()
 {
-	if (GET_KEY_DOWN('E'))activeCheck = !activeCheck;
-	if (activeCheck == false) return false;
-	RECT rect;
-	mouse = g_ptMouse;
-	POINT view;
-	GetClientRect(g_hWnd, &rect);
-	view.x = rect.right - rect.left;
-	view.y = rect.bottom - rect.top;
-	if (view.x != WIN_SIZE_X || view.y != WIN_SIZE_Y)
-	{
-		view.x /= WIN_SIZE_X;
-		view.y /= WIN_SIZE_Y;
-		mouse.x /= view.x;
-		mouse.y /= view.y;
-	}
+	if (GET_KEY_DOWN('E'))isActive = !isActive;
+	if (isActive == false) return false;
+	mouse = GetMousePoint();
 
 	if (GET_KEY_DOWN(VK_LBUTTON))
 	{
@@ -168,7 +161,7 @@ bool InventoryManager::Uadate()
 
 void InventoryManager::Render(HDC hdc)
 {
-	if (activeCheck == false) return;
+	if (isActive == false) return;
 
 	// 인벤토리 메인창 렌더
 	inventoryMain.img->Render(hdc,
@@ -176,11 +169,6 @@ void InventoryManager::Render(HDC hdc)
 		inventoryMain.pos.y,
 		0,0);
 	
-	// 인벤토리 메뉴창 렌더
-	//inventoryMenu.img->Render(hdc,
-	//	inventoryMenu.pos.x,
-	//	inventoryMenu.pos.y,
-	//	0, 0);
 
 	for (int y = 0; y < INVEN_SIZE_Y; ++y)
 	{

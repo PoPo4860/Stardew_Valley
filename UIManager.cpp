@@ -27,8 +27,13 @@ void UIManager::Release()
 	ReleaseSingleton();
 }
 
-void UIManager::GetSelectItem(int num)
+int UIManager::GetSelectItemNum()
 {
-	playerInventoryUI->SelectItemNum(num);
-
+	return playerInventoryUI->GetSelectItemNum();
 }
+
+void UIManager::SetSelectItemNum(int num)
+{
+	playerInventoryUI->SetSelectItemNum(num);
+}
+

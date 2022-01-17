@@ -2,7 +2,7 @@
 #include "Config.h"
 #include "MapInfo.h"
 #include "GameObject.h"
-
+class Interaction;
 class Image;
 class MapManager : public Singleton<MapManager>
 {
@@ -21,20 +21,25 @@ public:
 	// 맵 그리기
 
 	void ClearObject();
-	
+	void Clear();
 	
 	const MAP_INFO* GetMap() { return &mapInfo; }
 	
 	// 맵에 있는 오브젝트 삭제
 	void DeleteMapObject(POINT pos);
 
-	void Interaction(POINT pos);
+	// 오브젝트 생성
+	void CreateObject(Interaction* object,POINT pos);
+
 	// 상호작용
+	void Interactions(POINT pos);
 
 	void SetDungeonImage();
 	void Load(int num);
-	void CreateObject();
+	
 	// 맵에 오브젝트 생성
+	void CreateOreObject();
+
 	
 };
 
