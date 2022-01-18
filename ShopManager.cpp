@@ -62,28 +62,32 @@ bool ShopManager::Update()
 	case ShopType::BlackSmith:
 		break;
 	}
+	if (Input::GetButtonDown(VK_LBUTTON))
+	{
+		if (PtInRect(&(shopImage.upRect), GetMousePoint()))
+		{	// 위에버튼
+			if (salesListStartNum != 0)
+			{
+				--salesListStartNum;
+			}
+		}
+		if (PtInRect(&(shopImage.downRect), GetMousePoint()))
+		{	// 아래버튼
+			if (salesListStartNum + 4 < blackSmith.salesListMaxNum)
+			{
+				++salesListStartNum;
+			}
 
-	if (Input::GetButtonDown(VK_LBUTTON) && PtInRect(&(shopImage.upRect), GetMousePoint()))
-	{	// 위에버튼
-		if (salesListStartNum != 0)
+		}
+		if (PtInRect(&(shopImage.cancelRect), GetMousePoint()))
+		{	// 취소버튼
+			isActive = false;
+		}
+		else 
 		{
-			--salesListStartNum;
+			GetInventoryNum();
 		}
 	}
-	if (Input::GetButtonDown(VK_LBUTTON) && PtInRect(&(shopImage.downRect), GetMousePoint()))
-	{	// 아래버튼
-		if (salesListStartNum + 4 < blackSmith.salesListMaxNum)
-		{
-			++salesListStartNum;
-		}
-
-	}
-	if (Input::GetButtonDown(VK_LBUTTON) && PtInRect(&(shopImage.cancelRect), GetMousePoint()))
-	{	// 취소버튼
-		isActive = false;
-	}
-
-
 
 
 	return true;
@@ -106,14 +110,14 @@ void ShopManager::Render(HDC hdc)
 		{
 			int number = (int)(money % 10);
 			money = (int)(money / 10);
-			char num_char[1 + sizeof(char)];
+			char num_char[256];
 			sprintf_s(num_char, "%d", number);
 			PrintText(hdc, num_char, 169 - (i * 6), 150);
 		}
 	}
 	else
 	{
-		char num_char[1 + sizeof(char)];
+		char num_char[256];
 		sprintf_s(num_char, "%d", 0);
 		PrintText(hdc, num_char, 169 , 150);
 	}
@@ -136,7 +140,7 @@ void ShopManager::Render(HDC hdc)
 		{
 			int number = (int)(money % 10);
 			money = (int)(money / 10);
-			char num_char[1 + sizeof(char)];
+			char num_char[256];
 			sprintf_s(num_char, "%d", number);
 			PrintText(hdc, num_char, 350 - (j * 10), 41+ (27 * i),13);
 		}
@@ -154,6 +158,36 @@ void ShopManager::Render(HDC hdc)
 			INVEN_MANAGER->RenderItem(hdc, POINT{ x,y }, POINT{ 196 + (x * 16), 161 + y + (y * 16) });
 		}
 	}
+}
+
+POINT ShopManager::GetInventoryNum()
+{
+	POINT inventoryNum{ -1,-1 };
+	POINT mouse = GetMousePoint();
+	const static POINTFLOAT inventoryPos = { shopImage.mainPos.x + 74,shopImage.mainPos.y + 58 };
+	const static RECT inventoryRect
+	{
+		(LONG)inventoryPos.x - ((TILE_SIZE * INVEN_SIZE_X) / 2),
+		(LONG)inventoryPos.y - ((TILE_SIZE * INVEN_SIZE_Y) / 2),
+		(LONG)inventoryPos.x + ((TILE_SIZE * INVEN_SIZE_X) / 2),
+		(LONG)inventoryPos.y + ((TILE_SIZE * INVEN_SIZE_Y) / 2)
+	};
+
+	if (PtInRect(&inventoryRect, mouse))
+	{
+		mouse.x -= inventoryRect.left;
+		mouse.y -= inventoryRect.top;
+		if (0 <= mouse.x && mouse.x <= (TILE_SIZE * INVEN_SIZE_X))
+		{
+			inventoryNum.x = (LONG)(mouse.x / 16);
+		}
+		if (0 <= mouse.y && mouse.y <= (TILE_SIZE * INVEN_SIZE_Y))
+		{
+			inventoryNum.y = (LONG)(mouse.y / 16);
+		}
+	}
+	cout << inventoryNum.x << " " << inventoryNum.y << "\n";
+	return inventoryNum;
 }
 
 void ShopManager::Release()

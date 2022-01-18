@@ -1,6 +1,5 @@
 #pragma once
-#include "Config.h"
-
+#include"Config.h"
 class Image;
 struct ShopImage
 {
@@ -47,6 +46,7 @@ public:
 	void Init();
 	bool Update();
 	void Render(HDC hdc);
+	POINT GetInventoryNum();
 	void Release();
 };
 
