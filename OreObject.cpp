@@ -180,25 +180,25 @@ void OreObject::CreateItem()
 {
 	if (frameY <= 2)
 	{
-		ITEM_MANAGER->CreateResourceItem(STONE, pos);
-		if (rand() % 5 == 0) ITEM_MANAGER->CreateResourceItem(COAL, pos);
-		if (rand() % 5 == 0) ITEM_MANAGER->CreateResourceItem(STONE, pos);
+		ITEM_MANAGER->CreateItem(STONE, pos);
+		if (rand() % 5 == 0) ITEM_MANAGER->CreateItem(COAL, pos);
+		if (rand() % 5 == 0) ITEM_MANAGER->CreateItem(STONE, pos);
 	}
 	if (frameY == 3)
 	{
 		switch (frameX)
 		{
 		case 0:
-			ITEM_MANAGER->CreateResourceItem(COPPER, pos);
+			ITEM_MANAGER->CreateItem(COPPER, pos);
 			break;
 		case 1:
-			ITEM_MANAGER->CreateResourceItem(STEEL, pos);
+			ITEM_MANAGER->CreateItem(STEEL, pos);
 			break;
 		case 2:
-			ITEM_MANAGER->CreateResourceItem(GOLD, pos);
+			ITEM_MANAGER->CreateItem(GOLD, pos);
 			break;
 		case 3:
-			ITEM_MANAGER->CreateResourceItem(IRIDIUM, pos);
+			ITEM_MANAGER->CreateItem(IRIDIUM, pos);
 			break;
 		}
 	}
@@ -207,22 +207,22 @@ void OreObject::CreateItem()
 		switch (frameX)
 		{
 		case 0:
-			ITEM_MANAGER->CreateResourceItem(AQUAMARINE, pos);
+			ITEM_MANAGER->CreateItem(AQUAMARINE, pos);
 			break;
 		case 1:
-			ITEM_MANAGER->CreateResourceItem(RUBY, pos);
+			ITEM_MANAGER->CreateItem(RUBY, pos);
 			break;
 		case 2:
-			ITEM_MANAGER->CreateResourceItem(AMETHYST, pos);
+			ITEM_MANAGER->CreateItem(AMETHYST, pos);
 			break;
 		case 3:
-			ITEM_MANAGER->CreateResourceItem(TOPAZ, pos);
+			ITEM_MANAGER->CreateItem(TOPAZ, pos);
 			break;
 		case 4:
-			ITEM_MANAGER->CreateResourceItem(EMERALD, pos);
+			ITEM_MANAGER->CreateItem(EMERALD, pos);
 			break;
 		case 5:
-			ITEM_MANAGER->CreateResourceItem(DIAMOND, pos);
+			ITEM_MANAGER->CreateItem(DIAMOND, pos);
 			break;
 		}
 	}

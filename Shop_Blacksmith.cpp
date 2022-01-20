@@ -18,7 +18,7 @@ void Shop_Blacksmith::Update()
 
 void Shop_Blacksmith::Render(HDC hdc)
 {
-	img->Render(hdc, pos.x - GLOBAL_POS.x, pos.y - GLOBAL_POS.y, 0, 0);
+	img->Render(hdc, pos.x - GLOBAL_POS.x, pos.y - GLOBAL_POS.y - 8, 0, 0);
 }
 
 void Shop_Blacksmith::Release()

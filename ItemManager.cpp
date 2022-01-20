@@ -50,11 +50,9 @@ void ItemManager::Init()
 void ItemManager::Update()
 {
 	DeleteObjectVector();
-	for (vector<Item*>::iterator iter = itemVector.begin();
-		iter != itemVector.end();
-		++iter)
+	for (int i = 0; i < itemVector.size(); ++i)
 	{
-		(*iter)->Update();
+		itemVector[i]->Update();
 	}
 }
 
@@ -66,9 +64,9 @@ void ItemManager::Release()
 	ReleaseSingleton();
 }
 
-void ItemManager::CreateResourceItem(int key, POINTFLOAT pos, int num)
+void ItemManager::CreateItem(int key, POINTFLOAT pos, int num)
 {
-	itemVector.push_back(new Item (key, pos , num));
+	itemVector.push_back(new Item(key, pos, num));
 }
 
 void ItemManager::DeleteObjectVector()
@@ -110,7 +108,7 @@ void ItemManager::ItemClear()
 
 void ItemManager::ItemRender(HDC hdc, int itemCode, int posX, int posY)
 {
-	POINT frame{ itemCode - 1 ,(LONG)(itemCode / 12) };
-	frame.x = frame.x % 12;
+	POINT frame{ (LONG)(itemCode - 1) ,(LONG)((itemCode - 1) / 12) };
+	frame.x %= 12;
 	itemImage->Render(hdc, posX, posY, frame.x, frame.y);
 }

@@ -147,6 +147,7 @@
     <ClCompile Include="InventoryManager.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemManager.cpp" />
+    <ClCompile Include="ItemsToSell.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="MapManager.cpp" />
@@ -182,6 +183,7 @@
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemCode.h" />
     <ClInclude Include="ItemManager.h" />
+    <ClInclude Include="ItemsToSell.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="MapInfo.h" />
     <ClInclude Include="MapManager.h" />

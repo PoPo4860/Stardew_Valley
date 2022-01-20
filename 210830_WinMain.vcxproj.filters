@@ -46,7 +46,7 @@
     <Filter Include="MainGame\UI">
       <UniqueIdentifier>{1f435ee2-ae0a-40e5-9ade-16e3b03afc9b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="MainGame\Object\NPC">
+    <Filter Include="MainGame\Object\Shop">
       <UniqueIdentifier>{d082361f-c96b-43ae-9f2e-56c1c239b026}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -127,7 +127,10 @@
       <Filter>MainGame\Manager</Filter>
     </ClCompile>
     <ClCompile Include="Shop_Blacksmith.cpp">
-      <Filter>MainGame\Object\NPC</Filter>
+      <Filter>MainGame\Object\Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemsToSell.cpp">
+      <Filter>MainGame\Object\Shop</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -234,7 +237,10 @@
       <Filter>MainGame\Manager</Filter>
     </ClInclude>
     <ClInclude Include="Shop_Blacksmith.h">
-      <Filter>MainGame\Object\NPC</Filter>
+      <Filter>MainGame\Object\Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemsToSell.h">
+      <Filter>MainGame\Object\Shop</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

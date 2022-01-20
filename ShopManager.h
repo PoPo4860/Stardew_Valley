@@ -1,6 +1,7 @@
 #pragma once
 #include"Config.h"
 class Image;
+class ItemsToSell;
 struct ShopImage
 {
 	Image* main;
@@ -34,6 +35,9 @@ enum class ShopType
 class ShopManager : public Singleton<ShopManager>
 {
 private:
+	friend class ItemsToSell;
+	ItemsToSell* itemToSell;
+
 	ShopImage shopImage;
 	ShopType shopType;
 	Store blackSmith;
@@ -47,6 +51,7 @@ public:
 	bool Update();
 	void Render(HDC hdc);
 	POINT GetInventoryNum();
+	int GetShopSoldNum();
 	void Release();
 };
 

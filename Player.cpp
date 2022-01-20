@@ -127,7 +127,7 @@ void Player::KeyDownChangeState()
 	}
 	if (GET_KEY_STAY('C'))
 	{
-		int itemCode = INVEN_MANAGER->GetInventoryItemCode(UI_MANAGER->GetSelectItemNum(),0);
+		int itemCode = INVEN_MANAGER->GetInventoryInfo(UI_MANAGER->GetSelectItemNum(),0)->itemCode;
 		if (TOOL_ITEM(itemCode))
 		{
 			playerState = PlayerState::Pick;

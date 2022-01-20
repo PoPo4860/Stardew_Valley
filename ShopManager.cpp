@@ -1,8 +1,8 @@
-#pragma warning(disable : 4996)
 #include "ShopManager.h"
 #include "ItemCode.h"
 #include "Image.h"
 #include "CommonFunction.h"
+#include "ItemsToSell.h"
 #include<string>
 
 #define PORTRAIT_POS POINTFLOAT{ 76,68 }
@@ -38,12 +38,14 @@ void ShopManager::Init()
 	shopImage.cancelPos = POINTFLOAT{ (WIN_SIZE_X / 2) + 184 ,(WIN_SIZE_Y / 2) - 85 };
 	SetRect(&shopImage.cancelRect, shopImage.cancelPos, shopImage.cancel->GetWidth(), shopImage.cancel->GetHeight());
 
+	itemToSell = new ItemsToSell(this);
+	itemToSell->Init();
 	blackSmith.masterName = "클린트";
 	blackSmith.portrait = ImageManager::GetSingleton()->FindImage("Image/Shop/Shop_Portrait_Smith.bmp", 66, 66, 1, 1);
 	blackSmith.portraitPos = PORTRAIT_POS;
 	blackSmith.salesList = new int[5];
 	blackSmith.salesListMaxNum = 5;
-	blackSmith.salesList[0] = STONE;
+	blackSmith.salesList[0] = BAG;
 	blackSmith.salesList[1] = COAL;
 	blackSmith.salesList[2] = COPPER;
 	blackSmith.salesList[3] = STEEL;
@@ -71,21 +73,25 @@ bool ShopManager::Update()
 				--salesListStartNum;
 			}
 		}
-		if (PtInRect(&(shopImage.downRect), GetMousePoint()))
+		else if (PtInRect(&(shopImage.downRect), GetMousePoint()))
 		{	// 아래버튼
 			if (salesListStartNum + 4 < blackSmith.salesListMaxNum)
 			{
 				++salesListStartNum;
 			}
-
 		}
-		if (PtInRect(&(shopImage.cancelRect), GetMousePoint()))
+		else if (PtInRect(&(shopImage.cancelRect), GetMousePoint()))
 		{	// 취소버튼
 			isActive = false;
 		}
 		else 
 		{
-			GetInventoryNum();
+			// 아이템 판매
+			itemToSell->SellItem();
+
+			// 아이템 구매
+			itemToSell->BuyItem();
+
 		}
 	}
 
@@ -103,6 +109,7 @@ void ShopManager::Render(HDC hdc)
 
 	blackSmith.portrait->Render(hdc, blackSmith.portraitPos.x, blackSmith.portraitPos.y,0,0);
 
+	// 플레이어 돈 출력
 	int money = GAMEDATA_MANAGER->GetPlayerMoney();
 	if (money != 0)
 	{
@@ -121,40 +128,15 @@ void ShopManager::Render(HDC hdc)
 		sprintf_s(num_char, "%d", 0);
 		PrintText(hdc, num_char, 169 , 150);
 	}
-	for (int i = 0; i < 4; ++i)
-	{
-		// 아이템 출력
-		ITEM_MANAGER->ItemRender(hdc, blackSmith.salesList[i + salesListStartNum], 138, 49 + (26 * i));
 
-		// 아이템 이름 출력
-		const ResourceItemInfo* item = ITEM_MANAGER->GetResourceItem(blackSmith.salesList[i + salesListStartNum]);
-		char num_char[256];
-		strcpy(num_char, item->name.c_str());
-		PrintText(hdc, num_char, 150, 41 + (26.5f * i), 16);
+	itemToSell->RenderSaleslist(hdc);
 
-
-		// 아이템 가격 출력
-		
-		int money = item->gold;
-		for (int j = 0; money > 0; ++j)
-		{
-			int number = (int)(money % 10);
-			money = (int)(money / 10);
-			char num_char[256];
-			sprintf_s(num_char, "%d", number);
-			PrintText(hdc, num_char, 350 - (j * 10), 41+ (27 * i),13);
-		}
-		
-		// 코인 출력
-		coinImage->Render(hdc, 365, 43 + (26 * i));
-	}
-
-
+	// 인벤토리 출력
 	for (int y = 0; y < 3; ++y)
 	{
 		for (int x = 0; x < 12; ++x)
 		{
-			int itemCode = INVEN_MANAGER->GetInventoryItemCode(x, y);
+			int itemCode = INVEN_MANAGER->GetInventoryInfo(x, y)->itemCode;
 			INVEN_MANAGER->RenderItem(hdc, POINT{ x,y }, POINT{ 196 + (x * 16), 161 + y + (y * 16) });
 		}
 	}
@@ -179,15 +161,39 @@ POINT ShopManager::GetInventoryNum()
 		mouse.y -= inventoryRect.top;
 		if (0 <= mouse.x && mouse.x <= (TILE_SIZE * INVEN_SIZE_X))
 		{
-			inventoryNum.x = (LONG)(mouse.x / 16);
+			inventoryNum.x = (LONG)(mouse.x / TILE_SIZE);
 		}
 		if (0 <= mouse.y && mouse.y <= (TILE_SIZE * INVEN_SIZE_Y))
 		{
-			inventoryNum.y = (LONG)(mouse.y / 16);
+			inventoryNum.y = (LONG)(mouse.y / TILE_SIZE);
 		}
 	}
-	cout << inventoryNum.x << " " << inventoryNum.y << "\n";
 	return inventoryNum;
+}
+
+int ShopManager::GetShopSoldNum()
+{
+	POINT mouse = GetMousePoint();
+	int num = -1;
+	const static POINTFLOAT shopPos = { shopImage.mainPos.x + 44,shopImage.mainPos.y - 33 };
+	const static RECT shopRect
+	{
+		(LONG)shopPos.x - (258 / 2),
+		(LONG)shopPos.y - ((26 * 4) / 2),
+		(LONG)shopPos.x + (258 / 2),
+		(LONG)shopPos.y + ((26 * 4) / 2)
+	};
+	if (PtInRect(&shopRect, mouse))
+	{
+		mouse.x -= shopRect.left;
+		mouse.y -= shopRect.top;
+		if (0 <= mouse.y && mouse.y <= (26 * 4))
+		{
+			num = (LONG)(mouse.y / 26);
+		}
+	}
+	cout << num << "\n";
+	return num;
 }
 
 void ShopManager::Release()

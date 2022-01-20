@@ -22,7 +22,7 @@ public:
 public:
 	const ToolItemInfo* GetToolItem(int key) const { return &toolItmeInfo.at(key); }
 	const ResourceItemInfo* GetResourceItem(int key) { return &resourceItemInfo.at(key); }
-	void CreateResourceItem(int key, POINTFLOAT pos, int num = 1);
+	void CreateItem(int key, POINTFLOAT pos, int num = 1);
 
 	void DeleteObjectVector();
 	void DeleteObject(Item* obj);

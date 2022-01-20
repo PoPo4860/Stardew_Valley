@@ -15,6 +15,13 @@ struct Inventory
 {
 	int itemCode = 0;	// 아이템 코드
 	int itemNum = 0;	// 아이템 갯수
+	bool isOpen;		// 인벤토리 확장 여부
+public:
+	void Clear()
+	{
+		itemCode = 0;
+		itemNum = 0;
+	}
 };
 struct InventoryMouse
 {
@@ -27,9 +34,10 @@ private:
 	Inventory inventory[INVEN_SIZE_Y][INVEN_SIZE_X];
 	InventoryImage inventoryMain;
 	InventoryImage inventoryMenu;
-	bool isActive;
 	POINT mouse;
 	POINT mouseClick;
+	Image* inventoryCloseImage;
+	bool isActive;
 
 	InventoryMouse GetInventoryNum(POINT mouse);
 public:
@@ -41,10 +49,10 @@ public:
 public:
 	void PushInventory(int itemCode, int itemNum);
 	int AddInventory(int itemCode, int itemNum);
-	POINT AddInventoryEmpty(int itemCode, int itemNum);
+	void AddInventoryEmpty(int itemCode, int itemNum);
 	bool CheckInventoryEmpty();
 	void RenderItem(HDC hdc, POINT inventoryNum, POINT pos);
-
-	int GetInventoryItemCode(int y, int x);
+	bool ChangeCloseStateToOpen();
+	Inventory* GetInventoryInfo(int x, int y);
 };
 

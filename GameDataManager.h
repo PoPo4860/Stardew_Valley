@@ -28,6 +28,7 @@ public:
 
 	int GetPlayerMoney() { return playerMoney; }
 	void SetPlayerMoney(int newMoney) { playerMoney = newMoney; }
+	void AddPlayerMoney(int addMoney) { playerMoney += addMoney; }
 
 	void SetMapNum(int num) { mapNum = num; }
 	int GetMapNum() { return mapNum; }

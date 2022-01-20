@@ -42,8 +42,7 @@ void InventoryManager::PushInventory(int itemCode, int itemNum)
 	itemNum = AddInventory(itemCode, itemNum);
 	if (itemNum > 0)
 	{
-		POINT retult = AddInventoryEmpty(itemCode, itemNum);
-		inventory[retult.y][retult.x].itemCode = itemCode;
+		AddInventoryEmpty(itemCode, itemNum);
 	}
 }
 
@@ -73,25 +72,24 @@ int InventoryManager::AddInventory(int itemCode, int itemNum)
 	return itemNum;
 }
 
-POINT InventoryManager::AddInventoryEmpty(int itemCode, int itemNum)
+void InventoryManager::AddInventoryEmpty(int itemCode, int itemNum)
 {	// 비어있는 곳에 아이템을 추가하고, 그 위치 반환
-	POINT result{ -1,-1 };
-
 	for (int y = 0; y < INVEN_SIZE_Y; ++y)
 	{
 		for (int x = 0; x < INVEN_SIZE_X; ++x)
 		{
-			if (inventory[y][x].itemCode == 0)
+			if (inventory[y][x].itemCode == 0 && inventory[y][x].isOpen == true)
 			{
 				inventory[y][x].itemCode = itemCode;
 				inventory[y][x].itemNum = itemNum;
-				result.x = x;
-				result.y = y;
-				return result;
+				inventory[y][x].itemCode = itemCode;
+				return;
 			}
 		}
 	}	
-	return result;
+	
+	// 비어있는 아이템을 칸을 찾지 못했다면
+	ITEM_MANAGER->CreateItem(itemCode, GAMEDATA_MANAGER->GetPlayerPos(), itemNum);
 }
 
 bool InventoryManager::CheckInventoryEmpty()
@@ -111,12 +109,19 @@ bool InventoryManager::CheckInventoryEmpty()
 
 void InventoryManager::RenderItem(HDC hdc, POINT inventoryNum, POINT pos)
 {
+	// 인벤토리가 확장된 상태가 아니라면
+	if (inventory[inventoryNum.y][inventoryNum.x].isOpen == false)
+	{
+		inventoryCloseImage->Render(hdc, pos.x, pos.y, 0, 0);
+		return;
+	}
+
 	int itemCode = inventory[inventoryNum.y][inventoryNum.x].itemCode;
 	if (itemCode == 0)
 	{
 		return;
 	}
-	ITEM_MANAGER->ItemRender(hdc, itemCode, pos.x, pos.y);
+	ITEM_MANAGER->ItemRender(hdc, itemCode, pos.x-1, pos.y);
 
 	// 아이템 갯수 출력
 	int number = inventory[inventoryNum.y][inventoryNum.x].itemNum;
@@ -127,11 +132,31 @@ void InventoryManager::RenderItem(HDC hdc, POINT inventoryNum, POINT pos)
 		PrintText(hdc, num_char, pos.x, pos.y);
 	}
 }
-
-int InventoryManager::GetInventoryItemCode(int x, int y)
+/// <summary>
+/// 인벤토리의 닫혀있는 칸을 열림상태로 변경한다. 
+/// 열림상태로 변경에 성공했다면 true를 반환한다
+/// </summary>
+bool InventoryManager::ChangeCloseStateToOpen()
 {
-	return inventory[y][x].itemCode;
+	for (int y = 0; y < INVEN_SIZE_Y; ++y)
+	{
+		for (int x = 0; x < INVEN_SIZE_X; ++x)
+		{
+			if (inventory[y][x].isOpen == false)
+			{
+				inventory[y][x].isOpen = true;
+				return true;
+			}
+		}
+	}
+	return false;
 }
+
+Inventory* InventoryManager::GetInventoryInfo(int x, int y)
+{
+	return &inventory[y][x];
+}
+
 
 void InventoryManager::Init()
 {
@@ -142,6 +167,18 @@ void InventoryManager::Init()
 	SetRect(&inventoryMain.rect,inventoryMain.pos, 
 		(inventoryMain.img->GetFrameWidth()), (inventoryMain.img->GetFrameHeight()));
 
+	inventoryCloseImage = ImageManager::GetSingleton()->FindImage("Image/Inventory/Inventory_Close.bmp", 16, 16, 1, 1);
+
+
+	for (int i = 0; i < INVEN_SIZE_X; ++i)
+	{
+		inventory[0][i].isOpen = true;
+		inventory[0][i].isOpen = false;
+		inventory[1][i].isOpen = false;
+		inventory[2][i].isOpen = false;
+	}
+	inventory[0][0].isOpen = true;
+	inventory[0][1].isOpen = true;
 	PushInventory(PICK, 1);
 }
 
@@ -174,18 +211,15 @@ void InventoryManager::Render(HDC hdc)
 	{
 		for (int x = 0; x < INVEN_SIZE_X; ++x)
 		{
-			if (inventory[y][x].itemCode != 0)
-			{	// 인벤토리에 아이템이 있을 경우
-				if (mouseClick.x == x && mouseClick.y == y)
-				{	// 마우스가 인벤토리 아이템을 클릭한 경우 일때 출력 안함
-					continue;
-				}
-				// 아이템 출력
-				int space = y >= 1 ? 4 : 0;
-				int posX = (int)inventoryMain.pos.x - (inventoryMain.img->GetFrameWidth() / 2) + SPACE_X + (x * TILE_SIZE) + 9;
-				int posY = (int)inventoryMain.pos.y - (inventoryMain.img->GetFrameHeight() / 2) + SPACE_Y + (y * TILE_SIZE) + 8 + space;
-				RenderItem(hdc, POINT{ x, y }, POINT{ posX, posY });
+			if (mouseClick.x == x && mouseClick.y == y)
+			{	// 마우스가 인벤토리 아이템을 클릭한 경우 일때 출력 안함
+				continue;
 			}
+			// 아이템 출력
+			int space = y >= 1 ? 4 : 0;
+			int posX = (int)inventoryMain.pos.x - (inventoryMain.img->GetFrameWidth() / 2) + SPACE_X + (x * TILE_SIZE) + 9;
+			int posY = (int)inventoryMain.pos.y - (inventoryMain.img->GetFrameHeight() / 2) + SPACE_Y + (y * TILE_SIZE) + 8 + space;
+			RenderItem(hdc, POINT{ x, y }, POINT{ posX, posY });
 		}
 	}
 
@@ -200,7 +234,7 @@ void InventoryManager::Render(HDC hdc)
 		InventoryMouse result = GetInventoryNum(mouse);
 		if (result.inInventory == false)
 		{	// 마우스로 아이템을 끌어다 놓은곳이 인벤창 밖이라면
-			ITEM_MANAGER->CreateResourceItem(
+			ITEM_MANAGER->CreateItem(
 				inventory[mouseClick.y][mouseClick.x].itemCode,
 				GAMEDATA_MANAGER->GetPlayerPos(), 
 				inventory[mouseClick.y][mouseClick.x].itemNum);
@@ -209,8 +243,11 @@ void InventoryManager::Render(HDC hdc)
 			inventory[mouseClick.y][mouseClick.x].itemNum = 0;
 		}
 		else if (result.mouse.x >= 0 && result.mouse.y >= 0)
-		{	// 마우스로 아이템을 끌어다 놓은곳이 인벤창 안 이라면
-			swap(inventory[mouseClick.y][mouseClick.x], inventory[result.mouse.y][result.mouse.x]);
+		{	// 마우스로 아이템을 끌어다 놓은곳이 인벤창 안 이라면 스왑
+			if (inventory[mouseClick.y][mouseClick.x].isOpen == false || inventory[result.mouse.y][result.mouse.x].isOpen == false)
+			{
+				swap(inventory[mouseClick.y][mouseClick.x], inventory[result.mouse.y][result.mouse.x]);
+			}
 		}
 		mouseClick = { -1,-1 };
 	}
