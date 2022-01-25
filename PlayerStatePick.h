@@ -2,13 +2,21 @@
 #include "GameEntity.h"
 class Player;
 class Image;
+struct pickActionImage
+{
+	Image* normal;
+	Image* copper;
+	Image* iron;
+	Image* gold;
+};
 class PlayerStatePick : public GameEntity
 {
 private:
+	pickActionImage img;
 	Player* player;
-	Image* img;
 	float frameTime;
 	int frame;
+	int itemCode;
 protected:
 public:
 	virtual HRESULT Init() override;

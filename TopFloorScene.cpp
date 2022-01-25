@@ -8,7 +8,7 @@ HRESULT TopFloorScene::Init()
     player = new Player;
     player->Init();
     RENDER_MANAGER->PushObjectVector(player);
-    MAP_MANAGER->CreateObject(new Shop_Blacksmith(11, 5), POINT{ 11,5 });
+    MAP_MANAGER->CreateObject(new Shop_Blacksmith(4, 4), POINT{ 4,4 });
 	return S_OK;
 }
 

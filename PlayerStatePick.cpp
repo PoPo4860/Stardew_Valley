@@ -4,7 +4,10 @@
 #include "Config.h"
 HRESULT PlayerStatePick::Init()
 {
-	img = ImageManager::GetSingleton()->FindImage("Image/Player/Player_Pick_Action.bmp", 240, 192, 5, 4);
+	img.normal = ImageManager::GetSingleton()->FindImage("Image/Player/Player_NormalPick_Action.bmp", 240, 192, 5, 4);
+	img.copper = ImageManager::GetSingleton()->FindImage("Image/Player/Player_CopperPick_Action.bmp", 240, 192, 5, 4);
+	img.iron = ImageManager::GetSingleton()->FindImage("Image/Player/Player_IronPick_Action.bmp", 240, 192, 5, 4);
+	img.gold = ImageManager::GetSingleton()->FindImage("Image/Player/Player_GoldPick_Action.bmp", 240, 192, 5, 4);
 	return S_OK;
 }
 
@@ -16,16 +19,44 @@ void PlayerStatePick::Update()
 		frameTime -= 0.1f;
 		++frame;
 	}
+	itemCode = INVEN_MANAGER->GetInventoryInfo(UI_MANAGER->GetSelectItemNum(), 0)->itemCode;
 	CheckAction();
 }
 
 void PlayerStatePick::Render(HDC hdc)
 {
-	img->Render(hdc,
-		player->pos.x - GLOBAL_POS.x,
-		player->pos.y - player->bodySize - GLOBAL_POS.y - 8,
-		frame,
-		player->playerDirection);
+	if (itemCode == NORMAL_PICK)
+	{
+		img.normal->Render(hdc,
+			player->pos.x - GLOBAL_POS.x,
+			player->pos.y - player->bodySize - GLOBAL_POS.y - 8,
+			frame,
+			player->playerDirection);
+	}
+	else if (itemCode == COPPER_PICK)
+	{
+		img.copper->Render(hdc,
+			player->pos.x - GLOBAL_POS.x,
+			player->pos.y - player->bodySize - GLOBAL_POS.y - 8,
+			frame,
+			player->playerDirection);
+	}
+	else if (itemCode == IRON_PICK)
+	{
+		img.iron->Render(hdc,
+			player->pos.x - GLOBAL_POS.x,
+			player->pos.y - player->bodySize - GLOBAL_POS.y - 8,
+			frame,
+			player->playerDirection);
+	}
+	else if (itemCode == GOLD_PICK)
+	{
+		img.gold->Render(hdc,
+			player->pos.x - GLOBAL_POS.x,
+			player->pos.y - player->bodySize - GLOBAL_POS.y - 8,
+			frame,
+			player->playerDirection);
+	}
 }
 
 void PlayerStatePick::Release() {}
@@ -39,7 +70,7 @@ bool PlayerStatePick::CheckAction()
 		POINT result = player->GetFrontTilePos();
 		if (MAP->object[result.y][result.x] != nullptr)
 		{
-			MAP->object[result.y][result.x]->InteractionPick(1);
+			MAP->object[result.y][result.x]->InteractionPick(itemCode - 13);
 		}
 		player->playerState = PlayerState::Idle;
 	}

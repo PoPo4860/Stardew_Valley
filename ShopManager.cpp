@@ -14,7 +14,6 @@ void ShopManager::ActiveShop(string shopTypeString)
 		shopType = ShopType::BlackSmith;
 		isActive = true;
 	}
-
 }
 
 ShopManager::ShopManager()
@@ -43,13 +42,17 @@ void ShopManager::Init()
 	blackSmith.masterName = "클린트";
 	blackSmith.portrait = ImageManager::GetSingleton()->FindImage("Image/Shop/Shop_Portrait_Smith.bmp", 66, 66, 1, 1);
 	blackSmith.portraitPos = PORTRAIT_POS;
-	blackSmith.salesList = new int[5];
-	blackSmith.salesListMaxNum = 5;
+	blackSmith.salesList = new int[8];
+	blackSmith.salesListMaxNum = 8;
 	blackSmith.salesList[0] = BAG;
-	blackSmith.salesList[1] = COAL;
-	blackSmith.salesList[2] = COPPER;
-	blackSmith.salesList[3] = STEEL;
-	blackSmith.salesList[4] = GOLD;
+	blackSmith.salesList[1] = NORMAL_PICK;
+	blackSmith.salesList[2] = COPPER_PICK;
+	blackSmith.salesList[3] = IRON_PICK;
+	blackSmith.salesList[4] = GOLD_PICK;
+	blackSmith.salesList[5] = COPPER;
+	blackSmith.salesList[6] = STEEL;
+	blackSmith.salesList[7] = GOLD;
+
 	shopType = ShopType::None;
 
 	coinImage = ImageManager::GetSingleton()->FindImage("Image/Shop/Shop_Coin.bmp", 11, 11, 1, 1);
@@ -91,7 +94,6 @@ bool ShopManager::Update()
 
 			// 아이템 구매
 			itemToSell->BuyItem();
-
 		}
 	}
 
@@ -200,5 +202,7 @@ void ShopManager::Release()
 {
 	delete[] blackSmith.salesList;
 	blackSmith.salesList = nullptr;
+
+	SAFE_RELEASE(itemToSell);
 	ReleaseSingleton();
 }

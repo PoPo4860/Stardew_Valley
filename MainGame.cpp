@@ -62,14 +62,14 @@ void MainGame::Release()
 	SceneManager::GetSingleton()->Release();
 	TimerManager::GetSingleton()->Release();
 
-	GameDataManager::GetSingleton()->Release();
-	ItemManager::GetSingleton()->Release();
 	MapManager::GetSingleton()->Release();
 	CamerManager::GetSingleton()->Release();
-	ObjectRenderManager::GetSingleton()->Release();
+	GameDataManager::GetSingleton()->Release();
 	InventoryManager::GetSingleton()->Release();
-	UIManager::GetSingleton()->Release();
+	ItemManager::GetSingleton()->Release();
+	ObjectRenderManager::GetSingleton()->Release();
 	ShopManager::GetSingleton()->Release();
+	UIManager::GetSingleton()->Release();
 	KillTimer(g_hWnd, 0);
 }
 

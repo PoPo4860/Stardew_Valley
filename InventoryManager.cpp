@@ -179,7 +179,7 @@ void InventoryManager::Init()
 	}
 	inventory[0][0].isOpen = true;
 	inventory[0][1].isOpen = true;
-	PushInventory(PICK, 1);
+	PushInventory(NORMAL_PICK, 1);
 }
 
 bool InventoryManager::Uadate()

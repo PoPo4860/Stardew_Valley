@@ -18,6 +18,7 @@ public:
 	void Init();
 	void BuyItem();
 	void SellItem();
+	void Release();
 	void RenderSaleslist(HDC hdc);
 	
 };

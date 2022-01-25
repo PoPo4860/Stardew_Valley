@@ -24,6 +24,8 @@ using namespace std;
 #define SAFE_RELEASE(p)	{ if (p) { p->Release(); delete p; p = nullptr; } }
 #define SAFE_DELETE(p)	{ if (p) { delete p; p = nullptr; } }
 #define COUT cout << "Check" << "\n"
+
+#define new new(_CLIENT_BLOCK, __FILE__, __LINE__)
 //enum class MoveDir { Left, Right, Up, Down };
 
 typedef struct ArgumentFuncPtr

@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #define RESOURCE_ITEM(num) (1 <= num && num <= 12 )
-#define TOOL_ITEM(num) (13 <= num && num <= 14)
+#define TOOL_ITEM(num) (13 <= num && num <= 17)
 
 #define STONE 1
 #define COAL 2
@@ -18,7 +18,10 @@
 #define DIAMOND 12
 
 #define STEEL_SHORT_SWORD 13
-#define PICK 14
+#define NORMAL_PICK 14
+#define COPPER_PICK 15
+#define IRON_PICK 16
+#define GOLD_PICK 17
 
 using namespace std;
 

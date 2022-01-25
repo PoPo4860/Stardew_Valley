@@ -20,7 +20,9 @@ bool Item::FollowPlayer()
 	// 플레이어까지의 거리가 30 이하라면 플레이어 추적
 
 	if (distance < 5.0f)
+	{
 		return true;
+	}
 
 	return false;
 }
@@ -94,7 +96,7 @@ void Item::Update()
 
 void Item::Render(HDC hdc)
 {
-	ITEM_MANAGER->ItemRender(hdc, itemCode, pos.x - GLOBAL_POS.x, pos.y - GLOBAL_POS.y);
+	ITEM_MANAGER->ItemRender(hdc, itemCode, (int)(pos.x - GLOBAL_POS.x), (int)(pos.y - GLOBAL_POS.y));
 }
 
 void Item::Release()
