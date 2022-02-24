@@ -4,7 +4,7 @@
 #include "Config.h"
 HRESULT PlayerStatePick::Init()
 {
-	img.normal = ImageManager::GetSingleton()->FindImage("Image/Player/Player_NormalPick_Action.bmp", 240, 192, 5, 4);
+	img.normal = ImageManager::GetSingleton()->FindImage("Image/Player/Player_Normal.bmp", 240, 192, 5, 4);
 	img.copper = ImageManager::GetSingleton()->FindImage("Image/Player/Player_CopperPick_Action.bmp", 240, 192, 5, 4);
 	img.iron = ImageManager::GetSingleton()->FindImage("Image/Player/Player_IronPick_Action.bmp", 240, 192, 5, 4);
 	img.gold = ImageManager::GetSingleton()->FindImage("Image/Player/Player_GoldPick_Action.bmp", 240, 192, 5, 4);
