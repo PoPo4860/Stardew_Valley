@@ -7,7 +7,7 @@ enum class PlayerState { Idle, Move, Pick };
 
 class PlayerStateMove;
 class PlayerStatePick;
-class PlayerItemHold;
+class PlayerStateIdel;
 class Player : public GameObject, public Character
 {
 private:
@@ -15,11 +15,12 @@ private:
 	PlayerStateMove* playerStateMove;
 	friend class PlayerStatePick;
 	PlayerStatePick* playerStatePick;
+	friend class PlayerStateIdel;
+	PlayerStateIdel* playerStateIdel;
 
 	MoveDirection playerDirection;
 	PlayerState playerState;
 
-	bool isHoldCheck;
 
 	void SetPos(POINTFLOAT pos) { this->pos = pos; }
 	const POINT GetFrontTilePos() const;

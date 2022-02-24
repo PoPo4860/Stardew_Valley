@@ -29,13 +29,19 @@ void MineScene::Update()
 
 void MineScene::Render(HDC hdc)
 {
+
     MAP_MANAGER->DrawMapLayer(hdc, 1);
     MAP_MANAGER->DrawMapLayer(hdc, 2);
     RENDER_MANAGER->ObjectRender(hdc);
     MAP_MANAGER->DrawMapLayer(hdc, 3);
     INVEN_MANAGER->Render(hdc);
+    if (GET_KEY_STAY('G'))
+    {
+        MAP_MANAGER->DrawMapCollision(hdc);
+    }
     UI_MANAGER->Render(hdc);
 }
+
 
 void MineScene::Release()
 {

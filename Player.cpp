@@ -3,7 +3,7 @@
 #include "Player.h""
 #include "PlayerStatePick.h"
 #include "PlayerStateMove.h"
-#include "PlayerItemHold.h"
+#include "PlayerStateIdel.h"
 #include "Image.h"
 #include "Config.h"
 #include "CommonFunction.h"
@@ -12,8 +12,7 @@ Player::Player() :
 	playerStateMove{ nullptr },
 	playerStatePick{ nullptr },
 	playerDirection{ MoveDirection::Down },
-	playerState{ PlayerState::Idle },
-	isHoldCheck{ false }
+	playerState{ PlayerState::Idle }
 {}
 
 HRESULT Player::Init()
@@ -37,10 +36,13 @@ HRESULT Player::Init()
 	playerStateMove->Init();
 	playerStatePick = new PlayerStatePick(this);
 	playerStatePick->Init();
+	playerStateIdel = new PlayerStateIdel(this);
+	playerStateIdel->Init();
+
 
 
 	//플레이어 기본정보
-	img = ImageManager::GetSingleton()->FindImage("Image/Player/Player_Normal.bmp", 16, 128, 1, 4);
+	
 	moveSpeed = 70.0f;
 	bodySize = 10;
 	return S_OK;
@@ -51,6 +53,7 @@ void Player::Update()
 	SetRect(&rect, pos, bodySize);
 	switch (playerState) {
 	case PlayerState::Idle:
+		playerStateIdel->Update();
 		KeyDownChangeState();
 		break;
 	case PlayerState::Move:
@@ -61,16 +64,16 @@ void Player::Update()
 		playerStatePick->Update();
 		break;
 	}
+
 	CamerManager::GetSingleton()->SetGlobalPos(pos);
 	GAMEDATA_MANAGER->SetPlayerPos(pos);
-
 }
 
 void Player::Render(HDC hdc)
 {
 	switch (playerState) {
 	case PlayerState::Idle:
-		IdelRender(hdc);
+		playerStateIdel->Render(hdc);
 		break;
 	case PlayerState::Pick:
 		playerStatePick->Render(hdc);
@@ -85,6 +88,7 @@ void Player::Release()
 {
 	SAFE_RELEASE(playerStatePick);
 	SAFE_RELEASE(playerStateMove);
+	SAFE_RELEASE(playerStateIdel);
 }
 
 const POINT Player::GetFrontTilePos() const
@@ -149,14 +153,4 @@ void Player::KeyDownChangeState()
 			UI_MANAGER->SetSelectItemNum(input);
 		}
 	}
-
-}
-
-void Player::IdelRender(HDC hdc)
-{
-	img->Render(hdc,
-		pos.x - GLOBAL_POS.x,
-		pos.y - bodySize - GLOBAL_POS.y,
-		0,
-		playerDirection);
 }

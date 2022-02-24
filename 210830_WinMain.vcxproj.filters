@@ -132,6 +132,9 @@
     <ClCompile Include="ItemsToSell.cpp">
       <Filter>MainGame\Object\Shop</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerStateIdel.cpp">
+      <Filter>MainGame\Object\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Config.h">
@@ -241,6 +244,9 @@
     </ClInclude>
     <ClInclude Include="ItemsToSell.h">
       <Filter>MainGame\Object\Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerStateIdel.h">
+      <Filter>MainGame\Object\Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

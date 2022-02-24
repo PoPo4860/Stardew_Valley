@@ -59,7 +59,7 @@ public:
 			}
 		}
 	}
-
 	inline POINTFLOAT GetGlobalPos() { return globalPos; }
+
 	inline void Release() { ReleaseSingleton(); };
 };

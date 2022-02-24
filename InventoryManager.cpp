@@ -132,10 +132,8 @@ void InventoryManager::RenderItem(HDC hdc, POINT inventoryNum, POINT pos)
 		PrintText(hdc, num_char, pos.x, pos.y);
 	}
 }
-/// <summary>
-/// 인벤토리의 닫혀있는 칸을 열림상태로 변경한다. 
-/// 열림상태로 변경에 성공했다면 true를 반환한다
-/// </summary>
+
+/// <summary> 인벤토리의 닫혀있는 칸을 열림상태로 변경한다. 열림상태로 변경에 성공했다면 true를 반환한다 </summary>
 bool InventoryManager::ChangeCloseStateToOpen()
 {
 	for (int y = 0; y < INVEN_SIZE_Y; ++y)
@@ -173,7 +171,7 @@ void InventoryManager::Init()
 	for (int i = 0; i < INVEN_SIZE_X; ++i)
 	{
 		inventory[0][i].isOpen = true;
-		inventory[0][i].isOpen = false;
+		inventory[0][i].isOpen = true;
 		inventory[1][i].isOpen = false;
 		inventory[2][i].isOpen = false;
 	}
@@ -244,7 +242,7 @@ void InventoryManager::Render(HDC hdc)
 		}
 		else if (result.mouse.x >= 0 && result.mouse.y >= 0)
 		{	// 마우스로 아이템을 끌어다 놓은곳이 인벤창 안 이라면 스왑
-			if (inventory[mouseClick.y][mouseClick.x].isOpen == false || inventory[result.mouse.y][result.mouse.x].isOpen == false)
+			if (inventory[mouseClick.y][mouseClick.x].isOpen == true && inventory[result.mouse.y][result.mouse.x].isOpen == true)
 			{
 				swap(inventory[mouseClick.y][mouseClick.x], inventory[result.mouse.y][result.mouse.x]);
 			}

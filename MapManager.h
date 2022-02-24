@@ -11,6 +11,8 @@ private:
 	Image* selectDungeon;
 	vector<POINT> exit;
 	bool ladderDownCheck;
+	HPEN pen, oPen;
+
 public:
 	MapManager();
 	void Init();
@@ -37,6 +39,8 @@ public:
 	void SetDungeonImage();
 	void Load(int num);
 	
+	void DrawMapCollision(HDC hdc);
+
 	// 맵에 오브젝트 생성
 	void CreateOreObject();
 

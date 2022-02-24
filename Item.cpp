@@ -3,10 +3,8 @@
 #include "Config.h"
 bool Item::FollowPlayer()
 {
-	static POINTFLOAT playerPos;
-	static float distance;
-	static float xSpeed;
-	static float ySpeed;
+	POINTFLOAT playerPos;
+	float distance;
 
 	playerPos = GAMEDATA_MANAGER->GetPlayerPos();
 	distance = (float)sqrt(pow(pos.x - playerPos.x, 2) + pow(pos.y - playerPos.y, 2));
@@ -29,8 +27,7 @@ bool Item::FollowPlayer()
 
 void Item::GravityAction()
 {
-	static bool xCheck;
-	xCheck = move.speed.x > 0.0f ? true : false;
+	bool xCheck = move.speed.x > 0.0f ? true : false;
 	if (xCheck)
 	{
 		if (fabs(move.speed.x) > 0.1f)

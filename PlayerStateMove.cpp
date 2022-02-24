@@ -8,34 +8,34 @@ void PlayerStateMove::Move(float posX, float posY)
 {
 	// 플레이어 충돌체크할 RECT 생성
 	RECT rectTemp;
-	POINTFLOAT posTemp;
-	posTemp.x = posX;
-	posTemp.y = posY;
-	SetRect(&rectTemp, posTemp, player->bodySize);
+	SetRect(&rectTemp, POINTFLOAT{ posX,posY }, player->bodySize);
 
 	// 자기 pos값을 기준으로, 몇번째 타일인지 확인하는 함수
-	POINT result = GetPosTile(player->pos);
-
-	for (int y = result.y - 2; y < result.y + 2; ++y)
+	POINT playerPos = GetPosTile(player->pos);
+	for (int y = playerPos.y - 2; y < playerPos.y + 2; ++y)
 	{
-		for (int x = result.x - 2; x < result.x + 2; ++x)
+		for (int x = playerPos.x - 2; x < playerPos.x + 2; ++x)
 		{
 			if (MAP->tileState[y][x] != Tile_State::Empty)
 			{	// 해당 타일이 비어있는 공간이 아니라면 충돌검사
 				RECT rc;
 				if (IntersectRect(&rc, &rectTemp, &MAP->rect[y][x]))
+				{
 					return;
+				}
 			}
 			if (MAP->object[y][x] != nullptr)
 			{	// 해당 타일에 오브젝트가 있다면 충돌검사
 				RECT rc;
 				RECT temp = MAP->object[y][x]->GetRect();
 				if (IntersectRect(&rc, &rectTemp, &temp))
+				{
 					return;
+				}
 			}
 		}
 	}
-	// 충돌이 생기지 않았다면 바뀐 pos로 적용
+	// 충돌이 생기지 않았다면 이동
 	player->SetPos(POINTFLOAT{ posX ,posY });
 }
 
@@ -66,8 +66,6 @@ void PlayerStateMove::MovePlayer()
 HRESULT PlayerStateMove::Init()
 {
 	img = ImageManager::GetSingleton()->FindImage("Image/Player/Player_Move.bmp", 128, 128, 8, 4);
-	COUT;
-
 	return S_OK;
 }
 

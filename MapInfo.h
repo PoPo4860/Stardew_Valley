@@ -30,11 +30,6 @@ struct TILE_INFO
 	int frameX, frameY;
 };
 
-//enum class Stone_Object_Info
-//{
-//	SmallStone_Lv1, SmallStone_Lv2, SmallStone_Lv3
-//};
-
 struct MAP_INFO
 {
 	MAP_INFO() :

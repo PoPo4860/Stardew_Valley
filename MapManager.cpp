@@ -237,3 +237,29 @@ void MapManager::Load(int num)
 
     CloseHandle(hFile);
 }
+
+void MapManager::DrawMapCollision(HDC hdc)
+{
+
+    for (int y = 0; y < mapInfo.mapSizeY; ++y)
+    {
+        for (int x = 0; x < mapInfo.mapSizeX; ++x)
+        {
+            if (mapInfo.tileState[y][x] == Tile_State::Wall || mapInfo.object[y][x] != nullptr)
+            {
+                if (mapInfo.tileState[y][x] == Tile_State::Wall)
+                    pen = (HPEN)CreateSolidBrush(RGB(0, 128, 64));
+                if (mapInfo.object[y][x] != nullptr)
+                    pen = (HPEN)CreateSolidBrush(RGB(30, 30, 30));
+                oPen = (HPEN)SelectObject(hdc, pen);
+                Rectangle(hdc,
+                    mapInfo.rect[y][x].left   - GLOBAL_POS.x,
+                    mapInfo.rect[y][x].top     - GLOBAL_POS.y,
+                    mapInfo.rect[y][x].right   - GLOBAL_POS.x,
+                    mapInfo.rect[y][x].bottom - GLOBAL_POS.y);
+                SelectObject(hdc, oPen);
+                DeleteObject(pen);
+            }
+        }
+    }
+}

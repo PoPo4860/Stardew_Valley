@@ -156,6 +156,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerInventoryUI.cpp" />
     <ClCompile Include="PlayerItemHold.cpp" />
+    <ClCompile Include="PlayerStateIdel.cpp" />
     <ClCompile Include="PlayerStateMove.cpp" />
     <ClCompile Include="PlayerStatePick.cpp" />
     <ClCompile Include="SceneManager.cpp" />
@@ -193,6 +194,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerInventoryUI.h" />
     <ClInclude Include="PlayerItemHold.h" />
+    <ClInclude Include="PlayerStateIdel.h" />
     <ClInclude Include="PlayerStateMove.h" />
     <ClInclude Include="PlayerStatePick.h" />
     <ClInclude Include="SceneManager.h" />

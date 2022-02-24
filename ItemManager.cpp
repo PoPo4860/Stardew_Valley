@@ -2,6 +2,7 @@
 #include "Image.h"
 #include <fstream>
 #include <locale>
+#define AtlasSize 12
 
 ItemManager::ItemManager() :toolItmeInfo{}, resourceItemInfo{}, itemVector{}, itemImage{nullptr}
 {}
@@ -106,9 +107,9 @@ void ItemManager::ItemClear()
 	}
 }
 
+/// <summary> 입력된 아이템 코드 이미지를 출력한다. </summary>
 void ItemManager::ItemRender(HDC hdc, int itemCode, int posX, int posY)
 {
-	POINT frame{ (LONG)(itemCode - 1) ,(LONG)((itemCode - 1) / 12) };
-	frame.x %= 12;
+	POINT frame{ ((LONG)(itemCode - 1)) % AtlasSize ,(LONG)((itemCode - 1) / AtlasSize) };
 	itemImage->Render(hdc, posX, posY, frame.x, frame.y);
 }
